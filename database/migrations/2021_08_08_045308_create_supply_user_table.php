@@ -17,7 +17,7 @@ class CreateSupplyUserTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('supply_id')->unsigned();
-            $table->ingeter('contract');
+            $table->integer('contract');
             $table->timestamps();
 
             $table->foreign('user_id')
