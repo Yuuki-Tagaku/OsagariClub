@@ -3,6 +3,8 @@
     margin: 0;
   }
 
+  /*        レイアウト共用部分        */
+
   .header-container {
     margin: 10px;
     display: flex;
