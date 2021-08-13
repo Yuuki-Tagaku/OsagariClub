@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//ユーザー関係のルート
+Route::get('/user/edit', 'UserController@edit');
+Route::post('/user/edit', 'UserController@brach')->name('user.branch');
