@@ -22,7 +22,7 @@ class UserController extends Controller
         if(!empty($_POST['edit'])) {
             //editボタンを押された場合はupdataの処理を実行する
             return $this->updata($request);
-        } elseif(!empty($_POST['delete'])) {
+        } else {
             //deleteボタンを押された場合はdestroyの処理を実行する
             return $this->destroy($request);
         }
@@ -60,9 +60,9 @@ class UserController extends Controller
         if($user->isDirty()) {
             //userに変更があった場合
             $user->save();
-            return redirect('/');
+            return redirect('');
         } else {
-            return redirect('/');
+            return redirect('');
         }
     }
 
@@ -75,6 +75,11 @@ class UserController extends Controller
         //ストレージにある画像データを削除
         $user->delete();
 
-        return redirect('/');
+        return redirect('/user/delete');
+    }
+
+    public function delete(Request $request)
+    {
+        return view('osagariclub.userDelete');
     }
 }

@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 //ユーザー関係のルート
 Route::get('/user/edit', 'UserController@edit');
-Route::post('/user/edit', 'UserController@brach')->name('user.branch');
+Route::post('/user/edit', 'UserController@branch')->name('user.branch');
+Route::get('/user/delete', 'UserController@delete');

@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+}
+
+.admin-Header-Container li {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid;
+
+}
+
+.admin-Header-Container li ol {
+  width: 15%;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border: 1px solid;
+  text-align: center;
+  line-height: 50px;
+}
