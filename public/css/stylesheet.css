@@ -26,16 +26,16 @@
     border-radius: 10px;
   }
 
-  /*        ユーザー情報変更ページ        */
-  .title-Container {
-    height: 30px;
-    background-color: #f4ef92;
-  }
-
-  .title-Container h2 {
+  h2 {
     padding: 0;
     font-size: 15pt;
     text-align: center;
+  }
+
+  /*        ユーザー情報変更ページ        */
+  .title-Container, .matcing-Partner-Container-Title, .matcingItem-Information-Container-Inner-Title {
+    height: 30px;
+    background-color: #f4ef92;
   }
 
   .supply-Edit-Container form {
@@ -44,10 +44,10 @@
     line-height: 3.0;
   }
 
-    .supply-Edit-Container form dl dd input {
-      border: none;
-      outline: none;
-    }
+  .supply-Edit-Container form dl dd input {
+    border: none;
+    outline: none;
+  }
 
   .form-Group {
     display: flex;
@@ -76,6 +76,7 @@
 
   .btn-Group input {
     width: 60%;
+    border-radius: 10px;
   }
 
   /*        会員情報削除後ページ        */
@@ -84,5 +85,140 @@
     margin: 250px 0;
     text-align: center;
   }
-}
 
+  /*        チャットルーム        */
+
+  .matcing-Infomation {
+    margin: 30px 0;
+  }
+
+  .matcing-Infomation p, .matching-Button-Container, .matcing-ChatRoom-Container-Form {
+    text-align: center;
+    margin: 0;
+  }
+
+  .matching-Button-Container button {
+    width: 50%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .matcing-ChatRoom-Container-Form input[type="text"] {
+    width: 70%;
+    line-height: 1.8;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid;
+  }
+
+  .matcing-ChatRoom-Container-Form button {
+    width: 20%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+  }
+
+  .matcingItem-Container-Inner {
+    display: flex;
+  }
+
+  .matcingItem-Container-Inner-Image {
+    width: 50%;
+    margin: 0 5px;
+  }
+
+  .matcingItem-Container-Inner-Image img {
+    width: 100%;
+    margin-top: 30px;
+    border: 1px solid;
+  }
+
+  .matcingItem-Container-Inner-Information {
+    width: 50%;
+    padding: 10px 5%;
+    line-height: 2.0;
+  }
+
+  .matcingItem-Container-Inner-Information ul, .matcingItem-Container-Inner-Information ul ol {
+    padding: 0;
+  }
+
+  .matcing-Partner-Container-Inner-Image {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .matcing-Partner-Container-Inner-Image img {
+    height: 200px;
+    border: 1px solid;
+    border-radius: 50%;
+  }
+
+  .matcing-Partner-Container-Inner-Information {
+    width: 80%;
+    margin-top: 30px;
+    padding-left: 10%;
+  }
+
+  .matcing-Partner-Container-Inner-Information p span {
+    font-size: 18pt;
+  }
+
+  .matcing-Partner-Container-Inner-Information p {
+    font-size: 14pt;
+  }
+
+  .matcing-ChatRoom-Container-inner {
+    width: 90%;
+    height: 400px;
+    margin-bottom: 20px;
+    margin-left: 5%;
+    overflow-y: scroll;
+    background-color: #cce5fe;
+    border-radius: 5px;
+  }
+
+  .chat-Message {
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+
+  .chat-Message-Content {
+    margin-bottom: 10px;
+    display: flex;
+    position: relative;
+  }
+
+  .my-Message {
+    width: 40%;
+    margin: 0 5% 0 auto;
+    background-color: #7affe4;
+    border-radius: 10px;
+  }
+
+  .partner-Message {
+    width: 40%;
+    margin: 0 auto 0 5%;
+    background-color: #efff91;
+    border-radius: 10px;
+  }
+
+  .my-Message p, .partner-Message p {
+    padding: 0 10px;
+    text-align: left;
+    font-size: 10pt;
+  }
+
+  .my-Chat-Date {
+    position: absolute;
+    left: 120px;
+    bottom: 0;
+    font-size: 5pt;
+  }
+
+  .partner-Chat-Date {
+    position: absolute;
+    left: 205px;
+    bottom: 0;
+    font-size: 5pt;
+  }
+}

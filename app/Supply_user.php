@@ -15,4 +15,9 @@ class Supply_user extends Model
     {
         return $this->hasMany('App\Chat');
     }
+
+    public function supply()
+    {
+        return $this->belongsTo('App\Supply');
+    }
 }

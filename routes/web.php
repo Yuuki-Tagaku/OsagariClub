@@ -19,3 +19,9 @@ Route::get('/', function () {
 Route::get('/user/edit', 'UserController@edit');
 Route::post('/user/edit', 'UserController@branch')->name('user.branch');
 Route::get('/user/delete', 'UserController@delete');
+
+//チャット関係のルート
+Route::get('/chat/room', 'ChatController@chatroom');
+//チャット用ajax
+Route::get('ajax/chat', 'Ajax\ChatController@index');//メッセージ一覧を取得
+Route::post('ajax/chat', 'Ajax\ChatController@create');//チャット登録

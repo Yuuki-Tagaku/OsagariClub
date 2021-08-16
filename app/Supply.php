@@ -12,7 +12,7 @@ class Supply extends Model
 {
     public function user()
     {
-        return $this->belontsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function supply_user()
