@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function supply_user()
     {
-        return $this->belongsToMany('App\Supply', 'App\Supply_user');
+        return $this->belongsToMany('App\Supply');
     }
 }

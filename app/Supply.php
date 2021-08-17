@@ -15,8 +15,13 @@ class Supply extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function supply()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
     public function supply_user()
     {
-        return $this->belongsToMany('App\Supply_user', 'App\User');
+        return $this->hasMany('App\Supply_user');
     }
 }
