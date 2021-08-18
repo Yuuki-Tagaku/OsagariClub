@@ -6,7 +6,7 @@
   <div class="title-Container">
     <h2>会員情報変更</h2>
   </div>
-  <div class="supply-Edit-Container">
+  <div class="user-Edit-Container">
     <form action="{{ route('user.branch') }}" method="post" enctype="multipart/form-data">
       @csrf
       <dl>
@@ -14,24 +14,28 @@
           <dt>名前</dt>
           <dd>
             <input type="text" name="name" value="{{ $user->name }}">
+            <span>必須</span>
           </dd>
         </div>
         <div class="form-Group">
           <dt>メールアドレス</dt>
           <dd>
             <input type="text" name="email" value="{{ $user->email }}">
+            <span>必須</span>
           </dd>
         </div>
         <div class="form-Group">
           <dt>パスワード</dt>
           <dd>
             <input type="text" name="password">
+            <span>必須</span>
           </dd>
         </div>
         <div class="form-Group">
-          <dt>パスワード (確認)</dt></dd>
+          <dt>パスワード (確認)</dt>
           <dd>
             <input type="text" name="password_Confirmed">
+            <span>必須</span>
           </dd>
         </div>
         <div id="profile-Image">
@@ -47,10 +51,12 @@
             @endif
           </div>
         </div>
-        <dt>自己紹介（任意）</dt>
-        <dd>
-          <textarea name="appleal" rows="4" cols="30">{{$user->appleal}}</textarea>
-        </dd>
+        <div class="profile-Appleal-Container">
+          <dt>自己紹介（任意）</dt>
+          <dd>
+            <textarea name="appleal" rows="4" cols="34">{{$user->appleal}}</textarea>
+          </dd>
+        </div>
         <input type="hidden" name="id" value="{{ $user->id }}">
       </dl>
       <div class="btn-Group">

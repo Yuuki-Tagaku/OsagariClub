@@ -32,21 +32,33 @@
     text-align: center;
   }
 
-  /*        ユーザー情報変更ページ        */
+  /*        ユーザー情報変更ページ・おさがり情報変更ページ共通部分        */
   .title-Container, .matcing-Partner-Container-Title, .matcingItem-Information-Container-Inner-Title {
     height: 30px;
     background-color: #f4ef92;
   }
 
-  .supply-Edit-Container form {
+  .user-Edit-Container form, .supply-Edit-Container form {
     margin: 20px 30px;
     font-size: 10pt;
     line-height: 3.0;
   }
 
-  .supply-Edit-Container form dl dd input {
+  .user-Edit-Container form dl dt, .supply-Edit-Container form  dl dt {
+    width: 35%;
+  }
+
+  .user-Edit-Container form dl dd, .supply-Edit-Container form dl dd {
+    width: 60%;
+  }
+
+  .user-Edit-Container form dl dd input, .supply-Edit-Container form dl dd input {
     border: none;
     outline: none;
+  }
+
+  .user-Edit-Container form dl dd span, .supply-Edit-Container form dl dd span {
+    float: right;
   }
 
   .form-Group {
@@ -55,8 +67,25 @@
     border-bottom: 1px solid;
   }
 
-  .profile-Image dd input {
-    width: 70%;
+  .profile-Appleal-Container dd, .supply-Remarks-Container dd {
+    margin: 0 auto;
+  }
+
+  .btn-Group {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .btn-Group input, .btn-Group button {
+    width: 60%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+
+  /*        ユーザー情報変更ページ        */
+
+  #profile-Image dd {
+    margin: 0 auto;
   }
 
   .profile-Image-Thumbnail {
@@ -70,13 +99,13 @@
     border-radius: 50%;
   }
 
-  .btn-Group {
-    text-align: center;
-  }
+  /*        おさがり情報変更ページ        */
 
-  .btn-Group input {
-    width: 60%;
-    border-radius: 10px;
+  .form-Group select {
+    width: 70%;
+    height: 25px;
+    border: none;
+    outline: none;
   }
 
   /*        会員情報削除後ページ        */
@@ -84,6 +113,11 @@
   .user-Delete-Container {
     margin: 250px 0;
     text-align: center;
+  }
+
+  .condition-Group ul, .condition-Group ul ol {
+    margin: 0;
+    padding: 0;
   }
 
   /*        チャットルーム        */
@@ -221,4 +255,24 @@
     bottom: 0;
     font-size: 5pt;
   }
+}
+
+/*        マッチング確認画面        */
+
+.macting-Confirm-Container-Infomation, .matcing-Confirm-Container-Button {
+  text-align: center;
+}
+
+.matcing-Confirm-Container-Button input, .matcing-Confirm-Container-Button button {
+  width: 50%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.macting-Confirm-Container-Infomation {
+  margin-top: 100px;
+}
+
+.matcing-Confirm-Container-Button {
+  margin-top: 50px;
 }
