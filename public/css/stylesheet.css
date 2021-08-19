@@ -351,14 +351,22 @@
     margin: 0;
   }
 
+  .matching-Button-Container p {
+    width: 35%;
+    display: inline-block;
+    font-size: 10pt;
+  }
+
   .matching-Button-Container button {
-    width: 50%;
+    width: 70%;
     margin-bottom: 20px;
     border-radius: 10px;
+    background-color: #ef5a24;
   }
 
   .matcing-ChatRoom-Container-Form input[type="text"] {
     width: 70%;
+    margin-bottom: 30px;
     line-height: 1.8;
     border: none;
     outline: none;
@@ -366,9 +374,20 @@
   }
 
   .matcing-ChatRoom-Container-Form button {
-    width: 20%;
-    margin-bottom: 30px;
+    width: 18%;
+    height: 35px;
+    margin-right: 1%;
+    display: inline-block;
+    border: none;
+    outline: none;
     border-radius: 10px;
+    color: #0a0a0a;
+    background-color: #e1d7b9;
+    font-size: 8pt;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 2px;
   }
 
   .matcingItem-Container-Inner {
@@ -376,33 +395,60 @@
   }
 
   .matcingItem-Container-Inner-Image {
-    width: 50%;
-    margin: 0 5px;
+    width: 40%;
+    margin: 15px 0 0 3%;
   }
 
   .matcingItem-Container-Inner-Image img {
     width: 100%;
-    margin-top: 30px;
+    margin-left: 15%;
     border: 1px solid;
   }
 
   .matcingItem-Container-Inner-Information {
-    width: 50%;
-    padding: 10px 5%;
-    line-height: 2.0;
+    width: 60%;
+    margin-left: 7%;
+    font-size: 10pt;
+    font-weight: normal;
+    line-height: 1.8;
+  }
+
+  .matcingItem-Container-Inner-Information ul ol span {
+    font-weight: bold;
+  }
+
+  .chatColor {
+    width: 40%;
+  }
+
+  .supply-Remarks {
+    display: flex;
+  }
+
+  .supply-Remarks-inner {
+    width: 70%;
   }
 
   .matcingItem-Container-Inner-Information ul, .matcingItem-Container-Inner-Information ul ol {
     padding: 0;
   }
 
+  .matcing-Partner-Container {
+    margin: 30px 0;
+  }
+
+  .matcing-Partner-Container-Inner {
+    display: flex;
+  }
+
   .matcing-Partner-Container-Inner-Image {
     margin-top: 30px;
+    margin-left: 7%;
     text-align: center;
   }
 
   .matcing-Partner-Container-Inner-Image img {
-    height: 200px;
+    height: 180px;
     border: 1px solid;
     border-radius: 50%;
   }
@@ -410,25 +456,37 @@
   .matcing-Partner-Container-Inner-Information {
     width: 80%;
     margin-top: 30px;
-    padding-left: 10%;
+    padding-left: 2%;
+    font-size: 10pt;
+    font-weight: normal;
   }
 
   .matcing-Partner-Container-Inner-Information p span {
-    font-size: 18pt;
+    font-weight: bold;
+  }
+
+  .matcing-ChatRoom-Container, .matching-Button-Container, .matcingItem-Information-Container {
+    margin-top: 20px;
+    border-bottom: 1px solid #e2e2e2;
   }
 
   .matcing-Partner-Container-Inner-Information p {
-    font-size: 14pt;
+    font-size: 10pt;
   }
 
   .matcing-ChatRoom-Container-inner {
-    width: 90%;
+    width: 100%;
     height: 400px;
+    margin: 0;
     margin-bottom: 20px;
-    margin-left: 5%;
     overflow-y: scroll;
-    background-color: #cce5fe;
+    background-color: #f3efe2;
     border-radius: 5px;
+  }
+
+  .matcing-Infomation p {
+    font-size: 10pt;
+    color: #ff433c;
   }
 
   .chat-Message {
@@ -445,14 +503,14 @@
   .my-Message {
     width: 40%;
     margin: 0 5% 0 auto;
-    background-color: #7affe4;
+    background-color: #feffff;
     border-radius: 10px;
   }
 
   .partner-Message {
     width: 40%;
     margin: 0 auto 0 5%;
-    background-color: #efff91;
+    background-color: #feffff;
     border-radius: 10px;
   }
 
@@ -464,14 +522,14 @@
 
   .my-Chat-Date {
     position: absolute;
-    left: 120px;
+    left: 160px;
     bottom: 0;
     font-size: 5pt;
   }
 
   .partner-Chat-Date {
     position: absolute;
-    left: 205px;
+    left: 220px;
     bottom: 0;
     font-size: 5pt;
   }

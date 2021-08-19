@@ -43,7 +43,7 @@
       </div>
       <div class="matcing-ChatRoom-Container-Form">
         <!--チャットフォーム-->
-        <input type="text" name="chat" placeholder="メッセージを入力してください。" v-model="chat">
+        <input type="text" name="chat" placeholder="メッセージを入力します。" v-model="chat">
         <input type="hidden" id="supply_user" name="supply_user" value="{{ $search_supply['id'] }}">
         <input type="hidden" id="login_user" name="login_user" value="{{ $search_supply['user_id'] }}">
         <button type="button" @click="send()">送信する</button>
@@ -54,12 +54,13 @@
     <!--ここに条件分岐(contractの値が1でlogin_userのidがsupply_userテーブルのuser_idと同じ場合ボタンを表示)
         ここに条件分岐(contractの値が2でlogin_userのidがsupplyテーブルのuser_idと同じ場合ボタンを表示)
         上の条件分岐でそれぞれに別のタイミングでボタンを表示・非表示させ、２度押しを防止する-->
-    <a href="/matchi/confirm?match={{$supply_user_id}}"><button>マッチング</button></a>
+        <p>お互いにマッチングボタンを押したら取引成立になります。場所や日時を決定し受け渡しましょう。</p>
+    <a href="/matchi/confirm?match={{$supply_user_id}}" class="btn-Group"><button>マッチング</button></a>
   </div>
   <div class="matcingItem-Information-Container">
     <!--おさがり情報を置く場所-->
     <div class="matcingItem-Information-Container-Inner-Title">
-      <h2>交流中のおさがり情報</h2>
+      <h2>おさがりの情報</h2>
     </div>
     <div class="matcingItem-Container-Inner">
       <div class="matcingItem-Container-Inner-Image">
@@ -73,16 +74,22 @@
           @if($k->supply->id == $search_supply['supply_id'])
           <!--supplyテーブルのidと中間テーブルのsupply_idが同じものに限定-->
             <ul>
-              <li>{{ $k->supply->item }}</li>
-              <li>{{ $k->supply->size }}</li>
+              <ol><span>{{ $k->supply->item }}</span></ol>
+              <ol>サイズ：{{ $k->supply->size }}</ol>
+              <ol>使用年数：{{ $k->supply->years_used }}</ol>
+              @foreach(config('const')['gender'] as $k3 => $val2)
+                @if($k3 == $k->supply->gender)
+                  <ol>使用したこどもの性別：{{ $val2 }}</ol>
+                @endif
+              @endforeach
               @foreach(config('const')['condition'] as $k2 => $val)
               <!--おさがりのきれい度の数値をconfigフォルダのconstからforeach-->
                   @if($k2 == $k->supply->condition)
                   <!--const内のkeyとsupplyテーブルのconditionが同じものに限定-->
-                    <li>{{ $val }}</li>
+                    <ol>きれい度：<span class="color{{$k2}} chatColor">{{ $val }}</span></ol>
                   @endif
               @endforeach
-              <li>{{ $k->supply->remarks }}</;>
+              <ol class="supply-Remarks">その他：<div class="supply-Remarks-inner">{{ $k->supply->remarks }}</div></ol>
             </ul>
           @endif
         @endforeach
@@ -92,7 +99,7 @@
   <div class="matcing-Partner-Container">
     <!--交流相手の情報を置く場所-->
     <div class="matcing-Partner-Container-Title">
-      <h2>交流相手の情報</h2>
+      <h2>おさがりの提供者</h2>
     </div>
     <div class="matcing-Partner-Container-Inner">
       <div class="matcing-Partner-Container-Inner-Image">
