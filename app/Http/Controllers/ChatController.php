@@ -99,10 +99,10 @@ class ChatController extends Controller
                 //ユーザーが画像を登録してた場合
                 $delete_image = $supply->image_path1;
                 //登録してた画像PATHを変数delete_imageに入れる
-                Storage::delete('public/images/user' .$delete_image);
+                Storage::delete('public/images/supply' .$delete_image);
                 //ストレージの中にある画像を削除
             }
-            $path = $request->file('image_path1')->store('public/images/user');
+            $path = $request->file('image_path1')->store('public/images/supply');
             //画像をストレージの中に保存して画像pathを変数pathに入れる
             $supply->image_path1 = basename($path);
             //テーブルに画像PATHを保存
@@ -114,10 +114,10 @@ class ChatController extends Controller
                 //ユーザーが画像を登録してた場合
                 $delete_image = $supply->image_path2;
                 //登録してた画像PATHを変数delete_imageに入れる
-                Storage::delete('public/images/user' .$delete_image);
+                Storage::delete('public/images/supply' .$delete_image);
                 //ストレージの中にある画像を削除
             }
-            $path = $request->file('image_path2')->store('public/images/user');
+            $path = $request->file('image_path2')->store('public/images/supply');
             //画像をストレージの中に保存して画像pathを変数pathに入れる
             $supply->image_path2 = basename($path);
             //テーブルに画像PATHを保存
@@ -129,10 +129,10 @@ class ChatController extends Controller
                 //ユーザーが画像を登録してた場合
                 $delete_image = $supply->image_path3;
                 //登録してた画像PATHを変数delete_imageに入れる
-                Storage::delete('public/images/user' .$delete_image);
+                Storage::delete('public/images/supply' .$delete_image);
                 //ストレージの中にある画像を削除
             }
-            $path = $request->file('image_path3')->store('public/images/user');
+            $path = $request->file('image_path3')->store('public/images/supply');
             //画像をストレージの中に保存して画像pathを変数pathに入れる
             $supply->image_path3 = basename($path);
             //テーブルに画像PATHを保存
@@ -144,10 +144,10 @@ class ChatController extends Controller
                 //ユーザーが画像を登録してた場合
                 $delete_image = $supply->image_path4;
                 //登録してた画像PATHを変数delete_imageに入れる
-                Storage::delete('public/images/user' .$delete_image);
+                Storage::delete('public/images/supply' .$delete_image);
                 //ストレージの中にある画像を削除
             }
-            $path = $request->file('image_path4')->store('public/images/user');
+            $path = $request->file('image_path4')->store('public/images/supply');
             //画像をストレージの中に保存して画像pathを変数pathに入れる
             $supply->image_path4 = basename($path);
             //テーブルに画像PATHを保存
