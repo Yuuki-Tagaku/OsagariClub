@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+use App\Http\Controllers\SupplyController;
+use vendor\laravel\framework\src\Illuminate\Routing;;
+
+
+Route::get('/',"SupplyController@search");
+
+Route::resource('supplies', 'SupplyController');
+
+Route::get('/supplies.list', [SupplyController::class, 'list'])->name('supplies_list');
+
+Route::get("supplies/1/confirmation", "SupplyController@confirmation");
