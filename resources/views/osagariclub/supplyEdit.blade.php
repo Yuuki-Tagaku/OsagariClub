@@ -54,7 +54,7 @@
             <label>
               <div class="image{{$n}}">
                 <img id="img{{$n}}"><br>
-                <input type="file" name="image_path{{$n}}" class="imgFile{{$n}}">
+                <label>写真をアップロード<input type="file" name="image_path{{$n}}" class="imgFile{{$n}}"></label>
               </div>
             </label>
           @endfor
