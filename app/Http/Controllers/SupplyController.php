@@ -18,14 +18,13 @@ class SupplyController extends Controller
     {
         $supplies = Supply::paginate(10);
 
-        // 検索機能
-
-        $keyword = $request->input("search");
         
-        if($keyword){
-             $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
-        }
-        return view ("supplies.index",compact("supplies"));
+        $categories = [
+            1=>"体育",
+            2=>"図工"
+        ];
+
+        return view ("supplies.index",compact("supplies","categories"));
         
     }
 
@@ -35,8 +34,29 @@ class SupplyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view ("supplies.create");
+    { 
+        $conditions = [
+            1=>"新品・未使用",
+            2=>"未使用に近い",
+            3=>"目立った汚れなし",
+            4=>"やや汚れあり",
+            5=>"汚れあり",
+            6=>"全体的に状態が悪い",
+        ];
+
+        $genders = [
+            1=>"男",
+            2=>"女"
+        ];
+
+        $categories = [
+            1=>"体育",
+            2=>"図工"
+        ];
+
+
+
+        return view ("supplies.create",compact("conditions","genders","categories"));
     }
 
     /**
@@ -49,7 +69,7 @@ class SupplyController extends Controller
     {
         $supply = new Supply();
         $supply->user_id =1;
-        $supply->category_id =1;
+        $supply->category_id =$request->input("category_id");
         $supply->item = $request->input("item");
         $supply->size = $request->input("size");
         $supply->condition =$request->input("condition");
@@ -63,6 +83,16 @@ class SupplyController extends Controller
         }else{
             $path = null;
         }
+
+
+        $conditions = [
+            1=>"新品・未使用",
+            2=>"未使用に近い",
+            3=>"目立った汚れなし",
+            4=>"やや汚れあり",
+            5=>"汚れあり",
+            6=>"全体的に状態が悪い",
+        ];
         
        $supply->image_path1 = $path[1];
 
@@ -70,8 +100,7 @@ class SupplyController extends Controller
 
 
         $supply->save();
-        return redirect()->route("supplies.show",[$supply->id]);
-        
+        return redirect()->route("supplies.show",[$supply->id]);   
     }
 
     /**
@@ -134,8 +163,7 @@ class SupplyController extends Controller
      */
     public function destroy(Supply $supply)
     {
-        $supply->delete();
-        return redirect()->route("posts.index");
+        
     }
 
     public function search (Supply $suppl,Request $request)
@@ -150,17 +178,52 @@ class SupplyController extends Controller
         // カテゴリーIDを定義
         $keycategory = $request->input("category");
 
-        // 検索ワードがおさがり名に含まれてるものを検索して表示
-        if($keyword){
-            $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
-       }
-    //    カテゴリーIDが同じものを検索して表示
+        $keycondition = $request->input("condition");
 
-       if($keycategory){
-        $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
-        }
 
-        return view("supplies.search",compact("supplies"));
+        $categories = [
+            1=>"体育",
+            2=>"図工"
+        ];
+
+        $conditions = [
+            1=>"新品・未使用",
+            2=>"未使用に近い",
+            3=>"目立った汚れなし",
+            4=>"やや汚れあり",
+            5=>"汚れあり",
+            6=>"全体的に状態が悪い",
+        ];
+
+
+
+    //     // 検索ワードがおさがり名に含まれてるものを検索して表示
+    //     if($keyword){
+    //     $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
+    //     }
+
+
+    //     // カテゴリーIDが同じものを検索して表示
+
+    //    if($keycategory){
+    //     $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
+    //     }
+
+    //     // 綺麗度が同じものを表示
+    //     if($keycondition){
+    //         $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
+    //     }
+
+
+    if($keyword || $keycategory ||$keycondition){
+        $supplies = Supply::where('item','LIKE', "%{$keyword}%")
+        ->where('category_id',"{$keycategory}")
+        ->where('condition', "{$keycondition}");
+   }
+
+
+
+        return view("supplies.search",compact("supplies","categories","conditions"));
     }
 
     public function confirmation (Supply $supply)

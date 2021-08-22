@@ -25,4 +25,3 @@ Route::resource('supplies', 'SupplyController');
 
 Route::get('/supplies.list', [SupplyController::class, 'list'])->name('supplies_list');
 
-Route::get("supplies/1/confirmation", "SupplyController@confirmation");
