@@ -19,9 +19,8 @@ use App\Http\Controllers\SupplyController;
 use vendor\laravel\framework\src\Illuminate\Routing;;
 
 
+
 Route::get('/',"SupplyController@search");
 
 Route::resource('supplies', 'SupplyController');
-
-Route::get('/supplies.list', [SupplyController::class, 'list'])->name('supplies_list');
 
