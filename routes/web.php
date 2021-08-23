@@ -11,16 +11,21 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 use App\Http\Controllers\SupplyController;
 use vendor\laravel\framework\src\Illuminate\Routing;;
 
 
 
-Route::get('/',"SupplyController@search");
+Route::get('search',"SupplyController@search");
 
 Route::resource('supplies', 'SupplyController');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 

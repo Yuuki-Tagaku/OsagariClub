@@ -117,7 +117,6 @@ class SupplyController extends Controller
     public function show(Supply $supply)
     {
         return view("supplies.show",compact("supply"));
-
     }
 
     /**

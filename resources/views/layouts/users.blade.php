@@ -17,7 +17,7 @@
           <img src="/">
         </div>
         <div class="header-container-menu">
-          <button>おさがり<br>登録</button>
+          <a href="/supplies"><button>おさがり<br>登録</button></a>
           <button>おさがり<br>交渉中</button>
           <button>会員<br>情報</button>
         </div>

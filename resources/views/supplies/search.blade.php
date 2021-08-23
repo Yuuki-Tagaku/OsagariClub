@@ -5,22 +5,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 @endsection
 
-@section("container")
-  <header>
-    <div class="header-container">
-      <div class="header-container-logo">
-        <img src="">
-      </div>
-      <div class="header-container-menu">
-        <a href="/supplies"><button>おさがり登録</button></a>
-        
-      
-        <button>おさがり交流中</button>
-        <button>会員情報</button>
-      </div>
-    </div>
-  </header>
 
+@section("container")
   <div class = "center-block">
     <h1 class ="text-center" href = "/supplies" >おさがり検索</h1>
   </div>
