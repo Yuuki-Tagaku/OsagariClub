@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4082630659cb5b562e54d0341d00309",
+
+
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -612,10 +613,12 @@
                 "laravel",
                 "ui"
             ],
+
             "support": {
                 "issues": "https://github.com/laravel/ui/issues",
                 "source": "https://github.com/laravel/ui/tree/v1.3.0"
             },
+
             "time": "2020-11-03T19:38:34+00:00"
         },
         {
