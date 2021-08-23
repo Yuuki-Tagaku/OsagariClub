@@ -1,79 +1,89 @@
 @extends("layouts.users")
 
-@section("css")
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+@section('title', 'おさがり新規登録')
+
+@section('js')
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 @endsection
+
+@section("css")
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+@endsection
+
 @section("container")
-<h1 class ="text-center" >おさがり新規登録</h1>
+    <div class="title-Container">
+        <h2>おさがり情報を登録します。</h2>
+    </div>
+    <div class="supply-create-Container">
+        <form action= "/supplies" method="POST" enctype="multipart/form-data">
+            @csrf
+            <!-- おさがり名 -->
+                <div class="form-Group">
+                    <span>おさがり名＊</span>
+                    <input type="text" name="item" value="">
+                </div>
+            <!-- カテゴリー -->
+                <div class="category-Group">
+                    <span>カテゴリ＊</span>
+                    <div class="category-Group-Button">
+                        @foreach($categories as $category)
+                            <label class=""><input type="radio" name="category_id" value= "{{$category['id']}}" >
+                            <label class="form-check-label" for="inlineRadio1">{{$category->category}}</label>
+                        @endforeach
+                    </div>
+                </div>
+            <!-- サイズ入力 -->
+                <div class="form-Group">
+                    <span>サイズ＊</span>
+                    <input type="text" name="size" value="">
+                </div>
 
-<form action= "/supplies" method="POST" enctype="multipart/form-data">
-    @csrf
+            <!-- 使用年数 -->
+                <div class="form-Group">
+                    <span>使用年数＊</span>
+                    <input type="text" name="years_used" value="">
+                </div>
 
-    <!-- おさがり名 -->
-        <div class="mb-3 row">
-            <label for="inputItem" class="col-sm-2 col-form-label">おさがり名</label>
-            <div class="col-sm-10">
-                <input type="text"  name = "item" class="form-control">
+            <!-- 使用していた性別 -->
+                <div class="form-Group gender-Group">
+                    <span>使用していた性別＊</span>
+                    @foreach($genders as $k => $val)
+                        <label class="$genders{{$k}}"><input type="radio" name="gender" value="{{$k}}">
+                        <label class="form-check-label" for="inlineRadio1">{{$val}}</label>
+                    @endforeach
+                </div> 
+            <!-- 状態入力 -->           
+                <div class="condition-Group">
+                    きれい度
+                    <div class="condition-Group-Choice">
+                        @foreach($conditions as $k => $val)
+                            <label class="conditions{{$k}}"><input type="radio" name="condition" value="{{$k}}">
+                            <label class="form-check-label" for="inlineRadio1">{{$val}}</label>
+                        @endforeach
+                    </div>
+                </div>
+
+            <!-- 写真登録 -->
+                おさがりの写真
+                <div class="image-Group">
+                    @for($i =1; $i<=4; $i++)
+                        <div class="image{{$i}}">
+                            <label>写真をアップロード<input type="file" name="image_path{{$i}}" class="imgFile{{$i}}"></label>
+                        </div>    
+                    @endfor
+                </di>
+            <!-- 備考入力 -->
+                <div class="supply-Remarks-Container">
+                    備考
+                    <textarea name="remarks" rows="5" cols="46%"></textarea>
+                </div>
+            <!-- 確認ボタン -->
+            <div class="btn-Group">
+                <button type = "submit">確認する</button>   
             </div>
-        </div>
-    
-    <!-- サイズ入力 -->
-        <div class="mb-3 row">
-            <label for="inputSize" class="col-sm-2 col-form-label">サイズ</label>
-            <div class="col-sm-10">
-                <input type="text" name = "size" class="form-control">
-            </div>
-        </div>
-    <!-- カテゴリ -->
-        <label for="inpuVategory" class="col-sm-2 col-form-label">カテゴリー</label>
-        <div class="form-check form-check-inline">
-            @foreach($categories as $k => $val)
-                <label class="categories{{$k}}"><input type="radio" name="category_id" value="{{$k}}">
-                <label class="form-check-label" for="inlineRadio1">{{$val}}</label>
-            @endforeach
-        </div>
-        <br>
-    <!-- 使用年数 -->
-        <div class="mb-3 row">
-            <label for="inputYears_id" class="col-sm-2 col-form-label">使用年数</label>
-            <div class="col-sm-10">
-                <input type="text" name = "years_used" class="form-control">
-            </div>
-        </div>
-    <!-- 使用していた性別入力 -->      
-        使用していた性別
-        <div class="form-check form-check-inline">
-            @foreach($genders as $k => $val)
-                <label class="$genders{{$k}}"><input type="radio" name="gender" value="{{$k}}">
-                <label class="form-check-label" for="inlineRadio1">{{$val}}</label>
-            @endforeach
-        </div>
-        <br>
-
-
-    <!-- 状態入力 -->
-        きれい度
-        <div class="form-check form-check-inline">
-            @foreach($conditions as $k => $val)
-                <label class="conditions{{$k}}"><input type="radio" name="condition" value="{{$k}}">
-                <label class="form-check-label" for="inlineRadio1">{{$val}}</label>
-            @endforeach
-        </div>
-        <br>
-
-    <!-- 写真登録 -->
-        <h2>写真</h2><br>
-        <input type="file" name="image_path1">
-        <input type="file" name="image_path2">
-        <input type="file" name="image_path3">
-        <input type="file" name="image_path4">
-    
-    <!-- 備考入力 -->
-        <h2>備考</h2><br>
-        <input type ="text" name = "remarks"name = "remarks">
- <br>
-    
-    <button type = "submit">送信</button>
-</form>
-
+        </form>
+    </div>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('js/supplyForm.js') }}"></script>
 @endsection

@@ -59,12 +59,11 @@
     <div class = "category-wrapper">
       <h2>カテゴリ</h2>
       <ul class="list-group list-group-horizontal">
-        @foreach($categories as $k =>$val)
+        @foreach($categories as $category)
           <li class="list-group-item">
             <form class="container-fluid">
               <div class="input-group">
-                <input type="submit"  value="{{$val}}"  >
-                <input type="hidden" name = "category" class="form-control" name="search" value="{{$k}}"  >
+                <label><input type="submit" name="category" value="{{$category['id']}}">{{$category["category"]}}</label>
               </div>
             </form>
           </li>

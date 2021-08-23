@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Supply;
+use App\category;
 use Illuminate\Http\Request;
 use Illuminate\View\ViewServiceProvider;
 use Carbon\Carbon;
@@ -49,10 +50,14 @@ class SupplyController extends Controller
             2=>"女"
         ];
 
-        $categories = [
-            1=>"体育",
-            2=>"図工"
-        ];
+
+        $categories = Category::where("school_id","1")->get();
+
+        // $categories = [
+        //     1=>"体育",
+        //     2=>"図工"
+        // ];
+
 
 
 
@@ -181,10 +186,12 @@ class SupplyController extends Controller
         $keycondition = $request->input("condition");
 
 
-        $categories = [
-            1=>"体育",
-            2=>"図工"
-        ];
+        $categories = Category::where("school_id","1")->get();
+        
+        // $categories = [
+        //     1=>"体育",
+        //     2=>"図工"
+        // ];
 
         $conditions = [
             1=>"新品・未使用",
@@ -197,29 +204,29 @@ class SupplyController extends Controller
 
 
 
-    //     // 検索ワードがおさがり名に含まれてるものを検索して表示
-    //     if($keyword){
-    //     $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
-    //     }
+        // 検索ワードがおさがり名に含まれてるものを検索して表示
+        if($keyword){
+        $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
+        }
 
 
-    //     // カテゴリーIDが同じものを検索して表示
+        // カテゴリーIDが同じものを検索して表示
 
-    //    if($keycategory){
-    //     $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
-    //     }
+       if($keycategory){
+        $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
+        }
 
-    //     // 綺麗度が同じものを表示
-    //     if($keycondition){
-    //         $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
-    //     }
+        // 綺麗度が同じものを表示
+        if($keycondition){
+            $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
+        }
 
 
-    if($keyword || $keycategory ||$keycondition){
-        $supplies = Supply::where('item','LIKE', "%{$keyword}%")
-        ->where('category_id',"{$keycategory}")
-        ->where('condition', "{$keycondition}");
-   }
+//     if($keyword || $keycategory ||$keycondition){
+//         $supplies = Supply::where('item','LIKE', "%{$keyword}%")
+//         ->where('category_id',"{$keycategory}")
+//         ->where('condition', "{$keycondition}");
+//    }
 
 
 
