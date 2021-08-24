@@ -23,12 +23,30 @@ class ChatController extends Controller
         $search_supply = Supply_user::Find($supply_user_id);
         $supply_user = Supply_user::all();
         $supply = Supply::all();
+        $week = [
+            '日', //0
+            '月', //1
+            '火', //2
+            '水', //3
+            '木', //4
+            '金', //5
+            '土', //6
+        ];
+        $today = date('Y年m月d日');
+        $toweek = date('w');
+        $dayweek =  $today. '('.$week[$toweek].')';
+        $yesterday = date('Y年m月d日',strtotime('-1 day'));
+        $yesterdayweek = date('w',strtotime('-1 day'));
+        $yesterdayweeks =  $yesterday. '('.$week[$yesterdayweek].')';
+
 
         $param = [
             'supply_user_id' => $supply_user_id,
             'supply_user' => $supply_user,
             'search_supply' => $search_supply,
             'supply' => $supply,
+            'dayweek' => $dayweek,
+            'yesterdayweeks' => $yesterdayweeks,
         ];
         return view('osagariclub.chat', $param);
     }

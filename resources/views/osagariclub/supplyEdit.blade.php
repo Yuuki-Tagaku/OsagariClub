@@ -44,7 +44,7 @@
           きれい度
           <div class="condition-Group-Choice">
               @foreach(config('const')['condition'] as $k => $val)
-                  <label><span class="{{$k == $search_supply['condition'] ? 'select-Condition' : 'condition'}}"></span><input type="radio" name="condition" value="{{$k}}" {{$k == $search_supply['condition'] ? 'checked' : ''}}><span class="color{{$k}}">{{$val}}</span></label>
+                  <label class="condition{{$k}}"><span class="{{$k == $search_supply['condition'] ? 'select-Condition' : 'condition'}}"></span><input type="radio" name="condition" value="{{$k}}" {{$k == $search_supply['condition'] ? 'checked' : ''}}><span class="color{{$k}}">{{$val}}</span></label>
               @endforeach
           </div>
         </div>
@@ -53,15 +53,15 @@
           @for($n = 1; $n <= 4; $n++)
             <label>
               <div class="image{{$n}}">
-                <img id="img{{$n}}"><br>
-                <label>写真をアップロード<input type="file" name="image_path{{$n}}" class="imgFile{{$n}}"></label>
+                <img id="img{{$n}}">
+                <span class="label{{$n}}"><label>写真アップロード{{$n == 1 ? '必須' : ''}}<input type="file" name="image_path{{$n}}" class="imgFile{{$n}}"></label></span>
               </div>
             </label>
           @endfor
         </div>
         <div class="supply-Remarks-Container">
           備考
-          <textarea name="remarks" rows="5" cols="46%">{{$search_supply['remarks']}}</textarea>
+          <textarea name="remarks" rows="5" cols="44%" class="remarks-Textarea">{{$search_supply['remarks']}}</textarea>
         </div>
         <input type="hidden" name="id" value="{{$search_supply['id']}}">
       <div class="btn-Group">
