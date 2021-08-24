@@ -49,7 +49,8 @@
           <li class="list-group-item">
             <form class="container-fluid">
               <div class="input-group">
-                <label><input type="submit" name="category" value="{{$category['id']}}">{{$category["category"]}}</label>
+                <input type="submit" value="{{$category ["category"]}}">
+                <input type="hidden" name="category" value="{{$category['id']}}">
               </div>
             </form>
           </li>

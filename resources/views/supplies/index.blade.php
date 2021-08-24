@@ -5,12 +5,14 @@
 @endsection
 
 @section("container")
-    <a href="/"><button>おさがり検索に戻る</button></a>
-    <a class = "m-4 text-center" href = "/supplies/create"><button>おさがり新規登録</button></a>
+    <div class = "d-flex justify-content-center">
+        <a class = "m-4 text-center" href = "/supplies/create"><button>おさがり新規登録</button></a>
+    </div>
+    {{ $supplies->appends(request()->query())->links() }}   
     <div class = "d-flex justify-content-center">
         <h2 class = "m-4 text-center">登録したおさがり一覧</h2>
     </div>
-    {{ $supplies->appends(request()->query())->links() }}   
+    
     <!-- おさがりを一つずつ取り出す -->
         <ul class="list-group" style = "width:80%;">
             @foreach($supplies as $supply)
@@ -46,6 +48,7 @@
                 </li>
             @endforeach 
          </ul>
+         {{ $supplies->appends(request()->query())->links() }}   
 @endsection
    
 

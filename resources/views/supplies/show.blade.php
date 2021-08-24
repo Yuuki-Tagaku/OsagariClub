@@ -6,6 +6,18 @@
 @endsection
 
 @section("container")
-    登録が完了しました<br>
-    <a class="list-group-item" href = "/supplies">一覧に戻る</a>
+
+  <div class = "center-block">
+    <p class ="text-center" >登録が完了しました</p>
+  </div>
+
+
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-center" style="height:300px;">
+      <p class ="text-center" >登録が完了しました</p>
+      <a class = "m-4 text-center" href = "/supplies"><button>戻る</button></a>
+    </div>
+  </div>
+   
+
 @endsection

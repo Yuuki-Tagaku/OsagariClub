@@ -496,3 +496,13 @@
 .matcing-Confirm-Container-Button {
   margin-top: 50px;
 }
+
+.back_ground{
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(../images/1-1_back.png);
+}
+.title_logo{
+  
+}

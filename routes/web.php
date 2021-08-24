@@ -29,3 +29,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('edit', function () {
+    return view('osagariclub/supplyEdit');
+});
