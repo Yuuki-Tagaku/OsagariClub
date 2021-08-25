@@ -19,6 +19,7 @@ class ChatsTableSeeder extends Seeder
             'created_day' => '2021年02月02日(火)',
             'created_time' => '10:30',
         ];
+
         DB::table('chats')->insert($param);
 
         $param = [
@@ -29,6 +30,7 @@ class ChatsTableSeeder extends Seeder
             'created_day' => '2021年02月02日(火)',
             'created_time' => '10:33',
         ];
+
         DB::table('chats')->insert($param);
 
         $param = [
@@ -38,8 +40,8 @@ class ChatsTableSeeder extends Seeder
             'user_id' => '2',
             'created_day' => '2021年02月02日(火)',
             'created_time' => '10:36',
-
         ];
+
         DB::table('chats')->insert($param);
 
         $param = [
@@ -49,8 +51,8 @@ class ChatsTableSeeder extends Seeder
             'user_id' => '2',
             'created_day' => '2021年02月02日(火)',
             'created_time' => '10:39',
-
         ];
+
         DB::table('chats')->insert($param);
 
         $param = [
@@ -60,8 +62,9 @@ class ChatsTableSeeder extends Seeder
             'user_id' => '3',
             'created_day' => '2021年02月02日(火)',
             'created_time' => '10:42',
-
         ];
+
         DB::table('chats')->insert($param);
+
     }
 }

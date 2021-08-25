@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //ユーザー関係のルート
 Route::get('/user/edit', 'UserController@edit');
 Route::post('/user/edit', 'UserController@branch')->name('user.branch');
@@ -33,3 +29,8 @@ Route::post('/matchi/confirm', 'ChatController@matcing');
 //おさがり関係のルート
 Route::get('/supply/edit', 'ChatController@edit');//後でコントローラ買えます。一時的なルート
 Route::post('/supply/edit', 'ChatController@branch')->name('supply.branch');
+
+//おさがり検索ルート
+Route::get('/',"SupplyController@search");
+//商品登録ルート
+Route::resource('supplies', 'SupplyController');
