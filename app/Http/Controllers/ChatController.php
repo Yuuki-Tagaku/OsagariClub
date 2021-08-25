@@ -53,11 +53,10 @@ class ChatController extends Controller
 
     public function matcing(Request $request)
     {
-        $req_contract = $request->contract;
         $req_supply_user_id = $request->supply_user_id;
 
         $supply_user = Supply_user::Find($req_supply_user_id);
-        $supply_user->contract = $supply_user['contract'] + $req_contract;
+        $supply_user->contract = $request->contract;
         $supply_user->save();
 
         return view('osagariclub.matchiApplying',['supply_user' => $supply_user]);

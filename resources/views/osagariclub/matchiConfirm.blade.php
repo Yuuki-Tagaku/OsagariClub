@@ -14,7 +14,7 @@
         @csrf
         <input type="hidden" name="supply_user_id" value="{{$supply_user_id}}">
         <!--getパラメータにある中間テーブルの値をコントローラ側に送る-->
-        <input type="hidden" name="contract" value="1">
+        <input type="hidden" name="contract" value="2">
         <input type="submit" class="confirm-button" name="edit" value="はい">
       </form>
         <a href="/chat/room?match={{$supply_user_id}}"><button class="confirm-button">もどる</button></a>
