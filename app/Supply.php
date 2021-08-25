@@ -10,6 +10,7 @@ use App\Supply_user;
 
 class Supply extends Model
 {
+    protected $dates = ['display_date'];
     public function user()
     {
         return $this->belongsTo('App\User');

@@ -1,24 +1,23 @@
-<!-- @extends('layouts.app') -->
+@extends('layouts.app')
 
 @section('content')
-<div class="container">
+
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header"></div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    登録が完了しました！
-                    <a href="search">始める</a>
+        <div class="col-md-8">     
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+            <div class = "container">
+                <div class = "d-flex align-items-center justify-content-center" style="height: 100vh;">
+                    <div>
+                        <p class = "text-center m-1">登録が完了しました！</p>
+                        <a href="search" class =" d-flex align-items-center justify-content-center"><button >始める</button></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 @endsection

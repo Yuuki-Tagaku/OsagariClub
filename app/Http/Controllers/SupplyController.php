@@ -15,16 +15,14 @@ class SupplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,Supply $supply)
     {
         $supplies = Supply::paginate(10);
 
         
-        $categories = [
-            1=>"体育",
-            2=>"図工"
-        ];
+        $categories = Category::where("school_id","1")->get();
 
+       
         return view ("supplies.index",compact("supplies","categories"));
         
     }
@@ -53,11 +51,6 @@ class SupplyController extends Controller
 
         $categories = Category::where("school_id","1")->get();
 
-        // $categories = [
-        //     1=>"体育",
-        //     2=>"図工"
-        // ];
-
 
 
 
@@ -81,6 +74,8 @@ class SupplyController extends Controller
         $supply->years_used = $request->input("years_used");
         $supply->gender =$request->input("gender");
         $supply->remarks =$request->input("remarks");
+
+        //写真１ ------------------------------------------
         $supply->image_path1 =$request->file("image_path1");
         if($request->hasfile("image_path1")){
             $path = \Storage::put('/public',$supply->image_path1);
@@ -88,6 +83,40 @@ class SupplyController extends Controller
         }else{
             $path = null;
         }
+        $supply->image_path1 = $path[1];
+        // 写真２----------------------------------------
+
+        $supply->image_path2 =$request->file("image_path2");
+        if($request->hasfile("image_path2")){
+            $path = \Storage::put('/public',$supply->image_path2);
+            $path = explode('/',$path);
+        }else{
+            $path = null;
+        }
+        $supply->image_path2 = $path[1];
+        // 写真３-----------------------------------------
+        $supply->image_path3 =$request->file("image_path3");
+        if($request->hasfile("image_path3")){
+            $path = \Storage::put('/public',$supply->image_path3);
+            $path = explode('/',$path);
+        }else{
+            $path = null;
+        }
+        $supply->image_path3 = $path[1];
+
+        // // 写真４----------------------------------------
+
+        $supply->image_path4 =$request->file("image_path4");
+        if($request->hasfile("image_path4")){
+            $path = \Storage::put('/public',$supply->image_path4);
+            $path = explode('/',$path);
+        }else{
+            $path = null;
+        }
+        $supply->image_path4 = $path[1];
+
+
+
 
 
         $conditions = [
@@ -99,11 +128,6 @@ class SupplyController extends Controller
             6=>"全体的に状態が悪い",
         ];
         
-       $supply->image_path1 = $path[1];
-
-
-
-
         $supply->save();
         return redirect()->route("supplies.show",[$supply->id]);   
     }
@@ -187,10 +211,6 @@ class SupplyController extends Controller
 
         $categories = Category::where("school_id","1")->get();
         
-        // $categories = [
-        //     1=>"体育",
-        //     2=>"図工"
-        // ];
 
         $conditions = [
             1=>"新品・未使用",
@@ -219,13 +239,6 @@ class SupplyController extends Controller
         if($keycondition){
             $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
         }
-
-
-//     if($keyword || $keycategory ||$keycondition){
-//         $supplies = Supply::where('item','LIKE', "%{$keyword}%")
-//         ->where('category_id',"{$keycategory}")
-//         ->where('condition', "{$keycondition}");
-//    }
 
 
 
