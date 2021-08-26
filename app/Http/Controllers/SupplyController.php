@@ -17,6 +17,7 @@ class SupplyController extends Controller
      */
     public function index(Request $request,Supply $supply)
     {
+        
         $supplies = Supply::paginate(10);
 
         
@@ -196,6 +197,8 @@ class SupplyController extends Controller
 
     public function search (Supply $suppl,Request $request)
     {
+
+        $request->user();
 
         $supplies = Supply::paginate(10);
 

@@ -5,6 +5,11 @@
 @endsection
 
 @section("container")
+
+  <form id="logout-form" action="{{ route('logout') }}" method="POST">
+    <button type = "submit">ログアウト</button>
+    @csrf
+  </form>
     <div class = "d-flex justify-content-center">
         <a class = "m-4 text-center" href = "/supplies/create"><button>おさがり新規登録</button></a>
     </div>

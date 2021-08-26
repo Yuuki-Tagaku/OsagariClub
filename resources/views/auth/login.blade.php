@@ -39,6 +39,8 @@
                             </div>
                         </div>
 
+                    <!-- ここにチェックを入れて送信するとエラーになる -->
+
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -56,6 +58,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">

@@ -7,6 +7,12 @@
 
 
 @section("container")
+
+
+  <form id="logout-form" action="{{ route('logout') }}" method="POST">
+    <button type = "submit">ログアウト</button>
+    @csrf
+  </form>
   <div class = "center-block">
     <h1 class ="text-center" href = "/supplies" >おさがり検索</h1>
   </div>

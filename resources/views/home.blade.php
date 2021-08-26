@@ -4,11 +4,11 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8">     
-            @if (session('status'))
+            <!-- @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
                 </div>
-            @endif
+            @endif -->
             <div class = "container">
                 <div class = "d-flex align-items-center justify-content-center" style="height: 100vh;">
                     <div>
@@ -19,5 +19,6 @@
             </div>
         </div>
     </div>
+    
 
 @endsection
