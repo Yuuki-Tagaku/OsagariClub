@@ -10,6 +10,7 @@ new Vue({
       axios.get(url)
         .then((response) => {
           this.chats = response.data;
+          this.scrollToEnd();
         });
     },
     send() {
@@ -26,9 +27,16 @@ new Vue({
           this.chat = '';
         });
     },
+    scrollToEnd() {
+      this.$nextTick(function() {
+        const container = this.$el.querySelector("#scroll-inner");
+        container.scrollTop = container.scrollHeight;
+      })
+    }
   },
   mounted() {
     this.getChats();
+    this.scrollToEnd();
     Echo.channel('Osagari_chat')
         .listen('ChatCreated', (e) => {
           this.getChats();

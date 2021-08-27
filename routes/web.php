@@ -33,11 +33,14 @@ Route::post('/supply/edit', 'ChatController@branch')->name('supply.branch');
 //おさがり検索ルート
 Route::get('/',"SupplyController@search");
 //商品登録ルート
+
 Route::resource('supplies', 'SupplyController');
 
-おさがり削除ルート
+//おさがり削除ルート
 Route::get('/confirm', "SupplyController@confirm")->name('supplydeleteconfirm');
 Route::get('/supplydelete', "SupplyController@delete")->name('supplydelete');
 
 //管理者ルート
 Route::get('/supplylist', 'AdminSupplyController@search')->name('supplylist');
+
+Route::resource('supplies', 'SupplyController');
