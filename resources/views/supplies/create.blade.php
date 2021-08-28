@@ -11,7 +11,7 @@
     <div class="title-Container">
         <h2>おさがり情報を登録します。</h2>
     </div>
-    <div class="supply-create-Container">
+    <div class="supply-Edit-Container">
         <form action= "/supplies" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- おさがり名 -->
@@ -24,8 +24,9 @@
                     <span>カテゴリ＊</span>
                     <div class="category-Group-Button">
                         @foreach($categories as $category)
-                            <label class=""><input type="radio" name="category_id" value= "{{$category['id']}}" >
-                            <label class="form-check-label" for="inlineRadio1">{{$category->category}}</label>
+                            <label><input type="radio" name="category_id" value="{{$category['id']}}" ><span class = "category">{{$category['category']}}</span></label>
+
+    
                         @endforeach
                     </div>
                 </div>

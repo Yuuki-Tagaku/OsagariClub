@@ -57,7 +57,8 @@
             <div class="col">
               <form class="container-fluid">
                 <div class="input-group">
-                  <input type="submit" value="{{$category ["category"]}}">
+                  <input type="submit" value= "{{$category ['category']}}">
+
                   <input type="hidden" name="category" value="{{$category['id']}}">
                 </div>
               </form>

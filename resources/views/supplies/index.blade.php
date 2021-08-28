@@ -29,14 +29,19 @@
                                 <img src = "{{"/storage/" .$supply->image_path1 }}" style = "width:50px; heigh:50px;</head> " > 
                                 @endif
                             </li>
-                        <!-- おさがり名を表示 -->
-                            <li class="list-group-item" style ="width :100px; "><p class=" d-flex justify-content-center card-title m-3 w-100">{{$supply->item}}</p></li>
                         <!-- カテゴリー名を表示 -->
                             <li class="list-group-item">
-                               {{$supply->category_id}}
-
-                             
+                                <!-- カテゴリーの中身を取り出す -->
+                                @foreach($categories as $category)
+                                <!-- おさがりにに登録されてるカテゴリーIDと、同じカテゴリーの場合 -->
+                                    @if($supply->category_id==$category["id"])
+                                    <!-- 表示するのはカテゴリーテーブルのカテゴリー -->
+                                        {{$category["category"]}}
+                                    @endif
+                                 @endforeach
                             </li>
+                        <!-- おさがり名を表示 -->
+                        <li class="list-group-item" style ="width :100px; "><p class=" d-flex justify-content-center card-title m-3 w-100">{{$supply->item}}</p></li>
                         <!-- 投稿作成時間を表示 -->
                             <li class="list-group-item">
                                 <p>登録日</p>

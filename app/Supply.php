@@ -25,4 +25,9 @@ class Supply extends Model
     {
         return $this->hasMany('App\Supply_user');
     }
+
+    public function category()
+    {
+        return $this->belongsToMany('App\Category');
+    }
 }

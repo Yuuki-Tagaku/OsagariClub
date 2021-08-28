@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Supply;
 use App\category;
+use App\School;
 use Illuminate\Http\Request;
 use Illuminate\View\ViewServiceProvider;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SupplyController extends Controller
 {
@@ -17,11 +19,22 @@ class SupplyController extends Controller
      */
     public function index(Request $request,Supply $supply)
     {
-        
-        $supplies = Supply::paginate(10);
 
-        
-        $categories = Category::where("school_id","1")->get();
+    
+        // ログインしているユーザーを定義
+
+        $user = Auth::user();
+
+
+        // ユーザーが作ったおさがりを取得する
+        // 認証されているユーザーが作ったおさがりを取得
+
+    
+        $supplies = Supply::where("user_id",$user["id"])->paginate(10);
+
+       
+
+        $categories = Category::where("school_id",$user["school_id"])->get();
 
        
         return view ("supplies.index",compact("supplies","categories"));
@@ -50,7 +63,9 @@ class SupplyController extends Controller
         ];
 
 
-        $categories = Category::where("school_id","1")->get();
+        $user = Auth::user();
+
+        $categories = category::where("school_id",$user["school_id"])->get();
 
 
 
@@ -66,8 +81,9 @@ class SupplyController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $supply = new Supply();
-        $supply->user_id =1;
+        $supply->user_id =$user["id"];
         $supply->category_id =$request->input("category_id");
         $supply->item = $request->input("item");
         $supply->size = $request->input("size");
@@ -197,8 +213,8 @@ class SupplyController extends Controller
 
     public function search (Supply $suppl,Request $request)
     {
+        $user = Auth::user();
 
-        $request->user();
 
         $supplies = Supply::paginate(10);
 
@@ -212,7 +228,7 @@ class SupplyController extends Controller
         $keycondition = $request->input("condition");
 
 
-        $categories = Category::where("school_id","1")->get();
+        $categories = Category::where("school_id",$user["school_id"])->get();
         
 
         $conditions = [
