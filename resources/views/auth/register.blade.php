@@ -13,8 +13,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
-                        <!-- スクールID取得 -->
-                        <!-- スクールIDをどうやって取得するかわからない -->
+                        <!-- スクールID取得 スクールIDをどうやって取得するかわからない -->
                             <input type="hidden" name = "school_id" value="1">
                         <!-- 名前入力 -->
                             <div class="form-group row">
