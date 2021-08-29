@@ -11,24 +11,49 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-use App\Http\Controllers\SupplyController;
-use vendor\laravel\framework\src\Illuminate\Routing;;
+//ユーザー関係のルート
+Route::get('/user/edit', 'UserController@edit');
+Route::post('/user/edit', 'UserController@branch')->name('user.branch');
+Route::get('/user/delete', 'UserController@delete');
 
+//チャット関係のルート
+Route::get('/chat/room', 'ChatController@chatroom');//チャットルームのルート
+//チャット用ajax
+Route::get('ajax/chat', 'Ajax\ChatController@index');//メッセージ一覧を取得
+Route::post('ajax/chat', 'Ajax\ChatController@create');//チャット登録
 
+//マッチ関係のルート
+Route::get('/matchi/confirm', 'ChatController@home');
+Route::post('/matchi/confirm', 'ChatController@matcing');
 
-Route::get('search',"SupplyController@search");
+//おさがり関係のルート
+Route::get('/supply/edit', 'ChatController@edit');//後でコントローラ買えます。一時的なルート
+Route::post('/supply/edit', 'ChatController@branch')->name('supply.branch');
+
+//おさがり検索ルート
+Route::get('/',"SupplyController@search");
+//商品登録ルート
 
 Route::resource('supplies', 'SupplyController');
+
+//おさがり削除ルート
+Route::get('/confirm', "SupplyController@confirm")->name('supplydeleteconfirm');
+Route::get('/supplydelete', "SupplyController@delete")->name('supplydelete');
+
+
+// お下がり検索画面へ
+Route::get('search',"SupplyController@search");
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('edit', function () {
-    return view('osagariclub/supplyEdit');
-});
+
+
+//管理者ルート
+Route::get('/supplylist', 'AdminSupplyController@search')->name('supplylist');
+
+
+

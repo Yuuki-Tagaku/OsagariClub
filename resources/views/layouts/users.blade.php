@@ -15,12 +15,13 @@
     <header>
       <div class="header-container">
         <div class="header-container-logo">
-          <a href="/search"><img src="/"></a>
+
+          <img src="{{ asset('images/Logo-Title.png') }}">
         </div>
         <div class="header-container-menu">
-          <a href="/supplies"><button>おさがり<br>登録</button></a>
-          <button>おさがり<br>交渉中</button>
-          <button>会員<br>情報</button>
+          <img src="{{ asset('images/supply-create.png') }}">
+          <img src="{{ asset('images/chat.png') }}">
+          <img src="{{ asset('images/user-info.png') }}">
         </div>
       </div>
     </header>
