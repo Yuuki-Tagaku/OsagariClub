@@ -10,6 +10,7 @@ use App\Supply_user;
 
 class Supply extends Model
 {
+    protected $dates = ['display_date'];
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -23,5 +24,10 @@ class Supply extends Model
     public function supply_user()
     {
         return $this->hasMany('App\Supply_user');
+    }
+
+    public function category()
+    {
+        return $this->belongsToMany('App\Category');
     }
 }

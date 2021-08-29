@@ -11,6 +11,7 @@
 |
 */
 
+
 //ユーザー関係のルート
 Route::get('/user/edit', 'UserController@edit');
 Route::post('/user/edit', 'UserController@branch')->name('user.branch');
@@ -40,7 +41,19 @@ Route::resource('supplies', 'SupplyController');
 Route::get('/confirm', "SupplyController@confirm")->name('supplydeleteconfirm');
 Route::get('/supplydelete', "SupplyController@delete")->name('supplydelete');
 
+
+// お下がり検索画面へ
+Route::get('search',"SupplyController@search");
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
 //管理者ルート
 Route::get('/supplylist', 'AdminSupplyController@search')->name('supplylist');
 
-Route::resource('supplies', 'SupplyController');
+
+

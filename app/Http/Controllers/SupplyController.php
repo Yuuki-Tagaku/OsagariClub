@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Supply;
+use App\category;
+use App\School;
 use Illuminate\Http\Request;
 use Illuminate\View\ViewServiceProvider;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SupplyController extends Controller
 {
@@ -14,16 +17,26 @@ class SupplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,Supply $supply)
     {
-        $supplies = Supply::paginate(10);
 
-        
-        $categories = [
-            1=>"体育",
-            2=>"図工"
-        ];
+    
+        // ログインしているユーザーを定義
 
+        $user = Auth::user();
+
+
+        // ユーザーが作ったおさがりを取得する
+        // 認証されているユーザーが作ったおさがりを取得
+
+    
+        $supplies = Supply::where("user_id",$user["id"])->paginate(10);
+
+       
+
+        $categories = Category::where("school_id",$user["school_id"])->get();
+
+       
         return view ("supplies.index",compact("supplies","categories"));
         
     }
@@ -49,10 +62,11 @@ class SupplyController extends Controller
             2=>"女"
         ];
 
-        $categories = [
-            1=>"体育",
-            2=>"図工"
-        ];
+
+        $user = Auth::user();
+
+        $categories = category::where("school_id",$user["school_id"])->get();
+
 
 
 
@@ -67,8 +81,9 @@ class SupplyController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $supply = new Supply();
-        $supply->user_id =1;
+        $supply->user_id =$user["id"];
         $supply->category_id =$request->input("category_id");
         $supply->item = $request->input("item");
         $supply->size = $request->input("size");
@@ -76,6 +91,8 @@ class SupplyController extends Controller
         $supply->years_used = $request->input("years_used");
         $supply->gender =$request->input("gender");
         $supply->remarks =$request->input("remarks");
+
+        //写真１ ------------------------------------------
         $supply->image_path1 =$request->file("image_path1");
         if($request->hasfile("image_path1")){
             $path = \Storage::put('/public',$supply->image_path1);
@@ -83,6 +100,40 @@ class SupplyController extends Controller
         }else{
             $path = null;
         }
+        $supply->image_path1 = $path[1];
+        // 写真２----------------------------------------
+
+        $supply->image_path2 =$request->file("image_path2");
+        if($request->hasfile("image_path2")){
+            $path = \Storage::put('/public',$supply->image_path2);
+            $path = explode('/',$path);
+        }else{
+            $path = null;
+        }
+        $supply->image_path2 = $path[1];
+        // 写真３-----------------------------------------
+        $supply->image_path3 =$request->file("image_path3");
+        if($request->hasfile("image_path3")){
+            $path = \Storage::put('/public',$supply->image_path3);
+            $path = explode('/',$path);
+        }else{
+            $path = null;
+        }
+        $supply->image_path3 = $path[1];
+
+        // // 写真４----------------------------------------
+
+        $supply->image_path4 =$request->file("image_path4");
+        if($request->hasfile("image_path4")){
+            $path = \Storage::put('/public',$supply->image_path4);
+            $path = explode('/',$path);
+        }else{
+            $path = null;
+        }
+        $supply->image_path4 = $path[1];
+
+
+
 
 
         $conditions = [
@@ -94,11 +145,6 @@ class SupplyController extends Controller
             6=>"全体的に状態が悪い",
         ];
         
-       $supply->image_path1 = $path[1];
-
-
-
-
         $supply->save();
         return redirect()->route("supplies.show",[$supply->id]);   
     }
@@ -112,7 +158,6 @@ class SupplyController extends Controller
     public function show(Supply $supply)
     {
         return view("supplies.show",compact("supply"));
-
     }
 
     /**
@@ -168,6 +213,8 @@ class SupplyController extends Controller
 
     public function search (Supply $suppl,Request $request)
     {
+        $user = Auth::user();
+
 
         $supplies = Supply::paginate(10);
 
@@ -181,10 +228,8 @@ class SupplyController extends Controller
         $keycondition = $request->input("condition");
 
 
-        $categories = [
-            1=>"体育",
-            2=>"図工"
-        ];
+        $categories = Category::where("school_id",$user["school_id"])->get();
+        
 
         $conditions = [
             1=>"新品・未使用",
@@ -197,29 +242,22 @@ class SupplyController extends Controller
 
 
 
-    //     // 検索ワードがおさがり名に含まれてるものを検索して表示
-    //     if($keyword){
-    //     $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
-    //     }
+        // 検索ワードがおさがり名に含まれてるものを検索して表示
+        if($keyword){
+        $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
+        }
 
 
-    //     // カテゴリーIDが同じものを検索して表示
+        // カテゴリーIDが同じものを検索して表示
 
-    //    if($keycategory){
-    //     $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
-    //     }
+       if($keycategory){
+        $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
+        }
 
-    //     // 綺麗度が同じものを表示
-    //     if($keycondition){
-    //         $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
-    //     }
-
-
-    if($keyword || $keycategory ||$keycondition){
-        $supplies = Supply::where('item','LIKE', "%{$keyword}%")
-        ->where('category_id',"{$keycategory}")
-        ->where('condition', "{$keycondition}");
-   }
+        // 綺麗度が同じものを表示
+        if($keycondition){
+            $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
+        }
 
 
 

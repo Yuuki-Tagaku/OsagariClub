@@ -5,14 +5,21 @@
 @endsection
 
 @section("container")
-    <a href="/"><button>おさがり検索に戻る</button></a>
-    <a class = "m-4 text-center" href = "/supplies/create"><button>おさがり新規登録</button></a>
+
+  <form id="logout-form" action="{{ route('logout') }}" method="POST">
+    <button type = "submit">ログアウト</button>
+    @csrf
+  </form>
+    <div class = "d-flex justify-content-center">
+        <a class = "m-4 text-center" href = "/supplies/create"><button>おさがり新規登録</button></a>
+    </div>
+    <div class = "d-flex align-items-center justify-content-end">{{ $supplies->appends(request()->query())->links() }}</div>   
     <div class = "d-flex justify-content-center">
         <h2 class = "m-4 text-center">登録したおさがり一覧</h2>
     </div>
-    {{ $supplies->appends(request()->query())->links() }}   
+    
     <!-- おさがりを一つずつ取り出す -->
-        <ul class="list-group" style = "width:80%;">
+        <ul class="list-group">
             @foreach($supplies as $supply)
                 <li class="list-group-item d-flex justify-content-center">
                     <ul class="list-group list-group-horizontal">
@@ -22,20 +29,24 @@
                                 <img src = "{{"/storage/" .$supply->image_path1 }}" style = "width:50px; heigh:50px;</head> " > 
                                 @endif
                             </li>
-                        <!-- おさがり名を表示 -->
-                            <li class="list-group-item" style ="width :100px; "><p class=" d-flex justify-content-center card-title m-3 w-100">{{$supply->item}}</p></li>
                         <!-- カテゴリー名を表示 -->
-                            <li class="list-group-item">    
-                                @foreach($categories as $k =>$val)
-                                    @switch($supply->category_id)
-                                        @case($k)
-                                            <p class="card-text">{{$val}}</p>
-                                            @break
-                                    @endswitch
-                                @endforeach
+                            <li class="list-group-item">
+                                <!-- カテゴリーの中身を取り出す -->
+                                @foreach($categories as $category)
+                                <!-- おさがりにに登録されてるカテゴリーIDと、同じカテゴリーの場合 -->
+                                    @if($supply->category_id==$category["id"])
+                                    <!-- 表示するのはカテゴリーテーブルのカテゴリー -->
+                                        {{$category["category"]}}
+                                    @endif
+                                 @endforeach
                             </li>
+                        <!-- おさがり名を表示 -->
+                        <li class="list-group-item" style ="width :100px; "><p class=" d-flex justify-content-center card-title m-3 w-100">{{$supply->item}}</p></li>
                         <!-- 投稿作成時間を表示 -->
-                            <li class="list-group-item"><p class ="limit">{{$supply->created_at}}</p></li>
+                            <li class="list-group-item">
+                                <p>登録日</p>
+                                <div>{{ $supply['created_at']->format('Y/m/d') }}</div> 
+                            </li>
                         <!-- 編集画面へと推移 -->
                             <li class="list-group-item">
                                 <form action="/supplies/{{$supply->id}}/edit"  type = "hidden">
@@ -46,6 +57,8 @@
                 </li>
             @endforeach 
          </ul>
+         <div class = "d-flex align-items-center justify-content-center">{{ $supplies->appends(request()->query())->links() }}</div> 
+
 @endsection
    
 
