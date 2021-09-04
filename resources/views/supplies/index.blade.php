@@ -1,57 +1,48 @@
 @extends("layouts.users")
 
-@section("css")
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-@endsection
+@section('title', '登録おさがり一覧')
 
 @section("container")
-    <a href="/"><button>おさがり検索に戻る</button></a>
-    <a class = "m-4 text-center" href = "/supplies/create"><button>おさがり新規登録</button></a>
-    <div class = "d-flex justify-content-center">
-        <h2 class = "m-4 text-center">登録したおさがり一覧</h2>
+    <!-- 修正箇所：おさがり検索に戻るというボタンがないので削除しました。 -->
+    <div class="supply-Index-Button">
+        <a href = "/supplies/create"><button>おさがりを登録する</button></a>
     </div>
-    {{ $supplies->appends(request()->query())->links() }}   
-    <!-- おさがりを一つずつ取り出す -->
-        <ul class="list-group" style = "width:80%;">
-            @foreach($supplies as $supply)
-                <li class="list-group-item d-flex justify-content-center">
-                    <ul class="list-group list-group-horizontal">
-                        <!-- 写真を表示 -->
-                            <li class="list-group-item ">
-                                @if ($supply->image_path1 == !null )
-                                <img src = "{{"/storage/" .$supply->image_path1 }}" style = "width:50px; heigh:50px;</head> " > 
-                                @endif
-                            </li>
-                        <!-- おさがり名を表示 -->
-                            <li class="list-group-item" style ="width :100px; "><p class=" d-flex justify-content-center card-title m-3 w-100">{{$supply->item}}</p></li>
-                        <!-- カテゴリー名を表示 -->
-                            <li class="list-group-item">    
-                                @foreach($categories as $k =>$val)
-                                    @switch($supply->category_id)
-                                        @case($k)
-                                            <p class="card-text">{{$val}}</p>
-                                            @break
-                                    @endswitch
-                                @endforeach
-                            </li>
-                        <!-- 投稿作成時間を表示 -->
-                            <li class="list-group-item"><p class ="limit">{{$supply->created_at}}</p></li>
-                        <!-- 編集画面へと推移 -->
-                            <li class="list-group-item">
-                                <form action="/supplies/{{$supply->id}}/edit"  type = "hidden">
-                                <button class= "btn-link" class="card-link">編集</button>
-                                </form>
-                            </li>
-                    </ul>                    
-                </li>
-            @endforeach 
-         </ul>
+    <div class="title-Container supply-Add-List">
+        <h2>登録したおさがり一覧</h2>
+        <!-- 修正箇所：上のタイトルと同じ高さにペジネーションが存在しないといけないので、同じブロック内にあった方がデザインしやすいため場所を移動しています。 -->
+        <!-- 修正箇所：パラメータを保持するペジネーションはいらないので普通のペジネーションに変更してます -->
+        {{ $supplies->links() }}
+    </div>
+    <!-- 修正箇所：今回の一覧表示はデザインからするとテーブルの方が適してると思うのでテーブルに変更してます。 -->
+    <table class="my-Supply-Index">
+        <tr>
+            <th>写真</th>
+            <th>カテゴリ</th>
+            <th>おさがり名</th>
+            <th>最終交流日</th>
+            <th></th>
+        </tr>
+        <!-- おさがりを一つずつ取り出す -->
+        @foreach($supplies as $supply)
+            <tr>
+                <!-- 修正箇所：画像は１枚必ず登録なのでnullは存在しないため削除してます。
+                    あとダブルクォーターの中にクォーターを打つときはシングルクォーターでと種類を変えた方がいいです。 -->
+                <td><img src = "{{'/storage/images/supply/' .$supply->image_path1 }}"></td>
+                <td>
+                    <!-- 修正箇所：条件分岐で条件が１つしかないのであればSwitch文は不適切です。if文の方が短く済むし合っています。 -->
+                    @foreach($categories as $category)
+                        <!-- データベースにあるカテゴリーテーブルのIDというカラムの中の値が、サプライテーブルの中にあるcategori_idというカラム名の中の値と同じ場合というif文になる。 -->
+                        @if($category['id'] == $supply->category_id)
+                            <!-- ここでカテゴリーテーブルのcategoryというカラム名の値を取り出して表示させている -->
+                            <p>{{$category['category']}}</p>
+                        @endif
+                    @endforeach
+                </td>
+                <td><p>{{$supply->item}}</p></td>
+                <td><p>{{$supply->created_at}}</p></td>
+                <!-- 修正箇所：編集画面に移動するだけなのでフォームではなくaタグで対応できる。その方が記述が短い -->
+                <td><a><button class= "btn-link" class="card-link">編集</button></a></td>
+            </tr>
+        @endforeach
+    </table>
 @endsection
-   
-
-
-  
-  
-  
-  
-
