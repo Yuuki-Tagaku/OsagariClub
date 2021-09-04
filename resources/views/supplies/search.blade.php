@@ -43,7 +43,6 @@
 
     <h3 class="search-title">検索結果</h3>
     {{$supplies->appends($param)->links()}}
-
   <!-- 用品を一つずつ取り出す -->
     <div class="search-Result">
       @if(isset($supplies))
@@ -72,5 +71,8 @@
   <script src="{{ mix('js/app.js') }}"></script>
   <script src="{{ asset('js/supplyForm.js') }}"></script>
 @endsection
+
+
+
 
 

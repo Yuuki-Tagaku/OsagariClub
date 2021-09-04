@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
     <title>@yield('title')</title>
+    
 
     <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}" media="screen and (max-width: 480px)">
     @yield('css')
@@ -14,6 +15,7 @@
     <header>
       <div class="header-container">
         <div class="header-container-logo">
+
           <img src="{{ asset('images/Logo-Title.png') }}">
         </div>
         <div class="header-container-menu">

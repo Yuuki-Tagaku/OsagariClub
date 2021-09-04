@@ -705,6 +705,18 @@
     background-position: bottom right;
   }
 
+
+.matcing-Confirm-Container-Button {
+  margin-top: 50px;
+}
+
+.back_ground{
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(../images/1-1_back.png);
+}
+
   .user-Delete-Confirm-Container {
     width: 100vw;
     min-height: 90vh;
@@ -844,7 +856,8 @@
     font-size: 8pt;
   }
 
-  .my-Supply-Index tr:first-child {    border-collapse: unset;
+  .my-Supply-Index tr:first-child {
+    border-collapse: unset;
     background-color: #f2f2f2;
   }
 
