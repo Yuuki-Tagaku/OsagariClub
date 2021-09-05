@@ -88,7 +88,7 @@ class AdminSupplyController extends Controller
             $query->orwhere('gender', $gender);
         }
         if ($conditions != null) {
-            $query->orwhere('conditions', $conditions);
+            $query->orwhere('conditions', $conditionsx);
         }
         $supply = $query->get();
         $param = ["categories" => $categories, "supply" => $supply];

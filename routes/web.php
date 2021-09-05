@@ -43,6 +43,7 @@ Route::get('/supplydelete', "SupplyController@delete")->name('supplydelete');
 //管理者ルート
 Route::get('/supplylist', 'AdminSupplyController@search')->name('supplylist');
 Route::get('/supplylist/detail', 'AdminSupplyController@edit');
+Route::get('/supplylist/detail', 'AdminSupplyController@saerch');
 
 
 Route::resource('supplies', 'SupplyController');
