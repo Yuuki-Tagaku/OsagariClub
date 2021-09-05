@@ -15,6 +15,7 @@ class AdminSupplyController extends Controller
     public function search(Request $request)
     {
         //フォームを機能させるために各情報を取得し、viewに返す
+        //viewのnameの部分
         $items = $request->input('item');
         $categoryId = $request->input('category_id');
         $size = $request->input('size');
@@ -24,11 +25,74 @@ class AdminSupplyController extends Controller
 
         $categories = Category::find('1');
 
-        if (!empty($item)) {
-            $supply = Supply::where('item', $request->input)->get();
-            $param = ['input' => $request->input, 'item' => $item];
+        //検索フォームからの値で検索したいものを返したい
+        //カラム名、フォームで入力された値
+        /*$supply = Supply::where('item', 'like', '%'.$items.'%')
+            ->orwhere('category_id', $categoryId)
+            ->orwhere('size', 'like', '%'.$size.'%')
+            ->orwhere('years_used', 'like', '%'.$years_used.'%')
+            ->orwhere('gender', $gender)
+            ->orwhere('condition', $conditions)
+            ->get();*/
 
-            return view('osagariclub.supplylist', $param);
+        $query = Supply::query();
+        if ($items != null) {
+            $query->orwhere('item', 'like', '%' . $items . '%');
         }
+        if ($categoryId != null) {
+            $query->orwhere('category_id', $categoryId);
+        }
+        if ($size != null) {
+            $query->orwhere('size', 'like', '%' . $size . '%');
+        }
+        if ($years_used != null) {
+            $query->orwhere('years_used', 'like', '%' . $years_used . '%');
+        }
+        if ($gender != null) {
+            $query->orwhere('gender', $gender);
+        }
+        if ($conditions != null) {
+            $query->orwhere('conditions', $conditionsx);
+        }
+        $supply = $query->get();
+
+        $param = ["categories" => $categories, "supply" => $supply];
+
+        return view('osagariclub.supplylist', $param);
+    }
+
+    public function edit(Request $request)
+    {
+        $items = $request->input('item');
+        $categoryId = $request->input('category_id');
+        $size = $request->input('size');
+        $years_used = $request->input('year_used');
+        $gender = $request->input('gender');
+        $conditions = $request->input('conditions');
+
+        $categories = Category::find('1');
+        $query = Supply::query();
+        if ($items != null) {
+            $query->orwhere('item', 'like', '%' . $items . '%');
+        }
+        if ($categoryId != null) {
+            $query->orwhere('category_id', $categoryId);
+        }
+        if ($size != null) {
+            $query->orwhere('size', 'like', '%' . $size . '%');
+        }
+        if ($years_used != null) {
+            $query->orwhere('years_used', 'like', '%' . $years_used . '%');
+        }
+        if ($gender != null) {
+            $query->orwhere('gender', $gender);
+        }
+        if ($conditions != null) {
+            $query->orwhere('conditions', $conditions);
+        }
+        $supply = $query->get();
+        $param = ["categories" => $categories, "supply" => $supply];
+
+        return view('osagariclub.supplylistdetail', $param);
     }
 }
