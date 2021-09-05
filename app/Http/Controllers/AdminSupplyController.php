@@ -52,7 +52,7 @@ class AdminSupplyController extends Controller
             $query->orwhere('gender', $gender);
         }
         if ($conditions != null) {
-            $query->orwhere('conditions', $conditionsx);
+            $query->orwhere('conditions', $conditions);
         }
         $supply = $query->get();
 
@@ -88,11 +88,61 @@ class AdminSupplyController extends Controller
             $query->orwhere('gender', $gender);
         }
         if ($conditions != null) {
-            $query->orwhere('conditions', $conditionsx);
+            $query->orwhere('conditions', $conditions);
         }
         $supply = $query->get();
         $param = ["categories" => $categories, "supply" => $supply];
 
         return view('osagariclub.supplylistdetail', $param);
+    }
+
+    public function chatsearch(Request $request)
+    {
+        //フォームを機能させるために各情報を取得し、viewに返す
+        //viewのnameの部分
+        $items = $request->input('item');
+        $categoryId = $request->input('category_id');
+        $name = $request->input('name');
+        $categories = Category::find('1');
+        $query = Supply::query();
+        if ($items != null) {
+            $query->orwhere('item', 'like', '%' . $items . '%');
+        }
+        if ($categoryId != null) {
+            $query->orwhere('category_id', $categoryId);
+        }
+        if ($name != null) {
+            $query->orwhere('name', 'like', '%' . $name . '%');
+        }
+        $supply = $query->get();
+
+        $param = ["categories" => $categories, "supply" => $supply];
+
+        return view('osagariclub.chatlist', $param);
+    }
+
+    public function updata(Request $request)
+    {
+        //フォームを機能させるために各情報を取得し、viewに返す
+        //viewのnameの部分
+        $items = $request->input('item');
+        $categoryId = $request->input('category_id');
+        $name = $request->input('name');
+        $categories = Category::find('1');
+        $query = Supply::query();
+        if ($items != null) {
+            $query->orwhere('item', 'like', '%' . $items . '%');
+        }
+        if ($categoryId != null) {
+            $query->orwhere('category_id', $categoryId);
+        }
+        if ($name != null) {
+            $query->orwhere('name', 'like', '%' . $name . '%');
+        }
+        $supply = $query->get();
+
+        $param = ["categories" => $categories, "supply" => $supply];
+
+        return view('osagariclub.chatlistdetail', $param);
     }
 }

@@ -7,7 +7,7 @@
 @endsection
 
 @section('container')
-    <a class="">おさがりを検索します</a>
+    <a class="">おさがりを検索します。</a>
 
     <!--検索フォーム-->
     <div class="container" 　style="padding-left:10px padding-right:10px">
@@ -117,7 +117,7 @@
                             <td>{{ $k['conditions'] }}</td>
                             <td></td>
                             <td></td>
-                            <td><button class="">編集</button></td>
+                            <td><a href="/supplylist/detail" class="btn btn-sm" style="border-color:black">編集</a></td>
                         </tr>
                     @endforeach
                 </table>
