@@ -8,6 +8,7 @@ use App\School;
 use Illuminate\Http\Request;
 use Illuminate\View\ViewServiceProvider;
 use Carbon\Carbon;
+use App\Category;
 use Illuminate\Support\Facades\Auth;
 
 class SupplyController extends Controller
@@ -20,6 +21,7 @@ class SupplyController extends Controller
     public function index(Request $request,Supply $supply)
     {
 
+        $categories = Category::where('school_id', '1')->get();
     
         // ログインしているユーザーを定義
 
@@ -28,7 +30,6 @@ class SupplyController extends Controller
 
         // ユーザーが作ったおさがりを取得する
         // 認証されているユーザーが作ったおさがりを取得
-
     
         $supplies = Supply::where("user_id",$user["id"])->paginate(10);
 
@@ -38,7 +39,7 @@ class SupplyController extends Controller
 
        
         return view ("supplies.index",compact("supplies","categories"));
-        
+
     }
 
     /**
@@ -47,7 +48,7 @@ class SupplyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
+    {
         $conditions = [
             1=>"新品・未使用",
             2=>"未使用に近い",
@@ -144,9 +145,13 @@ class SupplyController extends Controller
             5=>"汚れあり",
             6=>"全体的に状態が悪い",
         ];
-        
+        $supply->image_path1 = $path[1];
+
+
+
+
         $supply->save();
-        return redirect()->route("supplies.show",[$supply->id]);   
+        return redirect()->route("supplies.show",[$supply->id]);
     }
 
     /**
@@ -215,58 +220,44 @@ class SupplyController extends Controller
     {
         $user = Auth::user();
 
-
-        $supplies = Supply::paginate(10);
-
         // 検索機能
 
         // 検索ワードを定義
-        $keyword = $request->input("search");
+        $keyword = $request->input("search_word");
         // カテゴリーIDを定義
-        $keycategory = $request->input("category");
-
-        $keycondition = $request->input("condition");
-
-
-        $categories = Category::where("school_id",$user["school_id"])->get();
-        
-
-        $conditions = [
-            1=>"新品・未使用",
-            2=>"未使用に近い",
-            3=>"目立った汚れなし",
-            4=>"やや汚れあり",
-            5=>"汚れあり",
-            6=>"全体的に状態が悪い",
+        $keycategory = $request->input("search_category");
+        // カテゴリー検索用配列
+        $categories = Category::where('school_id', '1')->get();
+        //ペジネーション時の検索ワード保持用パラメータ
+        $param = [
+            'keyword' => $keyword,
+            'keycategory' => $keycategory,
         ];
 
-
-
-        // 検索ワードがおさがり名に含まれてるものを検索して表示
-        if($keyword){
-        $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
+        //検索結果表示のもの。フリーワード検索は最初のif文。カテゴリーボタンを押された時は2個目のif文。最初にページに推移してきたときは全おさがり情報。
+        if(!empty($keyword)){
+            $supplies = Supply::where('item', 'like', '%'.$keyword.'%')
+                            ->orWhere('size', 'like', '%'.$keyword.'%')
+                            ->orWhere('condition', $keyword)
+                            ->orWhere('years_used', 'like', '%'.$keyword.'%')
+                            ->orWhere('gender', $keyword)
+                            ->orWhere('remarks', 'like', '%'.$keyword.'%')
+                            ->paginate(10);
+        } elseif(!empty($keycategory)) {
+            $supplies = Supply::WhereHas('category', function($query) use ($keycategory) {
+                                $query->where('id', $keycategory);
+                            })
+                            ->paginate(10);
+        } else {
+            $supplies = Supply::paginate(10);
         }
 
-
-        // カテゴリーIDが同じものを検索して表示
-
-       if($keycategory){
-        $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
-        }
-
-        // 綺麗度が同じものを表示
-        if($keycondition){
-            $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
-        }
-
-
-
-        return view("supplies.search",compact("supplies","categories","conditions"));
+        return view("supplies.search",compact("supplies","categories","keycategory","param"));
     }
 
     public function confirmation (Supply $supply)
     {
-        
+
         return view ("supplies.confirmation",compact("supplies"));
     }
 }

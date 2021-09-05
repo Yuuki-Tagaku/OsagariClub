@@ -5,7 +5,7 @@
 @section('js')
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-  @endsection
+@endsection
 
 @section('container')
   <div class="title-Container">

@@ -56,4 +56,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/supplylist', 'AdminSupplyController@search')->middleware('admin_auth')->name('supplylist');
 
 
-
