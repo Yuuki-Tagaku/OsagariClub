@@ -31,6 +31,7 @@ Route::get('/user/show', 'UserController@show');
 Route::get('/chat/room', 'ChatController@chatroom')->name('chat.room');//チャットルームのルート
 Route::get('/chat/create', 'ChatController@create');
 Route::get('/chat/index', 'ChatController@index');
+
 //チャット用ajax
 Route::get('ajax/chat', 'Ajax\ChatController@index');//メッセージ一覧を取得
 Route::post('ajax/chat', 'Ajax\ChatController@create');//チャット登録
@@ -49,12 +50,16 @@ Route::get('/supplydelete', "SupplyController@delete")->name('supplydelete');
 Route::get('/supply/index', 'SupplyController@index');
 Route::get('/supply/show', 'SupplyController@show')->name('supply.show');
 
-
 // おさがり検索画面へ
 Route::get('/search',"SupplyController@search");
-
 
 Auth::routes();
 
 //管理者ルート
+Route::get('/userlist', 'AdminController@search')->name('userlist');
+Route::get('/userlist/detail', 'AdminController@updata');
 Route::get('/supplylist', 'AdminSupplyController@search')->name('supplylist');
+Route::get('/supplylist/detail', 'AdminSupplyController@edit');
+Route::get('/chatlist', 'AdminSupplyController@chatsearch');
+Route::get('/chatlist/detail', 'AdminSupplyController@updata');
+
