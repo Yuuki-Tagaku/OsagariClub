@@ -18,7 +18,7 @@ Route::post('/user/edit', 'UserController@branch')->middleware('admin_auth')->na
 Route::get('/user/delete', 'UserController@delete')->middleware('admin_auth');
 
 //チャット関係のルート
-Route::get('/chat/room', 'ChatController@chatroom')->middleware('admin_auth');//チャットルームのルート
+Route::get('/chat/room', 'ChatController@chatroom');//チャットルームのルート
 //チャット用ajax
 Route::get('ajax/chat', 'Ajax\ChatController@index')->middleware('admin_auth');//メッセージ一覧を取得
 Route::post('ajax/chat', 'Ajax\ChatController@create')->middleware('admin_auth');//チャット登録
@@ -35,7 +35,7 @@ Route::post('/supply/edit', 'ChatController@branch')->middleware('admin_auth')->
 Route::get('/',"SupplyController@search");
 //商品登録ルート
 
-Route::resource('supplies', 'SupplyController')->middleware('admin_auth');
+Route::resource('supplies', 'SupplyController');
 
 //おさがり削除ルート
 Route::get('/confirm', "SupplyController@confirm")->name('supplydeleteconfirm');
@@ -50,9 +50,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
 //管理者ルート
-Route::get('/supplylist', 'AdminSupplyController@search')->middleware('admin_auth')->name('supplylist');
+Route::get('/userlist', 'AdminController@search')->name('userlist');
+Route::get('/userlist/detail', 'AdminController@updata');
+Route::get('/supplylist', 'AdminSupplyController@search')->name('supplylist');
+Route::get('/supplylist/detail', 'AdminSupplyController@edit');
+Route::get('/chatlist/', 'AdminSupplyController@chatsearch');
+Route::get('/chatlist/detail', 'AdminSupplyController@updata');
+
+
 
 

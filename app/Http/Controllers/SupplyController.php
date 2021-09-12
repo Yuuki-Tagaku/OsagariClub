@@ -8,7 +8,6 @@ use App\School;
 use Illuminate\Http\Request;
 use Illuminate\View\ViewServiceProvider;
 use Carbon\Carbon;
-use App\Category;
 use Illuminate\Support\Facades\Auth;
 
 class SupplyController extends Controller
