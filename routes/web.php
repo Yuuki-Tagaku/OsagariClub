@@ -31,11 +31,9 @@ Route::post('/matchi/confirm', 'ChatController@matcing')->middleware('admin_auth
 Route::get('/supply/edit', 'ChatController@edit')->middleware('admin_auth');//後でコントローラ買えます。一時的なルート
 Route::post('/supply/edit', 'ChatController@branch')->middleware('admin_auth')->name('supply.branch');
 
-//おさがり検索ルート
-Route::get('/',"SupplyController@search");
 //商品登録ルート
 
-Route::resource('supplies', 'SupplyController')->middleware('admin_auth');
+Route::resource('supplies', 'SupplyController');
 
 //おさがり削除ルート
 Route::get('/confirm', "SupplyController@confirm")->name('supplydeleteconfirm');
@@ -48,6 +46,10 @@ Route::get('search',"SupplyController@search");
 
 Auth::routes();
 
+
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::get('/home', 'HomeController@index')->name('home');
 
 

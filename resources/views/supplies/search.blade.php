@@ -6,7 +6,9 @@
 @endsection
 
 
+
 @section("container")
+
 
 
   <form id="logout-form" action="{{ route('logout') }}" method="POST">

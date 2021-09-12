@@ -22,6 +22,7 @@
           <img src="{{ asset('images/supply-create.png') }}">
           <img src="{{ asset('images/chat.png') }}">
           <img src="{{ asset('images/user-info.png') }}">
+        <a href="/supplies">登録画面へ</a>
         </div>
       </div>
     </header>

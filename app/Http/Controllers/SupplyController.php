@@ -19,6 +19,11 @@ class SupplyController extends Controller
      */
     public function index(Request $request,Supply $supply)
     {
+       
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションに１が入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "search"){
 
     
         // ログインしているユーザーを定義
@@ -35,42 +40,55 @@ class SupplyController extends Controller
        
 
         $categories = Category::where("school_id",$user["school_id"])->get();
-
-       
+        // セッションを削除
+        $request->session()->forget('session');
+       // セッションを定義
+       $request->session()->put('session', 'index');
         return view ("supplies.index",compact("supplies","categories"));
         
+        }else{
+            return redirect("/");
     }
+}
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     { 
-        $conditions = [
-            1=>"新品・未使用",
-            2=>"未使用に近い",
-            3=>"目立った汚れなし",
-            4=>"やや汚れあり",
-            5=>"汚れあり",
-            6=>"全体的に状態が悪い",
-        ];
+         // セッションを取得
+         $value = $request->session()->get('session');
+         // セッションに１が入っていればページを表示、入っていなければ戻る
+         if(isset($value) && $value == "index"){
+                
+            $conditions = [
+                1=>"新品・未使用",
+                2=>"未使用に近い",
+                3=>"目立った汚れなし",
+                4=>"やや汚れあり",
+                5=>"汚れあり",
+                6=>"全体的に状態が悪い",
+            ];
 
-        $genders = [
-            1=>"男",
-            2=>"女"
-        ];
-
-
-        $user = Auth::user();
-
-        $categories = category::where("school_id",$user["school_id"])->get();
-
-
+            $genders = [
+                1=>"男",
+                2=>"女"
+            ];
 
 
-        return view ("supplies.create",compact("conditions","genders","categories"));
+            $user = Auth::user();
+
+            $categories = category::where("school_id",$user["school_id"])->get();
+
+
+
+
+            return view ("supplies.create",compact("conditions","genders","categories"));
+        }else{
+            return redirect("/");
+        }
     }
 
     /**
@@ -213,55 +231,58 @@ class SupplyController extends Controller
 
     public function search (Supply $suppl,Request $request)
     {
-        $user = Auth::user();
-
-
-        $supplies = Supply::paginate(10);
-
-        // 検索機能
-
-        // 検索ワードを定義
-        $keyword = $request->input("search");
-        // カテゴリーIDを定義
-        $keycategory = $request->input("category");
-
-        $keycondition = $request->input("condition");
-
-
-        $categories = Category::where("school_id",$user["school_id"])->get();
         
-
-        $conditions = [
-            1=>"新品・未使用",
-            2=>"未使用に近い",
-            3=>"目立った汚れなし",
-            4=>"やや汚れあり",
-            5=>"汚れあり",
-            6=>"全体的に状態が悪い",
-        ];
+            $user = Auth::user();
 
 
+            $supplies = Supply::paginate(10);
 
-        // 検索ワードがおさがり名に含まれてるものを検索して表示
-        if($keyword){
-        $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
-        }
+            // 検索機能
+
+            // 検索ワードを定義
+            $keyword = $request->input("search");
+            // カテゴリーIDを定義
+            $keycategory = $request->input("category");
+
+            $keycondition = $request->input("condition");
 
 
-        // カテゴリーIDが同じものを検索して表示
+            $categories = Category::where("school_id",$user["school_id"])->get();
+            
 
-       if($keycategory){
-        $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
-        }
-
-        // 綺麗度が同じものを表示
-        if($keycondition){
-            $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
-        }
+            $conditions = [
+                1=>"新品・未使用",
+                2=>"未使用に近い",
+                3=>"目立った汚れなし",
+                4=>"やや汚れあり",
+                5=>"汚れあり",
+                6=>"全体的に状態が悪い",
+            ];
 
 
 
-        return view("supplies.search",compact("supplies","categories","conditions"));
+            // 検索ワードがおさがり名に含まれてるものを検索して表示
+            if($keyword){
+            $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
+            }
+
+
+            // カテゴリーIDが同じものを検索して表示
+
+        if($keycategory){
+            $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
+            }
+
+            // 綺麗度が同じものを表示
+            if($keycondition){
+                $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
+            }
+            // セッションを定義
+            $request->session()->put('session', 'search');
+
+
+
+            return view("supplies.search",compact("supplies","categories","conditions"));
     }
 
     public function confirmation (Supply $supply)
