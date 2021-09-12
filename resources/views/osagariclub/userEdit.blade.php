@@ -21,10 +21,10 @@
           <input type="text" name="email" value="{{ $user->email }}" placeholder="メールアドレス">
         </div>
         <div class="form-Group">
-          <input type="text" name="password" placeholder="パスワード">
+          <input type="password" name="password" placeholder="パスワード">
         </div>
         <div class="form-Group">
-          <input type="text" name="password_Confirmed" placeholder="パスワード（確認用）">
+          <input type="password" name="password_Confirmed" placeholder="パスワード（確認用）">
         </div>
         <div id="profile-Image">
           <p>プロフィール写真を登録します（任意）</p>

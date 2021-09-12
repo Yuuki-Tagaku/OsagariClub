@@ -1,6 +1,7 @@
 @media screen and (max-width: 480px) {
   body {
     margin: 0;
+    min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
   }
@@ -24,7 +25,7 @@
     justify-content: space-between;
   }
 
-  .header-container-logo img {
+  .header-container-logo a img {
     width: 70%;
     margin-top: 5px;
   }
@@ -439,7 +440,7 @@
 
   .matcing-ChatRoom-Container-Form {
     height: 80px;
-    padding-top: 25px;
+    padding-top: 10px;
   }
 
   .matcing-ChatRoom-Container-Form input[type="text"] {
@@ -496,7 +497,7 @@
   }
 
   .chatColor {
-    width: 60%;
+    width: 53%;
   }
 
   .supply-Remarks {
@@ -545,16 +546,12 @@
     font-weight: bold;
   }
 
-  .Appleal {
-    display: flex;
-  }
-
   .partner-Appleal {
-    width: 70%;
+    width: 90%;
     padding-top: 5px;
   }
 
-  .matcing-ChatRoom-Container, .matching-Button-Container, .matcingItem-Information-Container {
+  .matcing-ChatRoom-Container, .matching-Button-Container, .matcingItem-Information-Container, .supply-Show-Container-Infomation {
     margin-top: 25px;
     border-bottom: 2px solid #e2e2e2;
   }
@@ -583,19 +580,21 @@
 
   .chat-Message-Content {
     display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
   }
 
   .chat-Message-Content img {
+    display: block;
     width: 10%;
-    height: 10%;
     margin-left: 5%;
     margin-right: 5px;
     border-radius: 50%;
+    align-self: center;
   }
 
   .my-Chat {
-    margin: 0 5% 0 auto;
-    margin-bottom: 15px;
+    margin: 0 5% 10px 5%;
     justify-content: flex-end;
   }
 
@@ -608,7 +607,7 @@
 
   .partner-Chat {
     margin-right: 5%;
-    margin-bottom: 15px;
+    margin-left: 2%;
   }
 
   .partner-Message {
@@ -627,7 +626,7 @@
   }
 
   .my-Chat-Date {
-    margin-left: 60px;
+    margin-bottom: 0;
     padding-right: 5px;
     text-align: right;
     font-size: 3pt;
@@ -636,12 +635,16 @@
   }
 
   .partner-Chat-Date {
-    margin-right: 60px;
+    margin-bottom: 0;
     padding-left: 5px;
     text-align: left;
     font-size: 3pt;
     font-weight: normal;
     align-self: flex-end;
+  }
+
+  .my-Chat-Date p , .partner-Chat-Date p {
+    margin: 0;
   }
 
   /*        マッチング確認画面        */
@@ -706,16 +709,16 @@
   }
 
 
-.matcing-Confirm-Container-Button {
-  margin-top: 50px;
-}
+  .matcing-Confirm-Container-Button {
+    margin-top: 50px;
+  }
 
-.back_ground{
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background-image: url(../images/1-1_back.png);
-}
+  .back_ground{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(../images/1-1_back.png);
+  }
 
   .user-Delete-Confirm-Container {
     width: 100vw;
@@ -793,6 +796,11 @@
     flex-wrap: wrap;
   }
 
+  .result-Supply-Container:first-child, .result-Supply-Container:nth-child(2) {
+    padding-top: 0;
+    margin-top: 10px;
+  }
+
   .result-Supply-Container {
     width: 41%;
     padding: 10px 0;
@@ -807,6 +815,11 @@
 
   .result-Supply-Container:nth-child(even) {
     padding-left: 15px;
+  }
+
+  .result-Supply-Container a, .result-Supply-Container a:visited {
+    color: #0a0a0a;
+    text-decoration:none;
   }
 
   .result-Supply-Container img {
@@ -854,20 +867,46 @@
     margin: 0 5%;
     margin-bottom: 20px;
     font-size: 8pt;
+    text-align: center;
+    border-collapse: collapse;
+  }
+
+  .my-Supply-Index tr {
+    border-bottom: 1px solid #e2e2e2;
   }
 
   .my-Supply-Index tr:first-child {
     border-collapse: unset;
     background-color: #f2f2f2;
+    border: none;
   }
 
   .my-Supply-Index tr th {
     text-align: center;
   }
 
+  .my-Supply-Index tr td:first-child {
+    width: 50px;
+  }
+
   .my-Supply-Index tr td img {
-    width: 30px;
-    height: 30px;
+    width: 100%;
+    height: 50px;
+    margin-top: 2px;
+  }
+
+  .my-Supply-Index tr th:last-child, .my-Supply-Index tr td:last-child {
+    width: 15%;
+  }
+
+  .supply-Edit-Btn {
+    height: 20px;
+    display: block;
+    font-size: 8pt;
+    letter-spacing: 0px;
+    background-color: #e1d7b9;
+    border-radius: 10px;
+    line-height: 2;
   }
 
   .supply-Add-List {
@@ -876,5 +915,246 @@
 
   .supply-Add-List h2 {
     margin-bottom: 0;
+  }
+
+  /*        ユーザー登録        */
+  .user-Create-Container, .user-Create textarea, .user-Create-Container input {
+    background-color: #e1d7b9;
+  }
+
+  .user-Create label, .user-Create img, .user-Create input[type="submit"], .user-Create button {
+    background-color: #fff;
+  }
+
+  .user-Create-Top {
+    margin-top: 50px;
+  }
+
+  .title-logo {
+    padding-top: 80px;
+  }
+
+  .title-logo img {
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .user-Create-Confirm {
+    padding-top: 40px;
+  }
+
+  .user-Welcome-Button {
+    margin-top: 30px;
+  }
+
+  .user-Welcome-Container {
+    height: 100vh;
+    margin: 0;
+    background-image: url('../images/welcomeback.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top right;
+  }
+
+  .user-Welcome-Container-Infomation-Applying button {
+    width: 70%;
+  }
+
+  .user-Welcome-Container-Infomation-Applying p {
+    margin-left: 16%;
+  }
+
+  /*        ログインフォーム        */
+
+  .user-Login-Container {
+    height: 100vh;
+    background-image: url('../images/loginback.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+
+  .user-Login-Container-Form {
+    width: 70%;
+    height: 50vh;
+    margin: 80px auto;
+  }
+
+  .user-Login-Container-Form .form-Group input {
+    margin-left: 0;
+  }
+
+  .user-Login {
+    margin-bottom: 10px;
+  }
+
+  /*        おさがり詳細        */
+
+  .supply-Show-Container-Infomation {
+    margin: 0;
+  }
+
+  .slider{
+    width:100%;
+    margin:0 auto;
+  }
+
+  /*--------画像サイズ調整---------*/
+  .slider img{
+  width:100%;
+  }
+
+  /*-----------height調整----------*/
+  .slick-slide{
+    height:auto!important;
+  }
+
+  /*-----------矢印表示----------*/
+  .slick-next{
+    right:0!important;
+  }
+  .slick-prev{
+    left:0!important;
+  }
+  .slick-arrow{
+    z-index:2!important;
+  }
+
+  .supply-Show-Container-Info ul, .supply-Show-Container-Info ul ol {
+    padding: 0;
+  }
+
+  .supply-Show-Container-Info ul ol {
+    margin: 0 5%;
+    font-size: 10pt;
+    font-weight: normal;
+    line-height: 1.8;
+  }
+
+  .supply-Show-Container-Info ul ol:first-child {
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 12pt;
+  }
+
+  .supply-Show-Container-Info .btn-Group {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
+  .supply-Show {
+    margin-top: 10px;
+  }
+
+  .supply-Show-Bottom {
+    margin-bottom: 30px;
+  }
+
+  .supply-Show-Condition {
+    width: 33%;
+    font-size: 8pt;
+    line-height: 2.5;
+  }
+
+  .no-color {
+    background-color: #e2e2e2;
+  }
+
+  .supply-Show-Container-Info ul ol:nth-child(5) {
+    display: flex;
+  }
+
+  .supply-Show-Container-Info ul ol:nth-child(5) .condition-Group-Choice {
+    width: 80%;
+  }
+
+  .supply-Show-Container-Info ul ol:last-child span {
+    display: block;
+    width: 84%;
+  }
+
+  .supply-Show-Container-Info ul ol:last-child {
+    display: flex;
+  }
+
+  .my-Supply-Index tr td a {
+    text-decoration: none;
+    color: #0a0a0a;
+  }
+
+  /*        トップページ        */
+
+  .home-Container {
+    height: 100vh;
+    background-image: url(../images/top-BackGround.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+  }
+
+  .home-Container-Btn-Group {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 80px;
+  }
+
+  .home-Container-Btn-Group p {
+    margin-bottom: 20px;
+    font-size: 10pt;
+  }
+
+  /*        マイページ        */
+
+  .user-Show-Container {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .user-Show-Container p {
+    padding-top: 50px;
+    font-size: 10pt;
+    border-bottom: 1px solid #0a0a0a;
+  }
+
+  .user-Show-Container-Info p:first-child {
+    padding-top: 10px;
+  }
+
+  .user-Show-Container-Image img {
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #0a0a0a;
+    border-radius: 50%;
+  }
+
+  .user-Show-Container-Appleal .user-Appleal {
+    padding-top: 0;
+    border-bottom: none;
+    font-size: 10pt;
+    font-weight: normal;
+  }
+
+  .user-Show-Container-Appleal p:first-child {
+    padding-top: 20px;
+  }
+
+  .btn-Group .logout {
+    border: 1px solid #e1d7b9;
+    background-color: #fff;
+  }
+
+  /*        交流一覧        */
+
+  .my-Chat-Index tr th:last-child {
+    width: 25%;
+  }
+
+  .my-Chat-Index tr td:last-child a {
+    width: 70%;
+    margin: 0 auto;
+    display: block;
   }
 }

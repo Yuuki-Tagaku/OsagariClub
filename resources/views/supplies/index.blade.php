@@ -5,7 +5,7 @@
 @section("container")
     <!-- 修正箇所：おさがり検索に戻るというボタンがないので削除しました。 -->
     <div class="supply-Index-Button">
-        <a href = "/supplies/create"><button>おさがりを登録する</button></a>
+        <a href = "/supply/create"><button>おさがりを登録する</button></a>
     </div>
     <div class="title-Container supply-Add-List">
         <h2>登録したおさがり一覧</h2>
@@ -39,9 +39,13 @@
                     @endforeach
                 </td>
                 <td><p>{{$supply->item}}</p></td>
-                <td><p>{{$supply->created_at}}</p></td>
+                @if(!empty($supply['created_at']))
+                    <td><p>{{$supply->created_at->format('Y.m.d')}}</p></td>
+                @else
+                    <td><p>{{$supply->created_at}}</p></td>
+                @endif
                 <!-- 修正箇所：編集画面に移動するだけなのでフォームではなくaタグで対応できる。その方が記述が短い -->
-                <td><a><button class= "btn-link" class="card-link">編集</button></a></td>
+                <td><a href="/supply/edit?supply={{$supply->id}}" class="supply-Edit-Btn">編集</a></td>
             </tr>
         @endforeach
     </table>

@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\School;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        return view('osagariclub.index');
+    }
 
     public function edit(Request $request)
     {
-        $user = User::Find('1');
+        $user = Auth::user();
         return view('osagariclub.userEdit', ['user' => $user]);
     }
 
@@ -81,5 +86,67 @@ class UserController extends Controller
     public function delete(Request $request)
     {
         return view('osagariclub.userDelete');
+    }
+
+    public function add()
+    {
+        return view('osagariclub.userCreate');
+    }
+
+    public function create(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->school_id = $request->school_id;
+        $user->password = Hash::make($request->password);
+        if($request->hasFile('image_path')) {
+            $path = $request->file('image_path')->store('public/images/user');
+            //画像をストレージの中に保存して画像pathを変数pathに入れる
+            $user->image_path = basename($path);
+            //テーブルに画像PATHを保存
+        }
+        $user->appleal = $request->appleal;
+        $user->save();
+
+        Auth::guard()->login($user);
+        return redirect('/welcome');
+    }
+
+    public function welcome()
+    {
+        return view('osagariclub.welcome');
+    }
+
+    public function login()
+    {
+        return view('osagariclub.userLogin');
+    }
+
+    public function signin(Request $request)
+    {
+        //フォームに入力されたメールアドレス情報取得
+        $email    = $request->email;
+        //フォームに入力されたパスワード情報取得
+        $password = $request->password;
+
+        //ログイン処理
+        if(Auth::attempt(['email' => $email, 'password' => $password])) {
+            return redirect("/search");
+        } else {
+            return redirect('/user/login');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
+    public function show()
+    {
+        $user = Auth::user();
+        return view('osagariclub.user', ['user' => $user]);
     }
 }

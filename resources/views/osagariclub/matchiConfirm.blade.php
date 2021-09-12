@@ -14,7 +14,11 @@
         @csrf
         <input type="hidden" name="supply_user_id" value="{{$supply_user_id}}">
         <!--getパラメータにある中間テーブルの値をコントローラ側に送る-->
-        <input type="hidden" name="contract" value="2">
+        @if($user['id'] == $supply_user['id'])
+          <input type="hidden" name="contract" value="2">
+        @else
+          <input type="hidden" name="contract" value="3">
+        @endif
         <input type="submit" class="confirm-button" name="edit" value="はい">
       </form>
         <a href="/chat/room?match={{$supply_user_id}}"><button class="confirm-button">もどる</button></a>
