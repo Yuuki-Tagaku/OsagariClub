@@ -48,17 +48,19 @@
       @if(isset($supplies))
         @foreach ($supplies as $supply)
           <div class="result-Supply-Container">
-          <!-- 写真を表示(修正箇所：画像は１枚は必須なのでif文はいらない) -->
-            <img src = "{{ asset('storage/images/supply/' . $supply->image_path1) }}">
-          <!-- 用品のサイズを表示(修正箇所：サイズも必須なのでif文はいらない) -->
-            <p>{{$supply->item}}</p>
-            <p>{{$supply->size}}</p>
-          <!-- コンディションカラムの値によって、表示する状態をケース文で繰り返す -->
-            @foreach(config('const')['condition'] as $k => $val)
-              @if($supply->condition == $k)
-                <label class="condition{{$k}}"><span class="color{{$k}}">{{$val}}</span></label>
-              @endif
-            @endforeach
+            <a href="/supply/show?supply={{$supply->id}}">
+            <!-- 写真を表示(修正箇所：画像は１枚は必須なのでif文はいらない) -->
+              <img src = "{{ asset('storage/images/supply/' . $supply->image_path1) }}">
+            <!-- 用品のサイズを表示(修正箇所：サイズも必須なのでif文はいらない) -->
+              <p>{{$supply->item}}</p>
+              <p>{{$supply->size}}</p>
+            <!-- コンディションカラムの値によって、表示する状態をケース文で繰り返す -->
+              @foreach(config('const')['condition'] as $k => $val)
+                @if($supply->condition == $k)
+                  <label class="condition{{$k}}"><span class="color{{$k}}">{{$val}}</span></label>
+                @endif
+              @endforeach
+            </a>
           </div>
         @endforeach
       @else
