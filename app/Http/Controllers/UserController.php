@@ -89,8 +89,7 @@ class UserController extends Controller
     {
         
         return view('osagariclub.userDelete');
-         }else{
-            return redirect("/");
-         }
-    }
+         
+        }
+    
 }
