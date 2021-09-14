@@ -2,10 +2,6 @@
 
 @section('title', 'チャット')
 
-@section('css')
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
-@endsection
-
 @section('js')
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
@@ -69,18 +65,22 @@
         <!--チャットフォーム-->
         <input type="text" name="chat" placeholder="メッセージを入力します。" v-model="chat">
         <input type="hidden" id="supply_user" name="supply_user" value="{{ $search_supply['id'] }}">
-        <input type="hidden" id="login_user" name="login_user" value="{{ $search_supply['user_id'] }}">
+        <input type="hidden" id="login_user" name="login_user" value="{{ $user['id'] }}">
         <button type="button" @click="send()">送信する</button>
       </div>
     </div>
   </div>
-  <div class="matching-Button-Container">
-    <!--ここに条件分岐(contractの値が1でlogin_userのidがsupply_userテーブルのuser_idと同じ場合ボタンを表示)
-        ここに条件分岐(contractの値が2でlogin_userのidがsupplyテーブルのuser_idと同じ場合ボタンを表示)
-        上の条件分岐でそれぞれに別のタイミングでボタンを表示・非表示させ、２度押しを防止する-->
-        <p>お互いにマッチングボタンを押したら取引成立になります。場所や日時を決定し受け渡しましょう。</p>
-    <a href="/matchi/confirm?match={{$supply_user_id}}" class="btn-Group"><button>マッチング</button></a>
-  </div>
+  @if($search_supply['contract'] == 1 && $user['id'] == $search_supply['user_id'])
+    <div class="matching-Button-Container">
+          <p>お互いにマッチングボタンを押したら取引成立になります。場所や日時を決定し受け渡しましょう。</p>
+      <a href="/matchi/confirm?match={{$supply_user_id}}" class="btn-Group"><button>マッチング</button></a>
+    </div>
+  @elseif($search_supply['contract'] == 2 && $user['id'] == $search['user_id'])
+    <div class="matching-Button-Container">
+          <p>お互いにマッチングボタンを押したら取引成立になります。場所や日時を決定し受け渡しましょう。</p>
+      <a href="/matchi/confirm?match={{$supply_user_id}}" class="btn-Group"><button>マッチング</button></a>
+    </div>
+  @endif
   <div class="matcingItem-Information-Container">
     <!--おさがり情報を置く場所-->
     <div class="matcingItem-Information-Container-Inner-Title">
@@ -93,27 +93,27 @@
       </div>
       <div class="matcingItem-Container-Inner-Information">
         <!--ここに情報を入れる-->
-        @foreach($supply_user as $k)
+        @foreach($supply as $k)
         <!--中間テーブル情報をforeach-->
-          @if($k->supply->id == $search_supply['supply_id'])
+          @if($k->id == $search_supply['supply_id'])
           <!--supplyテーブルのidと中間テーブルのsupply_idが同じものに限定-->
             <div>
-              <p><span>{{ $k->supply->item }}</span></p>
-              <p>サイズ：{{ $k->supply->size }}</p>
-              <p>使用年数：{{ $k->supply->years_used }}</p>
+              <p><span>{{ $k->item }}</span></p>
+              <p>サイズ：{{ $k->size }}</p>
+              <p>使用年数：{{ $k->years_used }}</p>
               @foreach(config('const')['gender'] as $k3 => $val2)
-                @if($k3 == $k->supply->gender)
+                @if($k3 == $k->gender)
                   <p>使用したこどもの性別：{{ $val2 }}</p>
                 @endif
               @endforeach
               @foreach(config('const')['condition'] as $k2 => $val)
               <!--おさがりのきれい度の数値をconfigフォルダのconstからforeach-->
-                  @if($k2 == $k->supply->condition)
+                  @if($k2 == $k->condition)
                   <!--const内のkeyとsupplyテーブルのconditionが同じものに限定-->
                     <p>きれい度：<span class="color{{$k2}} chatColor">{{ $val }}</span></p>
                   @endif
               @endforeach
-              <p class="supply-Remarks">その他：<div class="supply-Remarks-inner">{{ $k->supply->remarks }}</div></p>
+              <p class="supply-Remarks">その他：<div class="supply-Remarks-inner">{{ $k->remarks }}</div></p>
             </div>
           @endif
         @endforeach
@@ -133,28 +133,36 @@
       </div>
       <div class="matcing-Partner-Container-Inner-Information">
         <!--ここに情報を入れる-->
-        <!--ログインユーザーのidがsupplyテーブルのuser_idと違う場合はsupplyのuser_idから情報を取り出す
-            ログインユーザーのidがsupplyテーブルのuser_idと同じ場合はsupply_userのuser_idから情報を取り出す
-            上の条件でログインユーザーを判別させ表示ユーザーを切り替える-->
-        @foreach($supply_user as $k)
-          @if($k->supply->id == $search_supply['id'])
-            @foreach($supply as $k2)
-              @if($k2->user->id == $k->supply->user_id)
-                <p><span>名前：{{$k2->user->name}}</span></p>
-                <div class="Appleal">
-                  <p>自己紹介：
-                    <div class="partner-Appleal">
-                      {{$k2->user->appleal}}
-                    </div>
-                  </p>
-                </div>
-              @endif
-            @endforeach
-          @endif
-        @endforeach
+        @if($search_supply['user_id'] == $user['id'])
+          @foreach($supply as $k)
+            @if($search_supply['supply_id'] == $k['id'])
+              <p><span>名前：{{$k->user->name}}</span></p>
+              <div class="Appleal">
+                <p>自己紹介：
+                  <div class="partner-Appleal">
+                    {{$k->user->appleal}}
+                  </div>
+                </p>
+              </div>
+            @endif
+          @endforeach
+        @else
+          @foreach($search_user as $k)
+            @if($search_supply['user_id'] == $k['id'])
+              <p><span>名前：{{$k['name']}}</span></p>
+              <div class="Appleal">
+                <p>自己紹介：
+                  <div class="partner-Appleal">
+                    {{$k['appleal']}}
+                  </div>
+                </p>
+              </div>
+            @endif
+          @endforeach
+        @endif
       </div>
     </div>
   </div>
-<script src="{{ mix('js/app.js') }}"></script>
-<script src="{{ asset('js/chat.js') }}"></script>
+  <script src="{{ mix('js/app.js') }}"></script>
+  <script src="{{ asset('js/chats.js') }}"></script>
 @endsection

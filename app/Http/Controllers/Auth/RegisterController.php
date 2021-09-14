@@ -65,7 +65,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $image =request()->file( 'image_path');
+        $image =request()->file('image_path');
     
 
         // request()->file( 'image_path')->storeAs('public/images', $image);
