@@ -25,6 +25,7 @@ class SupplyController extends Controller
         // セッションに１が入っていればページを表示、入っていなければ戻る
         if(isset($value) && $value == "search"){
 
+        $categories = Category::where('school_id', '1')->get();
     
         // ログインしているユーザーを定義
 
@@ -33,7 +34,6 @@ class SupplyController extends Controller
 
         // ユーザーが作ったおさがりを取得する
         // 認証されているユーザーが作ったおさがりを取得
-
     
         $supplies = Supply::where("user_id",$user["id"])->paginate(10);
 
@@ -42,12 +42,13 @@ class SupplyController extends Controller
         $categories = Category::where("school_id",$user["school_id"])->get();
         // セッションを削除
         $request->session()->forget('session');
-       // セッションを定義
+       // セッションを情報を発行
        $request->session()->put('session', 'index');
         return view ("supplies.index",compact("supplies","categories"));
         
         }else{
             return redirect("/");
+
     }
 }
 
@@ -56,11 +57,12 @@ class SupplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create(Request $request)
     { 
          // セッションを取得
          $value = $request->session()->get('session');
-         // セッションに１が入っていればページを表示、入っていなければ戻る
+         // セッションに情報が入っていればページを表示、入っていなければ戻る
          if(isset($value) && $value == "index"){
                 
             $conditions = [
@@ -162,9 +164,13 @@ class SupplyController extends Controller
             5=>"汚れあり",
             6=>"全体的に状態が悪い",
         ];
-        
+        $supply->image_path1 = $path[1];
+
+
+
+
         $supply->save();
-        return redirect()->route("supplies.show",[$supply->id]);   
+        return redirect()->route("supplies.show",[$supply->id]);
     }
 
     /**
@@ -186,7 +192,15 @@ class SupplyController extends Controller
      */
     public function edit(Supply $supply)
     {
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションに情報が入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "index"){
+
         return view ("supplies.edit",compact("supply"));
+        }else{
+            return redirect("/");
+        }
     }
 
     /**
@@ -235,59 +249,45 @@ class SupplyController extends Controller
             $user = Auth::user();
 
 
+        // 検索機能
+
+        // 検索ワードを定義
+        $keyword = $request->input("search_word");
+        // カテゴリーIDを定義
+        $keycategory = $request->input("search_category");
+        // カテゴリー検索用配列
+        $categories = Category::where('school_id', '1')->get();
+        //ペジネーション時の検索ワード保持用パラメータ
+        $param = [
+            'keyword' => $keyword,
+            'keycategory' => $keycategory,
+        ];
+
+        //検索結果表示のもの。フリーワード検索は最初のif文。カテゴリーボタンを押された時は2個目のif文。最初にページに推移してきたときは全おさがり情報。
+        if(!empty($keyword)){
+            $supplies = Supply::where('item', 'like', '%'.$keyword.'%')
+                            ->orWhere('size', 'like', '%'.$keyword.'%')
+                            ->orWhere('condition', $keyword)
+                            ->orWhere('years_used', 'like', '%'.$keyword.'%')
+                            ->orWhere('gender', $keyword)
+                            ->orWhere('remarks', 'like', '%'.$keyword.'%')
+                            ->paginate(10);
+        } elseif(!empty($keycategory)) {
+            $supplies = Supply::WhereHas('category', function($query) use ($keycategory) {
+                                $query->where('id', $keycategory);
+                            })
+                            ->paginate(10);
+        } else {
             $supplies = Supply::paginate(10);
-
-            // 検索機能
-
-            // 検索ワードを定義
-            $keyword = $request->input("search");
-            // カテゴリーIDを定義
-            $keycategory = $request->input("category");
-
-            $keycondition = $request->input("condition");
-
-
-            $categories = Category::where("school_id",$user["school_id"])->get();
-            
-
-            $conditions = [
-                1=>"新品・未使用",
-                2=>"未使用に近い",
-                3=>"目立った汚れなし",
-                4=>"やや汚れあり",
-                5=>"汚れあり",
-                6=>"全体的に状態が悪い",
-            ];
-
-
-
-            // 検索ワードがおさがり名に含まれてるものを検索して表示
-            if($keyword){
-            $supplies = Supply::where('item','LIKE', "%{$keyword}%")->paginate(10);
-            }
-
-
-            // カテゴリーIDが同じものを検索して表示
-
-        if($keycategory){
-            $supplies = Supply::where('category_id', "{$keycategory}")->paginate(10);
-            }
-
-            // 綺麗度が同じものを表示
-            if($keycondition){
-                $supplies = Supply::where('condition', "{$keycondition}")->paginate(10);
-            }
-            // セッションを定義
-            $request->session()->put('session', 'search');
-
-
-
-            return view("supplies.search",compact("supplies","categories","conditions"));
+        }
+        // セッション情報を発行
+        $request->session()->put('session', 'search');
+        return view("supplies.search",compact("supplies","categories","keycategory","param"));
     }
 
     public function confirmation (Supply $supply)
     {
-        
+
         return view ("supplies.confirmation",compact("supplies"));
     }
 }

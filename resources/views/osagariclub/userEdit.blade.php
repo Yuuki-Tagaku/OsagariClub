@@ -41,7 +41,7 @@
         </div>
         <div class="profile-Appleal-Container">
           <p>自己紹介（任意）</p>
-            <textarea name="appleal" rows="5" cols="46%">{{$user->appleal}}</textarea>
+          <textarea name="appleal" rows="5">{{$user->appleal}}</textarea>
         </div>
         <input type="hidden" name="id" value="{{ $user->id }}">
       <div class="btn-Group">

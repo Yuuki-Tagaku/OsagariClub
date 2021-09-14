@@ -13,18 +13,25 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
-        $user = User::Find('1');
+       $request->session()->put('session', 'user_edit');
         return view('osagariclub.userEdit', ['user' => $user]);
     }
 
     public function branch(Request $request)
     {
-        if(!empty($_POST['edit'])) {
-            //editボタンを押された場合はupdataの処理を実行する
-            return $this->updata($request);
-        } else {
-            //deleteボタンを押された場合はdestroyの処理を実行する
-            return $this->destroy($request);
+        $value = $request->session()->get('session');
+         // セッションに情報が入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "user_edit"){
+            $request->session()->forget('session');
+            if(!empty($_POST['edit'])) {
+                //editボタンを押された場合はupdataの処理を実行する
+                return $this->updata($request);
+            } else {
+                //deleteボタンを押された場合はdestroyの処理を実行する
+                return $this->destroy($request);
+            }
+        }else{
+            return redirect("/");
         }
     }
 
@@ -80,6 +87,10 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
+        
         return view('osagariclub.userDelete');
+         }else{
+            return redirect("/");
+         }
     }
 }
