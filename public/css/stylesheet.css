@@ -305,9 +305,16 @@
     margin-top: 40px;
   }
 
-  .user-Edit-Container form, .supply-Edit-Container form {
+  .user-Edit-Container form {
     margin: 0 auto;
     width: 80%;
+    font-size: 10pt;
+    line-height: 1.0;
+  }
+
+  .supply-Edit-Container form {
+    margin: 0 auto;
+    width: 87%;
     font-size: 10pt;
     line-height: 1.0;
   }
@@ -595,7 +602,8 @@
 
   .chat-Message-Content img {
     display: block;
-    width: 10%;
+    width: 35px;
+    height: 35px;
     margin-left: 7%;
     margin-right: 5px;
     border-radius: 50%;
@@ -603,7 +611,7 @@
   }
 
   .my-Chat {
-    margin: 0 9% 10px 5%;
+    margin: 0 9% 10px 9%;
     justify-content: flex-end;
   }
 
@@ -615,7 +623,7 @@
   }
 
   .partner-Chat {
-    margin-right: 5%;
+    margin-right: 9%;
     margin-left: 2%;
   }
 
@@ -1160,7 +1168,8 @@
   }
 
   .user-Show-Container-Image img {
-    width: 70%;
+    width: 200px;
+    height: 200px;
     margin: 0 auto;
     display: block;
     border: 1px solid #0a0a0a;

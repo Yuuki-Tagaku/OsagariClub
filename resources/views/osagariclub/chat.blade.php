@@ -43,7 +43,19 @@
             <div  v-else>
               <div class="chat-Message-Content partner-Chat">
                 <!--相手ユーザーのコメント欄-->
-                <img src="{{ asset('storage/images/user/bGOlhKukPx6x6GmdZEhWviu7Fk8eOb3JYHmUkrRA.jpg') }}">
+                @if($search_supply['user_id'] == $user['id'])
+                  @foreach($supply as $k)
+                    @if($search_supply['supply_id'] == $k['id'])
+                      <img src="{{ asset('storage/images/user/'. $k->user->image_path) }}">
+                    @endif
+                  @endforeach
+                @else
+                  @foreach($search_user as $k)
+                    @if($search_supply['user_id'] == $k['id'])
+                      <img src="{{ asset('storage/images/user/'. $k['image_path']) }}">
+                    @endif
+                  @endforeach
+                @endif
                 <div class="partner-Message">
                   <p v-text="m.chat"></p>
                 </div>

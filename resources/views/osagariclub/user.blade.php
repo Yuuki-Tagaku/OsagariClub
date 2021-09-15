@@ -14,7 +14,9 @@
     <div class="user-Show-Container-Image">
       <p>プロフィール写真（任意）</p>
       @if(!empty($user['image_path']))
-        <img src="{{ asset('srotage/images/user/' . $user['image_path']) }}">
+        <div class="user-Image">
+          <img src="{{ asset('storage/images/user/' . $user['image_path']) }}">
+        </div>
       @else
         <img src="{{ asset('images/no_image.png') }}">
       @endif
