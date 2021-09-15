@@ -654,7 +654,7 @@
   }
 
   .confirm-button {
-    width: 50%;
+    width: 70%;
     height: 40px;
     margin-bottom: 20px;
     border: none;
@@ -668,13 +668,21 @@
     padding-top: 10px;
   }
 
+  .matcing-Confirm-Container-Infomation-message {
+    width: 70%;
+    margin: 0 auto;
+  }
+
   .confirm-message {
     margin-bottom: 35px;
-    margin-left: 26%;
     padding: 0;
     padding-top: 80px;
     font-size: 9pt;
     text-align: left;
+  }
+
+  .match-confirm {
+    margin-left: 16%;
   }
 
   .matcing-Confirm-Container {
@@ -722,16 +730,17 @@
 
   .user-Delete-Confirm-Container {
     width: 100vw;
-    min-height: 90vh;
+    min-height: 100vh;
     background-color: #e1d7b9;
     background-image: url(../images/userDelete.png);
     background-size: 90%;
     background-repeat: no-repeat;
-    background-position: bottom right;
+    background-position: right bottom;
   }
 
   .user-Delete-Confirm-Container p {
-    margin-top: 0;
+    width: 70%;
+    margin: 0 auto;
     padding-top: 92px;
   }
 
@@ -803,7 +812,7 @@
 
   .result-Supply-Container {
     width: 41%;
-    padding: 10px 0;
+    padding-top: 10px;
     border-bottom: 1px solid #f2f2f2;
   }
 
@@ -827,7 +836,7 @@
     height: 70%;
   }
 
-  .result-Supply-Container p{
+  .result-Supply-Container p {
     margin: 0;
     font-size: 5pt;
     font-weight: normal;
@@ -910,11 +919,24 @@
   }
 
   .supply-Add-List {
-    margin-bottom: 0;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 5%;
   }
 
   .supply-Add-List h2 {
-    margin-bottom: 0;
+    margin-top: 0;
+    padding-top: 10px;
+  }
+
+  .index-Paginate-Area {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .index-Paginate-Area nav ul {
+    padding-left: 0;
   }
 
   /*        ユーザー登録        */
@@ -1156,5 +1178,159 @@
     width: 70%;
     margin: 0 auto;
     display: block;
+  }
+
+  /*        ユーザー情報変更後ページ        */
+
+  .user-Edit-Confirm {
+    height: 100vh;
+    background-color: #e1d7b9;
+    background-image: url(../images/userEditConfirm.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left bottom;
+  }
+
+  .user-Edit-Confirm-Container {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .user-Edit-Confirm-Container-Infomation-message p {
+    margin-top: 3px;
+  }
+
+  .user-Edit-Confirm-Container-Button .btn-Group a button {
+    background-color: #fff;
+  }
+
+  /*        おさがり情報削除確認        */
+
+  .supply-Delete-Confirm {
+    height: 100vh;
+    background-color: #e1d7b9;
+    background-image: url(../images/supplyDeleteConfirm.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: left bottom;
+  }
+
+  .supply-Delete-Confirm-Container {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .supply-Delete-Confirm-Container-Infomation-message p {
+    margin-top: 3px;
+  }
+
+  /*        交流完了確認画面        */
+
+  .matchi-complete-Confirm {
+    height: 100vh;
+    background-color: #e1d7b9;
+    background-image: url(../images/matchiComplete.png);
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: 20% bottom;
+  }
+
+  .matchi-complete-Confirm-Container {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .matchi-complete-Confirm-Container-Infomation-message p {
+    margin-top: 3px;
+  }
+
+  /*        おさがり詳細の受付終了メッセージ        */
+
+  .contract-Message {
+    padding-top: 15px;
+    border-top: 2px solid #e2e2e2;
+    text-align: center;
+    font-size: 14pt;
+  }
+
+  /*        ペジネーション        */
+
+  .pagination {
+    margin: 0;
+    margin-top: 12px;
+  }
+
+  .pagination li {
+    display: inline-block;
+  }
+
+  .pagination li a, .pagination li span {
+      font-size: 8pt;
+      margin: 0 2px;
+      color: #e2e2e2;
+  }
+
+  .pagination .active span {
+      box-sizing: border-box;
+      color: #0a0a0a;
+  }
+
+  .paginate-Container {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 5%;
+  }
+
+  .pagination-area {
+    text-align: right;
+    margin-right: 5%;
+    margin-bottom: 20px;
+  }
+
+  /*        おさがり登録完了        */
+  .supply-Create-Confirm-Container {
+    height: 100vh;
+    background-color: #e1d7b9;
+    background-image: url(../images/supplyCreateBack.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: 80% bottom;
+  }
+
+  .supply-Create-Confirm-Container-Infomation {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .supply-Create-Confirm-Container-Infomation-Applying p {
+    margin-top: 3px;
+    padding-top: 100px;
+    margin-bottom: 35px;
+  }
+
+  .supply-Create-Confirm-Container-Button {
+    margin-top: 50px;
+  }
+
+  .supply-Create-Confirm-Container-Button a button {
+    width: 100%;
+  }
+
+  .matci-Complete-Confirm-Container {
+    height: 100vh;
+    background-color: #e1d7b9;
+    background-image: url(../images/matciComplete.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: right bottom;
+  }
+
+  .supply-Delete-Complete-Container {
+    height: 100vh;
+    background-color: #e1d7b9;
+    background-image: url(../images/supplyDeleteComplete.png);
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: right bottom;
   }
 }

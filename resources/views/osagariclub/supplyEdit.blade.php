@@ -64,10 +64,10 @@
         </div>
         <input type="hidden" name="id" value="{{$search_supply['id']}}">
       <div class="btn-Group">
-        <input type="submit" name="edit" value="確認する">
+        <input type="submit" name="edit" value="変更する">
         @foreach($supply_user as $k => $val)
           @if($val['contract'] == 3)
-            <button>交流を完了する</button>
+            <button>交流を完了する</button></a>
           @endif
         @endforeach
         <input type="submit" name="delete" value="削除する">

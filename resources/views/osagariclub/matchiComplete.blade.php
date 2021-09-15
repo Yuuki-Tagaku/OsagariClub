@@ -3,16 +3,16 @@
 @section('title', '会員情報編集完了')
 
 @section('container')
-  <div class="supply-Delete-Confirm">
-    <div class="supply-Delete-Confirm-Container">
-      <div class="supply-Delete-Confirm-Container-Infomation">
-        <div class="supply-Delete-Confirm-Container-Infomation-message">
-          <p class="confirm-message">おさがり情報を削除します。<br>本当によろしいですか？</p>
+  <div class="matchi-complete-Confirm">
+    <div class="matchi-complete-Confirm-Container">
+      <div class="matchi-complete-Confirm-Container-Infomation">
+        <div class="matchi-complete-Confirm-Container-Infomation-message">
+          <p class="confirm-message">交流を完了します。<br>本当によろしいですか？</p>
         </div>
       </div>
-      <div class="supply-Delete-Confirm-Container-Button">
+      <div class="matchi-complete-Confirm-Container-Button">
         <div class="btn-Group">
-          <form action="/supply/delete" method="post">
+          <form action="/matchi/complete" method="post">
             @csrf
             <input type="hidden" name="id" value="{{$supply['id']}}">
             <div class="btn-Group user-Create">

@@ -46,4 +46,9 @@ class AdminController extends Controller
         $param = ["user" => $user];
         return view('osagariclub.userlistdetail', $param);
     }
+
+    public function home()
+    {
+        return view('concept');
+    }
 }

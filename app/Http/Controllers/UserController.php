@@ -65,9 +65,9 @@ class UserController extends Controller
         if($user->isDirty()) {
             //userに変更があった場合
             $user->save();
-            return redirect('');
+            return redirect('/user/edit/confirm');
         } else {
-            return redirect('');
+            return redirect();
         }
     }
 
@@ -80,7 +80,7 @@ class UserController extends Controller
         //ストレージにある画像データを削除
         $user->delete();
 
-        return redirect('/user/delete');
+        return redirect()->route('user.delete');
     }
 
     public function delete(Request $request)
@@ -148,5 +148,10 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return view('osagariclub.user', ['user' => $user]);
+    }
+
+    public function confirm()
+    {
+        return view('osagariclub.userEditConfirm');
     }
 }

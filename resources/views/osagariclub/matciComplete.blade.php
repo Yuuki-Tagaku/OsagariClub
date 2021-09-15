@@ -3,7 +3,7 @@
 @section('title', '交流完了')
 
 @section('container')
-  <div class="supply-Delete-Confirm">
+  <div class="matci-Complete-Confirm-Container">
     <div class="supply-Create-Confirm-Container-Infomation">
       <div class="supply-Create-Confirm-Container-Infomation-Applying">
         <p class="confirm-message user-Create-Confirm">交流を完了しました。</p>

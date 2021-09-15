@@ -17,7 +17,7 @@
         </tr>
         @foreach($supply as $k)
             @foreach($k->supply_user as $k2)
-                @if($user['id'] == $k['user_id'] || $k2['user_id'] == $user['id'])
+                @if($k2['contract'] != '4' && $k2['contract'] != '5' && ($user['id'] == $k['user_id'] || $k2['user_id'] == $user['id']))
                     <tr>
                         <td><img src = "{{'/storage/images/supply/' .$k->image_path1 }}"></td>
                         <td>
@@ -28,21 +28,23 @@
                             @endforeach
                         </td>
                         <td><p>{{$k->item}}</p></td>
-                        @foreach($chats as $chat)
-                            @if($chat['supply_user_id'] == $k2['id'])
-                                @if(!empty($chat['created_at']))
-                                    @if($user['id'] == $k['user_id'] || $user['id'] == $k2['user_id'])
-                                        <td><p>{{$chat->created_at->format('Y-m-d')}}</p></td>
-                                        @break
-                                    @endif
-                                @else
-                                    @if($user['id'] == $k['user_id'] || $user['id'] == $k2['user_id'])
-                                        <td><p>{{$chat->created_at}}</p></td>
-                                        @break
+                        <td>
+                            @foreach($chats as $chat)
+                                @if($chat['supply_user_id'] == $k2['id'])
+                                    @if(!empty($chat['created_at']))
+                                        @if($user['id'] == $k['user_id'] || $user['id'] == $k2['user_id'])
+                                            <p>{{$chat->created_at->format('Y-m-d')}}</p>
+                                            @break
+                                        @endif
+                                    @else
+                                        @if($user['id'] == $k['user_id'] || $user['id'] == $k2['user_id'])
+                                            <p>{{$chat->created_at}}</p>
+                                            @break
+                                        @endif
                                     @endif
                                 @endif
-                            @endif
-                        @endforeach
+                            @endforeach
+                        </td>
                         <td><a href="/chat/room?match={{$k2->id}}" class="supply-Edit-Btn">チャット</a></td>
                     </tr>
                 @endif
