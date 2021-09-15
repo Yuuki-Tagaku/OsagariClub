@@ -8,7 +8,23 @@
 @endsection
 
 
+
 @section("container")
+
+
+
+
+  <form id="logout-form" action="{{ route('logout') }}" method="POST">
+    <button type = "submit">ログアウト</button>
+    @csrf
+  </form>
+  <div class = "center-block">
+    <h1 class ="text-center" href = "/supplies" >おさがり検索</h1>
+  </div>
+
+  
+
+  
   <!-- フリー検索 -->
   <div class="title-Container">
     <h3 class="search-title">キーワードからおさがりを検索します。</h3>

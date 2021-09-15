@@ -18,9 +18,11 @@
           <a href="/search"><img src="{{ asset('images/Logo-Title.png') }}"></a>
         </div>
         <div class="header-container-menu">
+
           <a href="/supply/index"><img src="{{ asset('images/supply-create.png') }}"></a>
           <a href="/chat/index"><img src="{{ asset('images/chat.png') }}"></a>
           <a href="/user/show"><img src="{{ asset('images/user-info.png') }}"></a>
+
         </div>
       </div>
     </header>

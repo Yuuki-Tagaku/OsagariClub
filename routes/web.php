@@ -41,6 +41,7 @@ Route::get('/matchi/confirm', 'ChatController@home');
 Route::post('/matchi/confirm', 'ChatController@matcing');
 
 //おさがり関係のルート
+
 Route::get('/supply/edit', 'SupplyController@edit');//後でコントローラ買えます。一時的なルート
 Route::post('/supply/edit', 'SupplyController@branch')->name('supply.branch');
 Route::get('/supply/create', 'SupplyController@create');
@@ -54,6 +55,7 @@ Route::get('/supply/show', 'SupplyController@show')->name('supply.show');
 Route::get('/search',"SupplyController@search");
 
 Auth::routes();
+
 
 //管理者ルート
 Route::get('/userlist', 'AdminController@search')->name('userlist');

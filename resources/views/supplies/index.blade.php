@@ -45,6 +45,7 @@
                     <td><p>{{$supply->created_at}}</p></td>
                 @endif
                 <!-- 修正箇所：編集画面に移動するだけなのでフォームではなくaタグで対応できる。その方が記述が短い -->
+
                 <td><a href="/supply/edit?supply={{$supply->id}}" class="supply-Edit-Btn">編集</a></td>
             </tr>
         @endforeach

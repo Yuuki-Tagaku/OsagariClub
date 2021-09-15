@@ -18,18 +18,28 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
+
+       $request->session()->put('session', 'user_edit');
         $user = Auth::user();
+
         return view('osagariclub.userEdit', ['user' => $user]);
     }
 
     public function branch(Request $request)
     {
-        if(!empty($_POST['edit'])) {
-            //editボタンを押された場合はupdataの処理を実行する
-            return $this->updata($request);
-        } else {
-            //deleteボタンを押された場合はdestroyの処理を実行する
-            return $this->destroy($request);
+        $value = $request->session()->get('session');
+         // セッションに情報が入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "user_edit"){
+            $request->session()->forget('session');
+            if(!empty($_POST['edit'])) {
+                //editボタンを押された場合はupdataの処理を実行する
+                return $this->updata($request);
+            } else {
+                //deleteボタンを押された場合はdestroyの処理を実行する
+                return $this->destroy($request);
+            }
+        }else{
+            return redirect("/");
         }
     }
 
@@ -85,7 +95,9 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
+        
         return view('osagariclub.userDelete');
+    
     }
 
     public function add()
@@ -144,9 +156,18 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        $user = Auth::user();
-        return view('osagariclub.user', ['user' => $user]);
-    }
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションに１が入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "search"){
+            $user = Auth::user();
+            $request->session()->put('session', 'show_user');
+            $request->session()->put('session', 'search');
+            return view('osagariclub.user', ['user' => $user]);
+        }else{
+            return redirect("/");
+        }
+    }   
 }

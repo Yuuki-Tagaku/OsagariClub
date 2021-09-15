@@ -13,8 +13,14 @@ use App\Category;
 
 class ChatController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
+         // セッションを取得
+         $value = $request->session()->get('session');
+         // セッションにseachが入っていればページを表示、入っていなければ戻る
+         if(isset($value) && $value == "search"){
+
         $user = Auth::user();
         $supply = Supply::paginate(10);
         $categories = Category::where('school_id', $user['school_id'])->get();
@@ -25,12 +31,17 @@ class ChatController extends Controller
             "categories" => $categories,
             "chats" => $chats,
         ];
-
+        
         return view('osagariclub.chatIndex', $param);
+        }else{
+            return redirect("/");
+        }
     }
 
     public function chatroom(Request $request)
     {
+
+        
 
         $user = Auth::user();
         $supply_user_id = $request->input('match');
@@ -68,8 +79,10 @@ class ChatController extends Controller
             'search_user' => $search_user,
             'search' => $search,
         ];
-        return view('osagariclub.chat', $param);
-    }
+            return view('osagariclub.chat', $param);
+        
+        }
+    
 
     public function matcing(Request $request)
     {

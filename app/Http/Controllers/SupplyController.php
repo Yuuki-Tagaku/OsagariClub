@@ -20,6 +20,11 @@ class SupplyController extends Controller
      */
     public function index(Request $request,Supply $supply)
     {
+       
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションにseachが入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "search"){
 
         $categories = Category::where('school_id', '1')->get();
         // ログインしているユーザーを定義
@@ -29,35 +34,64 @@ class SupplyController extends Controller
         $supplies = Supply::where("user_id",$user["id"])->paginate(10);
         $categories = Category::where("school_id",$user["school_id"])->get();
 
+        // セッションを削除
+        $request->session()->forget('session');
+       // セッションを情報を発行
+       $request->session()->put('session', 'index');
+       $request->session()->put('session', 'search');
+
         return view ("supplies.index",compact("supplies","categories"));
+        
+        }else{
+            return redirect("/");
+
+
     }
+}
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $conditions = [
-            1=>"新品・未使用",
-            2=>"未使用に近い",
-            3=>"目立った汚れなし",
-            4=>"やや汚れあり",
-            5=>"汚れあり",
-            6=>"全体的に状態が悪い",
-        ];
 
-        $genders = [
-            1=>"男",
-            2=>"女"
-        ];
+    public function create(Request $request)
+    { 
+         // セッションを取得
+         $value = $request->session()->get('session');
+         // セッションに情報が入っていればページを表示、入っていなければ戻る
+         if(isset($value) && $value == "index"){
+                
+            $conditions = [
+                1=>"新品・未使用",
+                2=>"未使用に近い",
+                3=>"目立った汚れなし",
+                4=>"やや汚れあり",
+                5=>"汚れあり",
+                6=>"全体的に状態が悪い",
+            ];
+
+
+            $genders = [
+                1=>"男",
+                2=>"女"
+            ];
+
 
         $user = Auth::user();
 
-        $categories = category::where("school_id",$user["school_id"])->get();
+            $user = Auth::user();
 
-        return view ("supplies.create",compact("conditions","genders","categories"));
+            $categories = category::where("school_id",$user["school_id"])->get();
+
+
+
+
+            return view ("supplies.create",compact("conditions","genders","categories"));
+        }else{
+            return redirect("/");
+        }
+
     }
 
     /**
@@ -132,16 +166,36 @@ class SupplyController extends Controller
      */
     public function show(Request $request)
     {
+
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションにseachが入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "search"){
+
         $user = Auth::user();
         $search = $request->input('supply');
         $supply_user = Supply_user::where('supply_id', $search)
                                 ->where('user_id', $user['id'])->get();
         $supply = Supply::find($search);
         return view("supplies.show",compact("supply","supply_user","user"));
+        }else{
+            return redirect("/");
+        }
     }
 
     public function edit(Request $request)
     {
+
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションに情報が入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "search"){
+
+        return view ("supplies.edit",compact("supply"));
+        }else{
+            return redirect("/");
+        }
+
         $supply_id = $request->input('supply');
         $supply = Supply::all();
         foreach($supply as $k => $val) {
@@ -160,6 +214,7 @@ class SupplyController extends Controller
         ];
 
         return view('osagariclub.supplyEdit', $param);
+
     }
 
     public function branch(Request $request)
@@ -264,6 +319,7 @@ class SupplyController extends Controller
 
     public function search (Supply $suppl,Request $request)
     {
+
         $user = Auth::user();
         // 検索機能
         // 検索ワードを定義
@@ -295,7 +351,8 @@ class SupplyController extends Controller
         } else {
             $supplies = Supply::paginate(10);
         }
-
+        // セッション情報を発行
+        $request->session()->put('session', 'search');
         return view("supplies.search",compact("supplies","categories","keycategory","param"));
     }
 
