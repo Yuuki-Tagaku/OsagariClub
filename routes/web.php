@@ -73,3 +73,9 @@ Route::get('/chatlist/detail', 'AdminSupplyController@updata');
 
 //コンセプトページ
 Route::get('/home', 'AdminController@home');
+
+//パスワードリセット
+Route::get('/pass/reset',           'UserController@passreset')                        ->name('pass.reset');
+Route::get('/pass/edit/{token}',    'Auth\ResetPasswordController@showResetForm')      ->name('pass.edit');
+Route::post('/pass/edit',           'Auth\ResetPasswordController@reset')              ->name('password.update');
+Route::get('/pass/forget',          'UserController@pass_forget')                      ->name('pass.forget');

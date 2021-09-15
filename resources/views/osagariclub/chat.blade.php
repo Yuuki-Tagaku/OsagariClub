@@ -110,7 +110,7 @@
               <!--おさがりのきれい度の数値をconfigフォルダのconstからforeach-->
                   @if($k2 == $k->condition)
                   <!--const内のkeyとsupplyテーブルのconditionが同じものに限定-->
-                    <p>きれい度：<span class="color{{$k2}} chatColor">{{ $val }}</span></p>
+                    <p>きれい度: <span class="color{{$k2}} chatColor">{{$val}}</span></p>
                   @endif
               @endforeach
               <p class="supply-Remarks">その他：<div class="supply-Remarks-inner">{{ $k->remarks }}</div></p>

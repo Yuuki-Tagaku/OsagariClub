@@ -173,4 +173,14 @@ class UserController extends Controller
     {
         return view('osagariclub.userEditConfirm');
     }
+
+    public function passreset()
+    {
+        return view('osagariclub.passReset');
+    }
+
+    public function pass_forget()
+    {
+        return view('osagariclub.passForget');
+    }
 }

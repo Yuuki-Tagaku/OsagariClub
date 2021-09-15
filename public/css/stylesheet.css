@@ -296,7 +296,9 @@
   /*        ユーザー情報変更ページ・おさがり情報変更ページ共通部分        */
   .title-Container {
     height: 30px;
+    margin: 0 auto;
     margin-bottom: 30px;
+    width: 90%;
   }
 
   .matcingItem-Information-Container-Inner-Title p {
@@ -304,12 +306,18 @@
   }
 
   .user-Edit-Container form, .supply-Edit-Container form {
-    margin: 0 6%;
+    margin: 0 auto;
+    width: 80%;
     font-size: 10pt;
     line-height: 1.0;
   }
 
+  .user-Edit-Container form {
+    width: 80%;
+  }
+
   .form-Group input {
+    width: 100%;
     margin-left: 5%;
     border: none;
     outline: none;
@@ -372,12 +380,13 @@
     height: 40px;
     margin: 90px 2% 10px 0;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: #e1d7b9;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    font-size: 8pt;
     text-align: center;
-    line-height: 3.0;
+    line-height: 4.0;
   }
 
   .profile-Image-Thumbnail {
@@ -528,7 +537,7 @@
   }
 
   .matcing-Partner-Container-Inner-Image img {
-    height: 160px;
+    height: 130px;
     border: 1px solid;
     border-radius: 50%;
   }
@@ -587,14 +596,14 @@
   .chat-Message-Content img {
     display: block;
     width: 10%;
-    margin-left: 5%;
+    margin-left: 7%;
     margin-right: 5px;
     border-radius: 50%;
     align-self: center;
   }
 
   .my-Chat {
-    margin: 0 5% 10px 5%;
+    margin: 0 9% 10px 5%;
     justify-content: flex-end;
   }
 
@@ -645,6 +654,10 @@
 
   .my-Chat-Date p , .partner-Chat-Date p {
     margin: 0;
+  }
+
+  .matcing-ChatRoom-Container-Form input::placeholder {
+    color: #cccccc;
   }
 
   /*        マッチング確認画面        */
@@ -793,9 +806,9 @@
   }
 
   .search-Category-Group {
-    margin: 0;
+    margin: 0 auto;
+    width: 90%;
     padding-bottom: 15px;
-    border-bottom: 2px solid #f2f2f2;
   }
 
   /*        おさがり検索(結果)       */
@@ -803,6 +816,8 @@
   .search-Result {
     display: flex;
     flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
   }
 
   .result-Supply-Container:first-child, .result-Supply-Container:nth-child(2) {
@@ -1278,7 +1293,13 @@
   .paginate-Container {
     display: flex;
     justify-content: space-between;
-    margin-right: 5%;
+    border-top: 2px solid #f2f2f2;
+  }
+
+  .paginate-Container h3 {
+    width: 80%;
+    margin: 10px auto;
+    margin-bottom: 0;
   }
 
   .pagination-area {
@@ -1332,5 +1353,40 @@
     background-repeat: no-repeat;
     background-size: 40%;
     background-position: right bottom;
+  }
+
+  .pass-Reset-Container {
+    height: 100vh;
+    background-color: #e1d7b9;
+    background-image: url(../images/passReset.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .pass-Reset-Confirm-Container-Infomation-message {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .pass-Reset-Confirm-Container-Infomation-message p {
+    padding-top: 50px;
+  }
+
+  .pass-Reset-Container-Form {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+
+  .form-Group input {
+    margin-left: 0;
+  }
+
+  .pass-reset-btn {
+    margin-bottom: 5px;
+  }
+
+  .pass-Forget-Container {
+    height: 100vh;
   }
 }

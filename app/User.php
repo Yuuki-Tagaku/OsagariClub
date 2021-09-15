@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\PasswordResetNotification;
 use App\Supply;
 use App\Supply_user;
 
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function supply_user()
     {
         return $this->belongsToMany('App\Supply');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordResetNotification($token));
     }
 }
