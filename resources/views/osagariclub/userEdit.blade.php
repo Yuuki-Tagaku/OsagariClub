@@ -31,11 +31,7 @@
           <div class="profile-Image-Inner">
             <label>画像をアップロード<input type="file" name="image_path" class="imgFile"></label>
             <div class="profile-Image-Thumbnail">
-              @if(!empty($user->image_path))
-                <img src="{{ asset('storage/images/user' . $user->image_path) }}">
-              @else
-                <img id="img">
-              @endif
+              <img id="img">
             </div>
           </div>
         </div>
