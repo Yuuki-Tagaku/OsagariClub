@@ -21,47 +21,55 @@ class SupplyController extends Controller
      */
     public function index(Request $request,Supply $supply)
     {
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションにseachが入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "search"){
+            $categories = Category::where('school_id', '1')->get();
+            // ログインしているユーザーを定義
+            $user = Auth::user();
+            // ユーザーが作ったおさがりを取得する
+            // 認証されているユーザーが作ったおさがりを取得
+            $supplies = Supply::where("user_id",$user["id"])
+                            ->paginate(10);
+            $contract = Supply_user::whereIn('contract', ['1','2'])->get();
 
-        $categories = Category::where('school_id', '1')->get();
-        // ログインしているユーザーを定義
-        $user = Auth::user();
-        // ユーザーが作ったおさがりを取得する
-        // 認証されているユーザーが作ったおさがりを取得
-        $supplies = Supply::where("user_id",$user["id"])
-                        ->paginate(10);
-        $contract = Supply_user::whereIn('contract', ['1','2'])->get();
+            $categories = Category::where("school_id",$user["school_id"])->get();
 
-        $categories = Category::where("school_id",$user["school_id"])->get();
+            // セッションを削除
+            $request->session()->forget('session');
+            // セッションを情報を発行
+            $request->session()->put('session', 'index');
+            $request->session()->put('session', 'search');
 
-        return view ("supplies.index",compact("supplies","categories","contract"));
+            return view ("supplies.index",compact("supplies","categories"));
+
+        }else{
+            return redirect("/");
     }
+}
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+    public function create(Request $request)
     {
-        $conditions = [
-            1=>"新品・未使用",
-            2=>"未使用に近い",
-            3=>"目立った汚れなし",
-            4=>"やや汚れあり",
-            5=>"汚れあり",
-            6=>"全体的に状態が悪い",
-        ];
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションに情報が入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "index"){
+            $user = Auth::user();
+            $user = Auth::user();
+            $categories = category::where("school_id",$user["school_id"])->get();
 
-        $genders = [
-            1=>"男",
-            2=>"女"
-        ];
+            return view ("supplies.create",compact("categories"));
+        }else{
+            return redirect("/");
+        }
 
-        $user = Auth::user();
-
-        $categories = category::where("school_id",$user["school_id"])->get();
-
-        return view ("supplies.create",compact("conditions","genders","categories"));
     }
 
     /**
@@ -136,35 +144,49 @@ class SupplyController extends Controller
      */
     public function show(Request $request)
     {
-        $user = Auth::user();
-        $search = $request->input('supply');
-        $supply_user = Supply_user::where('supply_id', $search)
-                                ->where('user_id', $user['id'])->get();
-        $supply = Supply::find($search);
-        $contract = Supply_user::where('supply_id', $search)->get();
-        return view("supplies.show",compact("supply","supply_user","user","contract"));
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションにseachが入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "search"){
+            $user = Auth::user();
+            $search = $request->input('supply');
+            $supply_user = Supply_user::where('supply_id', $search)
+                                    ->where('user_id', $user['id'])->get();
+            $supply = Supply::find($search);
+            $contract = Supply_user::where('supply_id', $search)->get();
+            return view("supplies.show",compact("supply","supply_user","user","contract"));
+        }else{
+            return redirect("/");
+        }
     }
 
     public function edit(Request $request)
     {
-        $supply_id = $request->input('supply');
-        $supply = Supply::all();
-        foreach($supply as $k => $val) {
-            if($val->id == $supply_id) {
-                $school_id = $val->user->school_id;
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションに情報が入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "search"){
+            $supply_id = $request->input('supply');
+            $supply = Supply::all();
+            foreach($supply as $k => $val) {
+                if($val->id == $supply_id) {
+                    $school_id = $val->user->school_id;
+                }
             }
-        }
-        $supply_user = Supply_user::where('supply_id', $supply_id)->get();
-        $search_supply = Supply::Find($supply_id);
-        $categories = Category::where('school_id',$school_id)->get();
-        $param = [
-            'supply' => $supply,
-            'search_supply' => $search_supply,
-            'supply_user' => $supply_user,
-            'categories' => $categories,
-        ];
+            $supply_user = Supply_user::where('supply_id', $supply_id)->get();
+            $search_supply = Supply::Find($supply_id);
+            $categories = Category::where('school_id',$school_id)->get();
+            $param = [
+                'supply' => $supply,
+                'search_supply' => $search_supply,
+                'supply_user' => $supply_user,
+                'categories' => $categories,
+            ];
 
-        return view('osagariclub.supplyEdit', $param);
+            return view('osagariclub.supplyEdit', $param);
+        }else{
+            return redirect("/");
+        }
     }
 
     public function branch(Request $request)
@@ -300,6 +322,7 @@ class SupplyController extends Controller
 
     public function search (Supply $suppl,Request $request)
     {
+
         $user = Auth::user();
         // 検索機能
         // 検索ワードを定義
@@ -331,7 +354,8 @@ class SupplyController extends Controller
         } else {
             $supplies = Supply::paginate(10);
         }
-
+        // セッション情報を発行
+        $request->session()->put('session', 'search');
         return view("supplies.search",compact("supplies","categories","keycategory","param"));
     }
 

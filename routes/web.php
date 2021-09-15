@@ -62,6 +62,7 @@ Route::get('/search',"SupplyController@search")->middleware('auth');
 
 Auth::routes();
 
+
 //管理者ルート
 Route::get('/userlist', 'AdminController@search')->name('userlist');
 Route::get('/userlist/detail', 'AdminController@updata');

@@ -10,7 +10,7 @@
     <a class="">検索条件を指定します。</a>
 
     <!--検索フォーム-->
-    <div class="container" 　style="padding-left:10px padding-right:10px">
+    <div class="container" style="padding-left:10px padding-right:10px">
         <form method="GET" action="{{ route('userlist') }}">
             <div class="row mt-3" style="text-align: center;">
                 <div class="col-6">

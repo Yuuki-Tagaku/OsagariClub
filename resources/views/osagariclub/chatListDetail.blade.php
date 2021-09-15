@@ -8,7 +8,7 @@
 
 @section('container')
 <!--検索フォーム-->
-    <div class="container" 　style="padding-left:10px padding-right:10px">
+    <div class="container" style="padding-left:10px padding-right:10px">
         <form method="GET" action="{{ route('supplylist') }}">
             <div class="row mt-5" style="text-align: center;">
                 <div class="col-6">

@@ -6,7 +6,6 @@
   <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 @endsection
 
-
 @section("container")
   <!-- フリー検索 -->
   <div class="title-Container">
@@ -95,8 +94,3 @@
     </div>
   <script src="{{ asset('js/supplyForm.js') }}"></script>
 @endsection
-
-
-
-
-
