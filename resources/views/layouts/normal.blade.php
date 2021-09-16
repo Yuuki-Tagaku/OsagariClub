@@ -7,7 +7,7 @@
     @yield('css')
     <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}" media="screen and (max-width: 480px)">
     @yield('js')
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   </head>
   <body class="user-Create-Container">
     @yield('container')

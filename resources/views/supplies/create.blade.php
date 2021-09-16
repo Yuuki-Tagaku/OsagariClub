@@ -3,7 +3,7 @@
 @section('title', 'おさがり情報編集')
 
 @section('js')
-  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 @endsection
 
 @section('container')
