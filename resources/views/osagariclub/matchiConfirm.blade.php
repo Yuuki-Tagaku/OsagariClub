@@ -14,7 +14,7 @@
         @csrf
         <input type="hidden" name="supply_user_id" value="{{$supply_user_id}}">
         <!--getパラメータにある中間テーブルの値をコントローラ側に送る-->
-        @if($user['id'] == $supply_user['id'])
+        @if($user['id'] == $supply_user['user_id'])
           <input type="hidden" name="contract" value="2">
         @else
           <input type="hidden" name="contract" value="3">

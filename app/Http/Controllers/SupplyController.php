@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\ViewServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SupplyController extends Controller
 {
@@ -20,32 +21,31 @@ class SupplyController extends Controller
      */
     public function index(Request $request,Supply $supply)
     {
-       
         // セッションを取得
         $value = $request->session()->get('session');
         // セッションにseachが入っていればページを表示、入っていなければ戻る
         if(isset($value) && $value == "search"){
+            $categories = Category::where('school_id', '1')->get();
+            // ログインしているユーザーを定義
+            $user = Auth::user();
+            // ユーザーが作ったおさがりを取得する
+            // 認証されているユーザーが作ったおさがりを取得
+            $supplies = Supply::where("user_id",$user["id"])
+                            ->paginate(10);
+            $contract = Supply_user::whereIn('contract', ['1','2'])->get();
 
-        $categories = Category::where('school_id', '1')->get();
-        // ログインしているユーザーを定義
-        $user = Auth::user();
-        // ユーザーが作ったおさがりを取得する
-        // 認証されているユーザーが作ったおさがりを取得
-        $supplies = Supply::where("user_id",$user["id"])->paginate(10);
-        $categories = Category::where("school_id",$user["school_id"])->get();
+            $categories = Category::where("school_id",$user["school_id"])->get();
 
-        // セッションを削除
-        $request->session()->forget('session');
-       // セッションを情報を発行
-       $request->session()->put('session', 'index');
-       $request->session()->put('session', 'search');
+            // セッションを削除
+            $request->session()->forget('session');
+            // セッションを情報を発行
+            $request->session()->put('session', 'index');
+            $request->session()->put('session', 'search');
 
-        return view ("supplies.index",compact("supplies","categories"));
-        
+            return view ("supplies.index",compact("supplies","categories"));
+
         }else{
             return redirect("/");
-
-
     }
 }
 
@@ -56,38 +56,16 @@ class SupplyController extends Controller
      */
 
     public function create(Request $request)
-    { 
-         // セッションを取得
-         $value = $request->session()->get('session');
-         // セッションに情報が入っていればページを表示、入っていなければ戻る
-         if(isset($value) && $value == "index"){
-                
-            $conditions = [
-                1=>"新品・未使用",
-                2=>"未使用に近い",
-                3=>"目立った汚れなし",
-                4=>"やや汚れあり",
-                5=>"汚れあり",
-                6=>"全体的に状態が悪い",
-            ];
-
-
-            $genders = [
-                1=>"男",
-                2=>"女"
-            ];
-
-
-        $user = Auth::user();
-
+    {
+        // セッションを取得
+        $value = $request->session()->get('session');
+        // セッションに情報が入っていればページを表示、入っていなければ戻る
+        if(isset($value) && $value == "index"){
             $user = Auth::user();
-
+            $user = Auth::user();
             $categories = category::where("school_id",$user["school_id"])->get();
 
-
-
-
-            return view ("supplies.create",compact("conditions","genders","categories"));
+            return view ("supplies.create",compact("categories"));
         }else{
             return redirect("/");
         }
@@ -155,7 +133,7 @@ class SupplyController extends Controller
         $supply->image_path4 = $path[1];
 
         $supply->save();
-        return redirect('/supply/index');
+        return redirect('/supply/create/confirm');
     }
 
     /**
@@ -166,18 +144,17 @@ class SupplyController extends Controller
      */
     public function show(Request $request)
     {
-
         // セッションを取得
         $value = $request->session()->get('session');
         // セッションにseachが入っていればページを表示、入っていなければ戻る
         if(isset($value) && $value == "search"){
-
-        $user = Auth::user();
-        $search = $request->input('supply');
-        $supply_user = Supply_user::where('supply_id', $search)
-                                ->where('user_id', $user['id'])->get();
-        $supply = Supply::find($search);
-        return view("supplies.show",compact("supply","supply_user","user"));
+            $user = Auth::user();
+            $search = $request->input('supply');
+            $supply_user = Supply_user::where('supply_id', $search)
+                                    ->where('user_id', $user['id'])->get();
+            $supply = Supply::find($search);
+            $contract = Supply_user::where('supply_id', $search)->get();
+            return view("supplies.show",compact("supply","supply_user","user","contract"));
         }else{
             return redirect("/");
         }
@@ -185,44 +162,41 @@ class SupplyController extends Controller
 
     public function edit(Request $request)
     {
-
         // セッションを取得
         $value = $request->session()->get('session');
         // セッションに情報が入っていればページを表示、入っていなければ戻る
         if(isset($value) && $value == "search"){
+            $supply_id = $request->input('supply');
+            $supply = Supply::all();
+            foreach($supply as $k => $val) {
+                if($val->id == $supply_id) {
+                    $school_id = $val->user->school_id;
+                }
+            }
+            $supply_user = Supply_user::where('supply_id', $supply_id)->get();
+            $search_supply = Supply::Find($supply_id);
+            $categories = Category::where('school_id',$school_id)->get();
+            $param = [
+                'supply' => $supply,
+                'search_supply' => $search_supply,
+                'supply_user' => $supply_user,
+                'categories' => $categories,
+            ];
 
-        return view ("supplies.edit",compact("supply"));
+            return view('osagariclub.supplyEdit', $param);
         }else{
             return redirect("/");
         }
-
-        $supply_id = $request->input('supply');
-        $supply = Supply::all();
-        foreach($supply as $k => $val) {
-            if($val->id == $supply_id) {
-                $school_id = $val->user->school_id;
-            }
-        }
-        $supply_user = Supply_user::where('supply_id', $supply_id)->get();
-        $search_supply = Supply::Find($supply_id);
-        $categories = Category::where('school_id',$school_id)->get();
-        $param = [
-            'supply' => $supply,
-            'search_supply' => $search_supply,
-            'supply_user' => $supply_user,
-            'categories' => $categories,
-        ];
-
-        return view('osagariclub.supplyEdit', $param);
-
     }
 
     public function branch(Request $request)
     {
         if(!empty($_POST['edit'])) {
             return $this->updata($request);
+        } elseif(!empty($_POST['delete'])) {
+            return $this->delete($request);
         } else {
-            return $this->destroy($request);
+            return $this->contract($request);
         }
     }
 
@@ -300,9 +274,9 @@ class SupplyController extends Controller
         if($supply->isDirty()) {
             //userに変更があった場合
             $supply->save();
-            return redirect('');
+            return redirect('/supply/index');
         } else {
-            return redirect('');
+            return redirect();
         }
     }
 
@@ -312,9 +286,38 @@ class SupplyController extends Controller
      * @param  \App\Supply  $supply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Supply $supply)
+
+    public function delete(Request $request)
     {
-        
+        $select_supply = $request->id;
+        $supply = Supply::find($select_supply);
+        $param = [
+            'select_supply' => $select_supply,
+            'supply' => $supply,
+        ];
+        return view('osagariclub.supplyDeleteConfirm', $param);
+    }
+
+    public function destroy(Request $request,Supply $supply)
+    {
+        $select_supply = $request->id;
+        $supply = Supply::find($select_supply);
+        $delete_image = $supply->image_path1;
+        //テーブルにある画像パスを変数delete_imageに入れる
+        Storage::delete('public/images/supply' . $delete_image);
+        $delete_image = $supply->image_path2;
+        //テーブルにある画像パスを変数delete_imageに入れる
+        Storage::delete('public/images/supply' . $delete_image);
+        $delete_image = $supply->image_path2;
+        //テーブルにある画像パスを変数delete_imageに入れる
+        Storage::delete('public/images/supply' . $delete_image);
+        $delete_image = $supply->image_path2;
+        //テーブルにある画像パスを変数delete_imageに入れる
+        Storage::delete('public/images/supply' . $delete_image);
+        //ストレージにある画像データを削除
+        $supply->delete();
+
+        return redirect('/supply/delete/complete');
     }
 
     public function search (Supply $suppl,Request $request)
@@ -344,10 +347,10 @@ class SupplyController extends Controller
                             ->orWhere('remarks', 'like', '%'.$keyword.'%')
                             ->paginate(10);
         } elseif(!empty($keycategory)) {
-            $supplies = Supply::WhereHas('category', function($query) use ($keycategory) {
-                                $query->where('id', $keycategory);
-                            })
-                            ->paginate(10);
+            $supplies = Supply::whereHas('category', function($query) use ($keycategory) {
+                                    $query->where('id', $keycategory);
+                                })
+                                ->paginate(10);
         } else {
             $supplies = Supply::paginate(10);
         }
@@ -359,5 +362,42 @@ class SupplyController extends Controller
     public function confirmation (Supply $supply)
     {
         return view ("supplies.confirmation",compact("supplies"));
+    }
+
+    public function contract($request)
+    {
+        $select_supply = $request->id;
+        $supply = Supply::find($select_supply);
+        return view('osagariclub.matchiComplete', ['supply' => $supply]);
+    }
+
+    public function complete(Request $request)
+    {
+        $select_supply = $request->id;
+        $supply = Supply::find($select_supply);
+        $select_supply_user = Supply_user::where('supply_id', $supply['id'])->get();
+        foreach($select_supply_user as $k) {
+            if($k['contract'] == '3') {
+                $supply_user = Supply_user::find($k['id']);
+                $supply_user->contract = '4';
+                $supply_user->save();
+            } else {
+                $supply_user = Supply_user::find($k['id']);
+                $supply_user->contract = '5';
+                $supply_user->save();
+            }
+        }
+
+        return redirect('/matchi/complete');
+    }
+
+    public function confirm()
+    {
+        return view('osagariclub.supplyAddConfirm');
+    }
+
+    public function deleteComplete()
+    {
+        return view('osagariclub.supplyDeleteComplete');
     }
 }

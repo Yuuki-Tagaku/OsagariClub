@@ -17,11 +17,11 @@
           <div class="form-Group user-Login">
             <input type="password" name="password" placeholder="パスワード">
           </div>
-          <div class="btn-Group user-Create">
+          <div class="btn-Group user-Create pass-reset-btn">
             <input type="submit" value="ログイン">
-            <a href="" class="btn-Group user-Create"><button>パスワード再発行</button></a>
           </div>
         </form>
+            <a href="/pass/reset" class="btn-Group user-Create"><button>パスワード再発行</button></a>
       </div>
     </div>
   </div>

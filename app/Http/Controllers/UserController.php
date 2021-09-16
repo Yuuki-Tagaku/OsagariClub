@@ -18,8 +18,7 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
-
-       $request->session()->put('session', 'user_edit');
+        $request->session()->put('session', 'user_edit');
         $user = Auth::user();
 
         return view('osagariclub.userEdit', ['user' => $user]);
@@ -70,14 +69,15 @@ class UserController extends Controller
             $user->image_path = basename($path);
             //テーブルに画像PATHを保存
         }
+
         $user->appleal = $request->appleal;
 
         if($user->isDirty()) {
             //userに変更があった場合
             $user->save();
-            return redirect('');
+            return redirect('/user/edit/confirm');
         } else {
-            return redirect('');
+            return redirect();
         }
     }
 
@@ -90,14 +90,12 @@ class UserController extends Controller
         //ストレージにある画像データを削除
         $user->delete();
 
-        return redirect('/user/delete');
+        return redirect()->route('user.delete');
     }
 
     public function delete(Request $request)
     {
-        
         return view('osagariclub.userDelete');
-    
     }
 
     public function add()
@@ -169,5 +167,20 @@ class UserController extends Controller
         }else{
             return redirect("/");
         }
-    }   
+    }
+
+    public function confirm()
+    {
+        return view('osagariclub.userEditConfirm');
+    }
+
+    public function passreset()
+    {
+        return view('osagariclub.passReset');
+    }
+
+    public function pass_forget()
+    {
+        return view('osagariclub.passForget');
+    }
 }

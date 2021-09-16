@@ -22,7 +22,10 @@ class ChatController extends Controller
          if(isset($value) && $value == "search"){
 
         $user = Auth::user();
-        $supply = Supply::paginate(10);
+        $supply = Supply::whereHas('supply_user', function($query) {
+                            $query->where('contract', '<>', '4');
+                        })
+                        ->paginate(10);
         $categories = Category::where('school_id', $user['school_id'])->get();
         $chats = Chat::orderBy('created_at', 'desc')->get();
         $param = [
@@ -118,5 +121,10 @@ class ChatController extends Controller
         $supply_user->save();
 
         return redirect(route('chat.room',['match' => $supply_user->id]));
+    }
+
+    public function complete()
+    {
+        return view('osagariclub.matciComplete');
     }
 }

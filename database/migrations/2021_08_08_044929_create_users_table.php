@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('school_id')->unsigned();
             $table->string('appleal')->nullable();
             $table->string('image_path')->nullable();
+            $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('school_id')
