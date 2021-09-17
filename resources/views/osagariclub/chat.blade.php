@@ -101,13 +101,7 @@
     <div class="matcingItem-Container-Inner">
       <div class="matcingItem-Container-Inner-Image">
         <!--おさがり情報画像置き場-->
-        @foreach($supply as $k)
-          @if($k->id == $search_supply['supply_id'])
             <img src="{{ asset('storage/images/supply/' . $k->image_path1) }}">
-          @else
-            <img src="{{ asset('images/no_image.png') }}">
-          @endif
-        @endforeach
       </div>
       <div class="matcingItem-Container-Inner-Information">
         <!--ここに情報を入れる-->
