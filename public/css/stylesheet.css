@@ -545,6 +545,7 @@
 
   .matcing-Partner-Container-Inner-Image img {
     height: 130px;
+    width: 130px;
     border: 1px solid;
     border-radius: 50%;
   }
