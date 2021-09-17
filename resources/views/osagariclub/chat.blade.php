@@ -145,7 +145,6 @@
       <div class="matcing-Partner-Container-Inner-Image">
         <!--交流相手の登録写真-->
         @if($search_supply['user_id'] == $user['id'])
-          @foreach($supply as $k)
             @if($search_supply['supply_id'] == $k['id'])
               <img src="{{ asset('storage/images/user/'. $k->user->image_path) }}">
             @endif
