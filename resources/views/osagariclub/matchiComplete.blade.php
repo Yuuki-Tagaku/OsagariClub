@@ -15,7 +15,7 @@
           <form action="/matchi/complete" method="post">
             @csrf
             <input type="hidden" name="id" value="{{$supply['id']}}">
-            <div class="btn-Group user-Create">
+            <div class="btn-Group user-Create complete-message">
               <input type="submit" name="delete" value="はい">
             </div>
           </form>

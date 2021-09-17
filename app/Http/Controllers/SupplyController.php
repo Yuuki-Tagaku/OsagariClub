@@ -315,6 +315,16 @@ class SupplyController extends Controller
         // 検索機能
         // 検索ワードを定義
         $keyword = $request->input("search_word");
+        foreach(config('const')['condition'] as $k => $val) {
+            if($keyword == $val) {
+                $search_condition = $k;
+            }
+        }
+        foreach(config('const')['gender'] as $k => $val) {
+            if($keyword == $val) {
+                $search_gender = $k;
+            }
+        }
         // カテゴリーIDを定義
         $keycategory = $request->input("search_category");
         // カテゴリー検索用配列
@@ -326,12 +336,18 @@ class SupplyController extends Controller
         ];
 
         //検索結果表示のもの。フリーワード検索は最初のif文。カテゴリーボタンを押された時は2個目のif文。最初にページに推移してきたときは全おさがり情報。
-        if (!empty($keyword)) {
+        if (!empty($search_condition)) {
+            $supplies = Supply::Where('condition', $search_condition)
+                                ->paginate(10);
+        } elseif (!empty($search_gender)) {
+            $supplies = Supply::Where('gender', $search_gender)
+                                ->paginate(10);
+        } elseif (!empty($keyword)) {
             $supplies = Supply::where('item', 'like', '%' . $keyword . '%')
                 ->orWhere('size', 'like', '%' . $keyword . '%')
-                ->orWhere('condition', $keyword)
+                // ->orWhere('condition', $search_condition)
                 ->orWhere('years_used', 'like', '%' . $keyword . '%')
-                ->orWhere('gender', $keyword)
+                // ->orWhere('gender', $search_gender)
                 ->orWhere('remarks', 'like', '%' . $keyword . '%')
                 ->paginate(10);
         } elseif (!empty($keycategory)) {

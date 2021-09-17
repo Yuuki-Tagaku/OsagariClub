@@ -48,9 +48,7 @@ body {
 }
 
 .concept-Info-Message-Inner {
-  width: 50%;
-  margin: 0 auto;
-  padding-left: 20%;
+  padding-left: 30%;
   text-align: left;
 }
 
@@ -58,12 +56,12 @@ body {
   margin: 0;
   padding-top: 100px;
   padding-bottom: 20px;
-  font-size: 30pt;
+  font-size: 34pt;
 }
 
 .concept-Info-Message-Inner p {
   margin: 0;
-  font-size: 11pt;
+  font-size: 16pt;
   line-height: 1.5;
 }
 
@@ -106,13 +104,26 @@ body {
 }
 
 .used-Step-Info p span {
-  font-size: 20pt;
+  font-size: 28pt;
+  font-weight: bold;
   color: #eae3ce;
+  font-family: Arial;
+}
+
+.used-Step-Info p:first-child {
+  padding-top: 20px;
 }
 
 .used-Step-Info p {
   margin: 0;
-  font-size: 10pt;
+  padding-left: 10px;
+  font-size: 12pt;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.step2, .step3, .step4 {
+  width: 75%;
 }
 
 @media screen and (max-width: 768px) {
@@ -166,29 +177,57 @@ body {
 
 .feature-Container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  margin: 0 4%;
 }
 
 .feature-Container-Inner {
-  width: 30%;
+  width: 25%;
   margin-bottom: 50px;
 }
 
 .feature-Info p span {
-  font-size: 18pt;
+  font-size: 25pt;
   font-weight: bold;
+}
+
+.feature-Info p {
+  margin: 0;
+  font-size: 14pt;
+}
+
+.feature-img {
+  width: 120px;
+  height: 120px;
+}
+
+.feature-img img {
+  width: 90%;
+}
+
+.feature-Container-Inner:nth-child(2) .feature-img img {
+  width: 72%;
+}
+
+.feature-Container-Inner:nth-child(5) .feature-img img, .feature-Container-Inner:nth-child(6) .feature-img img {
+  width: 140%;
 }
 
 #contact {
   background-image: url(../images/contact-Back.png);
   background-repeat: no-repeat;
-  /* background-size: contain; */
+  background-size: 30%;
   background-position: right bottom;
 }
 
+.contact-title h3 {
+  font-size: 35pt;
+  margin-left: 3%;
+}
+
 .contact-form form {
-  width: 45%;
+  width: 40%;
+  margin-left: 3%;
 }
 
 .contact-form form textarea {
@@ -202,20 +241,33 @@ body {
   width: 100%;
   border: none;
   outline: none;
-  margin: 20px 0;
+  margin-top: 10px;
+  padding: 20px 0 5px 0;
   border-bottom: 1px solid #cccccc;
 }
 
+.contact-form form input[name="name"] {
+  margin-top: 0;
+  padding-top: 15px;
+}
+
+.contact-form form input::placeholder {
+  font-size: 12pt;
+  font-weight: bold;
+}
+
 .btn-Group button {
-  width: 45%;
-  height: 40px;
-  margin-top: 10px;
+  width: 40%;
+  height: 60px;
+  margin-top: 30px;
   margin-bottom: 50px;
   border: none;
   border-radius: 13px;
   background-color: #e1d7b9;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 14pt;
   font-weight: bold;
+  margin-left: 3%;
 }
 
 footer {
