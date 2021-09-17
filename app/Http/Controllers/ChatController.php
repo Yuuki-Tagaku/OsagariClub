@@ -16,35 +16,35 @@ class ChatController extends Controller
     public function index(Request $request)
     {
 
-         // セッションを取得
-         $value = $request->session()->get('session');
-         // セッションにseachが入っていればページを表示、入っていなければ戻る
-         if(isset($value) && $value == "search"){
+        // セッションを取得
+        // $value = $request->session()->get('session');
+        // セッションにseachが入っていればページを表示、入っていなければ戻る
+        // if (isset($value) && $value == "search") {
 
-        $user = Auth::user();
-        $supply = Supply::whereHas('supply_user', function($query) {
-                            $query->where('contract', '<>', '4');
-                        })
-                        ->paginate(10);
-        $categories = Category::where('school_id', $user['school_id'])->get();
-        $chats = Chat::orderBy('created_at', 'desc')->get();
-        $param = [
-            "user" => $user,
-            "supply" => $supply,
-            "categories" => $categories,
-            "chats" => $chats,
-        ];
-        
-        return view('osagariclub.chatIndex', $param);
-        }else{
-            return redirect("/");
-        }
+            $user = Auth::user();
+            $supply = Supply::whereHas('supply_user', function ($query) {
+                $query->where('contract', '<>', '4');
+            })
+                ->paginate(10);
+            $categories = Category::where('school_id', $user['school_id'])->get();
+            $chats = Chat::orderBy('created_at', 'desc')->get();
+            $param = [
+                "user" => $user,
+                "supply" => $supply,
+                "categories" => $categories,
+                "chats" => $chats,
+            ];
+
+            return view('osagariclub.chatIndex', $param);
+        // } else {
+        //     return redirect("/");
+        // }
     }
 
     public function chatroom(Request $request)
     {
 
-        
+
 
         $user = Auth::user();
         $supply_user_id = $request->input('match');
@@ -64,10 +64,10 @@ class ChatController extends Controller
         ];
         $today = date('Y年m月d日');
         $toweek = date('w');
-        $dayweek =  $today. '('.$week[$toweek].')';
-        $yesterday = date('Y年m月d日',strtotime('-1 day'));
-        $yesterdayweek = date('w',strtotime('-1 day'));
-        $yesterdayweeks =  $yesterday. '('.$week[$yesterdayweek].')';
+        $dayweek =  $today . '(' . $week[$toweek] . ')';
+        $yesterday = date('Y年m月d日', strtotime('-1 day'));
+        $yesterdayweek = date('w', strtotime('-1 day'));
+        $yesterdayweeks =  $yesterday . '(' . $week[$yesterdayweek] . ')';
 
 
 
@@ -82,10 +82,9 @@ class ChatController extends Controller
             'search_user' => $search_user,
             'search' => $search,
         ];
-            return view('osagariclub.chat', $param);
-        
-        }
-    
+        return view('osagariclub.chat', $param);
+    }
+
 
     public function matcing(Request $request)
     {
@@ -95,7 +94,7 @@ class ChatController extends Controller
         $supply_user->contract = $request->contract;
         $supply_user->save();
 
-        return view('osagariclub.matchiApplying',['supply_user' => $supply_user]);
+        return view('osagariclub.matchiApplying', ['supply_user' => $supply_user]);
     }
 
     public function home(Request $request)
@@ -120,7 +119,7 @@ class ChatController extends Controller
         $supply_user->contract = '1';
         $supply_user->save();
 
-        return redirect(route('chat.room',['match' => $supply_user->id]));
+        return redirect(route('chat.room', ['match' => $supply_user->id]));
     }
 
     public function complete()

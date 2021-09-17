@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
-        $request->session()->put('session', 'user_edit');
+        // $request->session()->put('session', 'user_edit');
         $user = Auth::user();
 
         return view('osagariclub.userEdit', ['user' => $user]);
@@ -26,10 +26,10 @@ class UserController extends Controller
 
     public function branch(Request $request)
     {
-        $value = $request->session()->get('session');
+        // $value = $request->session()->get('session');
          // セッションに情報が入っていればページを表示、入っていなければ戻る
-        if(isset($value) && $value == "user_edit"){
-            $request->session()->forget('session');
+        // if(isset($value) && $value == "user_edit"){
+        //     $request->session()->forget('session');
             if(!empty($_POST['edit'])) {
                 //editボタンを押された場合はupdataの処理を実行する
                 return $this->updata($request);
@@ -37,9 +37,9 @@ class UserController extends Controller
                 //deleteボタンを押された場合はdestroyの処理を実行する
                 return $this->destroy($request);
             }
-        }else{
-            return redirect("/");
-        }
+        // }else{
+        //     return redirect("/");
+        // }
     }
 
     public function updata($request)
@@ -157,16 +157,16 @@ class UserController extends Controller
     public function show(Request $request)
     {
         // セッションを取得
-        $value = $request->session()->get('session');
+        // $value = $request->session()->get('session');
         // セッションに１が入っていればページを表示、入っていなければ戻る
-        if(isset($value) && $value == "search"){
+        // if(isset($value) && $value == "search"){
             $user = Auth::user();
-            $request->session()->put('session', 'show_user');
-            $request->session()->put('session', 'search');
+            // $request->session()->put('session', 'show_user');
+            // $request->session()->put('session', 'search');
             return view('osagariclub.user', ['user' => $user]);
-        }else{
-            return redirect("/");
-        }
+        // }else{
+        //     return redirect("/");
+        // }
     }
 
     public function confirm()
