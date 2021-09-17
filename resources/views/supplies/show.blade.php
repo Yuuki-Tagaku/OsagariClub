@@ -58,7 +58,7 @@
           @else
             @if($user['id'] != $supply['user_id'])
               <div class="btn-Group">
-                @if(count($supply_user) != 0)
+                @if(!empty($supply_user) || count($supply_user) != 0)
                   @foreach($supply_user as $k)
                     @if($user['id'] == $k['user_id'])
                       <a href="/chat/room?match={{$k['id']}}"><button>チャットで連絡する</button></a>
