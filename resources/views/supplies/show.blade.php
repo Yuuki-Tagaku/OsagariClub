@@ -51,14 +51,14 @@
           </ol>
           <ol>その他：<span>{{$supply['remarks']}}</span></ol>
         </ul>
-        @foreach($contract as $k2)
+        {{-- @foreach($contract as $k2)
           @if($k2['contract'] == 3 || $k2['contract'] == 4 || $k2['contract'] == 5)
             <p class="contract-Message">このおさがりは募集を終了しています。</p>
             @break
-          @else
+          @else --}}
             @if($user['id'] != $supply['user_id'])
               <div class="btn-Group">
-                @if(!empty($supply_user) || count($supply_user) != 0)
+                @if(count($supply_user) != 0)
                   @foreach($supply_user as $k)
                     @if($user['id'] == $k['user_id'])
                       <a href="/chat/room?match={{$k['id']}}"><button>チャットで連絡する</button></a>
@@ -69,9 +69,9 @@
                 @endif
               </div>
             @endif
-            @break
+            {{-- @break
           @endif
-        @endforeach
+        @endforeach --}}
       </div>
     </div>
     <div class="matcing-Partner-Container supply-Show-Bottom">
