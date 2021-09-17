@@ -82,7 +82,7 @@
       <div class="matcing-Partner-Container-Inner">
         <div class="matcing-Partner-Container-Inner-Image">
           <!--交流相手の登録写真-->
-          @if(!empty($supply->user->image_path)
+          @if(!empty($supply->user->image_path))
             <img src="{{ asset('storage/images/user/'. $supply->user->image_path) }}">
           @else
             <img src="{{ asset('images/no_image.png') }}">
