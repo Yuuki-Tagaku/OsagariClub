@@ -82,8 +82,11 @@
       <div class="matcing-Partner-Container-Inner">
         <div class="matcing-Partner-Container-Inner-Image">
           <!--交流相手の登録写真-->
-            <!--交流相手の登録写真（if文で画像がない場合はno_imageに変更する）-->
-          <img src="{{ asset('images/no_image.png') }}">
+          @if(!empty($supply->user->image_path)
+            <img src="{{ asset('storage/images/user/' . $supply->user->image_path) }}">
+          @else
+            <img src="{{ asset('images/no_image.png') }}">
+          @endif
         </div>
         <div class="matcing-Partner-Container-Inner-Information">
           <!--ここに情報を入れる-->

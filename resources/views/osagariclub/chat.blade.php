@@ -101,7 +101,13 @@
     <div class="matcingItem-Container-Inner">
       <div class="matcingItem-Container-Inner-Image">
         <!--おさがり情報画像置き場-->
-        <img src="{{ asset('images/no_image.png') }}">
+        @foreach($supply as $k)
+          @if($k->id == $search_supply['supply_id'])
+            <img src="{{ asset('storage/images/supply/' . $k->image_path1) }}">
+          @else
+            <img src="{{ asset('images/no_image.png') }}">
+          @endif
+        @endforeach
       </div>
       <div class="matcingItem-Container-Inner-Information">
         <!--ここに情報を入れる-->
@@ -140,8 +146,19 @@
     <div class="matcing-Partner-Container-Inner">
       <div class="matcing-Partner-Container-Inner-Image">
         <!--交流相手の登録写真-->
-          <!--交流相手の登録写真（if文で画像がない場合はno_imageに変更する）-->
-        <img src="{{ asset('images/no_image.png') }}">
+        @if($search_supply['user_id'] == $user['id'])
+          @foreach($supply as $k)
+            @if($search_supply['supply_id'] == $k['id'])
+              <img src="{{ asset('storage/images/user/'. $k->user->image_path) }}">
+            @endif
+          @endforeach
+        @else
+          @foreach($search_user as $k)
+            @if($search_supply['user_id'] == $k['id'])
+              <img src="{{ asset('storage/images/user/'. $k['image_path']) }}">
+            @endif
+          @endforeach
+        @endif
       </div>
       <div class="matcing-Partner-Container-Inner-Information">
         <!--ここに情報を入れる-->
