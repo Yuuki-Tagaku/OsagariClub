@@ -61,10 +61,10 @@ class SupplyController extends Controller
         // $value = $request->session()->get('session');
         // セッションに情報が入っていればページを表示、入っていなければ戻る
         // if (isset($value) && $value == "index") {
-            $user = Auth::user();
-            $categories = category::where("school_id", $user["school_id"])->get();
+        $user = Auth::user();
+        $categories = category::where("school_id", $user["school_id"])->get();
 
-            return view("supplies.create", compact("categories"));
+        return view("supplies.create", compact("categories"));
         // } else {
         //     return redirect("/");
         // }
@@ -103,10 +103,7 @@ class SupplyController extends Controller
             //画像をストレージの中に保存して画像pathを変数pathに入れる
             $supply->image_path2 = basename($path);
             //テーブルに画像PATHを保存
-        } else {
-            $path = null;
         }
-        $supply->image_path2 = $path[1];
         // 写真３-----------------------------------------
         $supply->image_path3 = $request->file("image_path3");
         if ($request->hasfile("image_path3")) {
@@ -114,10 +111,7 @@ class SupplyController extends Controller
             //画像をストレージの中に保存して画像pathを変数pathに入れる
             $supply->image_path2 = basename($path);
             //テーブルに画像PATHを保存
-        } else {
-            $path = null;
         }
-        $supply->image_path3 = $path[1];
         // // 写真４----------------------------------------
         $supply->image_path4 = $request->file("image_path4");
         if ($request->hasfile("image_path4")) {
@@ -125,11 +119,7 @@ class SupplyController extends Controller
             //画像をストレージの中に保存して画像pathを変数pathに入れる
             $supply->image_path2 = basename($path);
             //テーブルに画像PATHを保存
-        } else {
-            $path = null;
         }
-        $supply->image_path4 = $path[1];
-
         $supply->save();
         return redirect('/supply/create/confirm');
     }
@@ -146,13 +136,13 @@ class SupplyController extends Controller
         // $value = $request->session()->get('session');
         // セッションにseachが入っていればページを表示、入っていなければ戻る
         // if (isset($value) && $value == "search") {
-            $user = Auth::user();
-            $search = $request->input('supply');
-            $supply_user = Supply_user::where('supply_id', $search)
-                ->where('user_id', $user['id'])->get();
-            $supply = Supply::find($search);
-            $contract = Supply_user::where('supply_id', $search)->get();
-            return view("supplies.show", compact("supply", "supply_user", "user", "contract"));
+        $user = Auth::user();
+        $search = $request->input('supply');
+        $supply_user = Supply_user::where('supply_id', $search)
+            ->where('user_id', $user['id'])->get();
+        $supply = Supply::find($search);
+        $contract = Supply_user::where('supply_id', $search)->get();
+        return view("supplies.show", compact("supply", "supply_user", "user", "contract"));
         // } else {
         //     return redirect("/");
         // }
@@ -164,24 +154,24 @@ class SupplyController extends Controller
         // $value = $request->session()->get('session');
         // セッションに情報が入っていればページを表示、入っていなければ戻る
         // if (isset($value) && $value == "search") {
-            $supply_id = $request->input('supply');
-            $supply = Supply::all();
-            foreach ($supply as $k => $val) {
-                if ($val->id == $supply_id) {
-                    $school_id = $val->user->school_id;
-                }
+        $supply_id = $request->input('supply');
+        $supply = Supply::all();
+        foreach ($supply as $k => $val) {
+            if ($val->id == $supply_id) {
+                $school_id = $val->user->school_id;
             }
-            $supply_user = Supply_user::where('supply_id', $supply_id)->get();
-            $search_supply = Supply::Find($supply_id);
-            $categories = Category::where('school_id', $school_id)->get();
-            $param = [
-                'supply' => $supply,
-                'search_supply' => $search_supply,
-                'supply_user' => $supply_user,
-                'categories' => $categories,
-            ];
+        }
+        $supply_user = Supply_user::where('supply_id', $supply_id)->get();
+        $search_supply = Supply::Find($supply_id);
+        $categories = Category::where('school_id', $school_id)->get();
+        $param = [
+            'supply' => $supply,
+            'search_supply' => $search_supply,
+            'supply_user' => $supply_user,
+            'categories' => $categories,
+        ];
 
-            return view('osagariclub.supplyEdit', $param);
+        return view('osagariclub.supplyEdit', $param);
         // } else {
         //     return redirect("/");
         // }
