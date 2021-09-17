@@ -122,36 +122,36 @@
     line-height: 3.0;
   }
 
-  .condition2, .condition4, .condition6 {
+  .condition4, .condition6, .condition8 {
     margin: 0;
     margin-left: 6%;
   }
 
-  .color1 {
+  .color3 {
     background-color: #3ddcff;
   }
 
-  .color2 {
+  .color4 {
     background-color: #919fff;
   }
 
-  .color3 {
+  .color5 {
     background-color: #d782ff;
   }
 
-  .color4 {
+  .color6 {
     background-color: #ff9b64;
   }
 
-  .color5 {
+  .color7 {
     background-color: #c89101;
   }
 
-  .color6 {
+  .color8 {
     background-color: #6c5807;
   }
 
-  .color1, .color2, .color3, .color4, .color5, .color6 {
+  .color3, .color4, .color5, .color6, .color7, .color8 {
     width: 77%;
     height: 25px;
     display: inline-block;
