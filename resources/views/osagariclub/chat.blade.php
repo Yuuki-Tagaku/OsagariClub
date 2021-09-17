@@ -103,9 +103,9 @@
         <!--おさがり情報画像置き場-->
         @foreach($supply as $k)
           @if($k->id == $search_supply['supply_id'])
-            <img src="{{ asset('storage/images/supply/' . $k->image_path1) }}">  
+            <img src="{{ asset('storage/images/supply/' . $k->image_path1) }}">
           @endif
-        @endforeach  
+        @endforeach
       </div>
       <div class="matcingItem-Container-Inner-Information">
         <!--ここに情報を入れる-->
@@ -145,6 +145,7 @@
       <div class="matcing-Partner-Container-Inner-Image">
         <!--交流相手の登録写真-->
         @if($search_supply['user_id'] == $user['id'])
+          @foreach($supply as $k)
             @if($search_supply['supply_id'] == $k['id'])
               <img src="{{ asset('storage/images/user/'. $k->user->image_path) }}">
             @endif

@@ -54,7 +54,6 @@
 
   h2 {
     margin-top: 20px;
-    margin-left: 5%;
     padding: 0;
     font-size: 10pt;
     text-align: left;
@@ -158,6 +157,7 @@
     line-height: 2.0;
     color: #fdffff;
     text-align: center;
+    font-weight: normal;
   }
 
   /*        カテゴリーボタン        */
@@ -298,7 +298,7 @@
     height: 30px;
     margin: 0 auto;
     margin-bottom: 30px;
-    width: 90%;
+    width: 87%;
   }
 
   .matcingItem-Information-Container-Inner-Title p {
@@ -320,11 +320,11 @@
   }
 
   .user-Edit-Container form {
-    width: 80%;
+    width: 87%;
   }
 
   .form-Group input {
-    width: 100%;
+    width: 70%;
     margin-left: 5%;
     border: none;
     outline: none;
@@ -641,6 +641,7 @@
     text-align: left;
     font-size: 10pt;
     font-weight: normal;
+    line-height: 1.5;
   }
 
   .my-Chat-Date {
@@ -901,6 +902,7 @@
     margin-bottom: 20px;
     font-size: 8pt;
     text-align: center;
+    font-weight: normal;
     border-collapse: collapse;
   }
 
@@ -943,15 +945,9 @@
   }
 
   .supply-Add-List {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    margin-right: 5%;
-  }
-
-  .supply-Add-List h2 {
-    margin-top: 0;
-    padding-top: 10px;
   }
 
   .index-Paginate-Area {
@@ -1154,7 +1150,7 @@
   /*        マイページ        */
 
   .user-Show-Container {
-    width: 70%;
+    width: 87%;
     margin: 0 auto;
   }
 
@@ -1301,9 +1297,11 @@
   }
 
   .paginate-Container {
-    display: flex;
-    justify-content: space-between;
     border-top: 2px solid #f2f2f2;
+  }
+
+  .search-paginate-top {
+    margin: 0 auto 0 0;
   }
 
   .paginate-Container h3 {
@@ -1398,5 +1396,13 @@
 
   .pass-Forget-Container {
     height: 100vh;
+  }
+
+  .user-Group input {
+    width: 100%;
+  }
+
+  .complete-message {
+    margin-bottom: 10px;
   }
 }

@@ -9,16 +9,16 @@
   <div class="user-Edit-Container user-Create-Container">
     <form action="{{ route('user.create') }}" method="post" enctype="multipart/form-data">
       @csrf
-        <div class="form-Group">
+        <div class="form-Group user-Group">
           <input type="text" name="name" placeholder="名前">
         </div>
-        <div class="form-Group">
+        <div class="form-Group user-Group">
           <input type="text" name="email" placeholder="メールアドレス">
         </div>
-        <div class="form-Group">
+        <div class="form-Group user-Group">
           <input type="password" name="password" placeholder="パスワード">
         </div>
-        <div class="form-Group">
+        <div class="form-Group user-Group">
           <input type="password" name="password_Confirmed" placeholder="パスワード（確認用）">
         </div>
         <div id="profile-Image">

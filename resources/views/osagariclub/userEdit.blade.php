@@ -14,16 +14,16 @@
   <div class="user-Edit-Container">
     <form action="{{ route('user.branch') }}" method="post" enctype="multipart/form-data">
       @csrf
-        <div class="form-Group">
+        <div class="form-Group user-Group">
           <input type="text" name="name" value="{{ $user->name }}" placeholder="名前">
         </div>
-        <div class="form-Group">
+        <div class="form-Group user-Group">
           <input type="text" name="email" value="{{ $user->email }}" placeholder="メールアドレス">
         </div>
-        <div class="form-Group">
+        <div class="form-Group user-Group">
           <input type="password" name="password" placeholder="パスワード">
         </div>
-        <div class="form-Group">
+        <div class="form-Group user-Group">
           <input type="password" name="password_Confirmed" placeholder="パスワード（確認用）">
         </div>
         <div id="profile-Image">
@@ -42,7 +42,7 @@
         <input type="hidden" name="id" value="{{ $user->id }}">
       <div class="btn-Group">
         <input type="submit" name="edit" value="更新する">
-        <input type="submit" name="delete" value="退会する">
+        <input type="submit" name="delete" class="logout" value="退会する">
       </div>
     </form>
   </div>
