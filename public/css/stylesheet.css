@@ -871,7 +871,6 @@
 
   .result-Supply-Container label {
     margin-left: 0;
-    margin-bottom: 10px;
   }
 
   .result-Supply-Container span {
@@ -880,6 +879,7 @@
     font-size: 5pt;
     text-align: center;
     line-height: 1.5;
+    margin-bottom: 10px;
   }
 
   .no-supply {
