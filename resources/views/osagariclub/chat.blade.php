@@ -139,7 +139,7 @@
   <div class="matcing-Partner-Container">
     <!--交流相手の情報を置く場所-->
     <div class="matcing-Partner-Container-Title">
-      <h2>おさがりの提供者</h2>
+      <h2>お相手の情報</h2>
     </div>
     <div class="matcing-Partner-Container-Inner">
       <div class="matcing-Partner-Container-Inner-Image">
