@@ -517,13 +517,15 @@
   }
 
   .supply-Remarks {
+    width: 86%;
     float: left;
+    text-justify: justify;
   }
 
-  .supply-Remarks-inner {
-    width: 85%;
+  /* .supply-Remarks-inner {
     padding-right: 5px;
-  }
+    text-justify: justify;
+  } */
 
   .matcingItem-Container-Inner-Information div, .matcingItem-Container-Inner-Information div p {
     margin: 0;
