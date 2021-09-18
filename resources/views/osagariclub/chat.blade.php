@@ -129,7 +129,7 @@
                     <p>きれい度: <span class="color{{$k2}} chatColor">{{$val}}</span></p>
                   @endif
               @endforeach
-              <p class="supply-Remarks">その他：<div class="supply-Remarks-inner">{{ $k->remarks }}</div></p>
+              <p class="supply-Remarks">その他：{{ $k->remarks }}</p>
             </div>
           @endif
         @endforeach

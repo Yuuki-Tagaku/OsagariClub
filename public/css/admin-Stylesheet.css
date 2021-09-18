@@ -194,6 +194,7 @@ body {
 .feature-Info p {
   margin: 0;
   font-size: 14pt;
+  text-align: justify;
 }
 
 .feature-img {
