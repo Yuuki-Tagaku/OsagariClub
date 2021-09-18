@@ -38,7 +38,7 @@
         <p>そんな人たちと、こどものおさがりをつないでいくサービスです。</p>
       </article>
       <div class="QR">
-        <img src="{{ asset('images/localhost8000.png') }}">
+        <img src="{{ asset('images/QR.png') }}">
       </div>
     </div>
     <div id="used">
@@ -46,14 +46,14 @@
       <div class="used-Step">
         <div class="used-Step-Inner">
           <img src="{{ asset('images/step1-Left.png') }}">
-          <div class="used-Step-Info">
+          <div class="used-Step-Info step1">
             <p><span>step.1</span></p>
             <p>欲しいおさがりをキーワード検索したり、カテゴリから検索してみる</p>
           </div>
         </div>
         <div class="used-Step-Inner">
           <img src="{{ asset('images/step1-Right.png') }}">
-          <div class="used-Step-Info">
+          <div class="used-Step-Info step1">
             <p><span>step.1</span></p>
             <p>ゆずりたいおさがりの写真や情報を登録します。</p>
           </div>
@@ -63,14 +63,14 @@
       <div class="used-Step">
         <div class="used-Step-Inner">
           <img src="{{ asset('images/step2.png') }}">
-          <div class="used-Step-Info">
+          <div class="used-Step-Info step2">
             <p><span>step.2</span></p>
             <p>気に入ったおさがりについてチャットを使って、直接情報を交換します。</p>
           </div>
         </div>
         <div class="used-Step-Inner">
           <img src="{{ asset('images/step2.png') }}">
-          <div class="used-Step-Info">
+          <div class="used-Step-Info step2">
             <p><span>step.2</span></p>
             <p>おさがりをほしい人からコンタクトがあります。お互いの不安を解消しましょう。</p>
           </div>
@@ -80,14 +80,14 @@
       <div class="used-Step">
         <div class="used-Step-Inner">
           <img src="{{ asset('images/step3.png') }}">
-          <div class="used-Step-Info">
+          <div class="used-Step-Info step3">
             <p><span>step.3</span></p>
             <p>情報交換してこのおさがりをほしいな。と思ったら「マッチングボタン」をおします。</p>
           </div>
         </div>
         <div class="used-Step-Inner">
           <img src="{{ asset('images/step3.png') }}">
-          <div class="used-Step-Info">
+          <div class="used-Step-Info step3">
             <p><span>step.3</span></p>
             <p>情報交換してこの人にゆずってもいいな。と思ったら「マッチングボタン」をおします。</p>
           </div>
@@ -97,9 +97,9 @@
       <div class="used-Step-Last">
         <div class="used-Step-Inner">
           <img src="{{ asset('images/step4.png') }}">
-          <div class="used-Step-Info">
+          <div class="used-Step-Info step4">
             <p><span>step.4</span></p>
-            <p>ゆずりたいおさがりの写真や情報を登録します。</p>
+            <p>ほしい人、ゆずりたい人、お互いマッチングボタンを押すと交渉成立になります。</p>
           </div>
         </div>
         </div>
@@ -109,65 +109,83 @@
       <div class="feature-title">
         <h3>おさがりくらぶの特徴</h3>
       </div>
-      <div class="feature-Container">
-        <div class="feature-Container-Inner">
-          <img src="{{ asset('images/feature1.png') }}">
-          <div class="feature-Info">
-            <p><span>同じ学校の人</span></p>
-            <p>
-              このくらぶに入部できる条件はたった1つ。同じ施設（小学校、幼稚園、保育園など）であること。
-              だからまったく知らない人との交流ではなくなり、節度を保った交流がはかれます。</p>
+      <div class="feature-inner-top">
+        <div class="feature-Container">
+          <div class="feature-Container-Inner">
+            <div class="feature-img">
+              <img src="{{ asset('images/feature1.png') }}">
+            </div>
+            <div class="feature-Info">
+              <p><span>同じ学校の人</span></p>
+              <p>
+                このくらぶに入部できる条件はたった1つ。同じ施設（小学校、幼稚園、保育園など）であること。
+                だからまったく知らない人との交流ではなくなり、節度を保った交流がはかれます。</p>
+            </div>
+          </div>
+          <div class="feature-Container-Inner">
+            <div class="feature-img">
+              <img src="{{ asset('images/feature2.png') }}">
+            </div>
+              <div class="feature-Info">
+              <p><span>相手がみえる</span></p>
+              <p>
+                自己紹介欄を設けました。おさがりの情報と一緒に、
+                またチャットをしながら双方向でどんな方なのか確認ができます。
+                任意で写真をのせることもできます。
+              </p>
+            </div>
+          </div>
+          <div class="feature-Container-Inner">
+            <div class="feature-img">
+              <img src="{{ asset('images/feature3.png') }}">
+            </div>
+            <div class="feature-Info">
+              <p><span>きれい度</span></p>
+              <p>
+                おさがりで一番気になるのはそのおさがりがきれいかどうか。
+                わかりやすい言葉の表現と色を使って6段階で表示。きれい度から検索することも可能です。
+              </p>
+            </div>
           </div>
         </div>
-        <div class="feature-Container-Inner">
-          <img src="{{ asset('images/feature2.png') }}">
-          <div class="feature-Info">
-            <p><span>相手がみえる</span></p>
-            <p>
-              自己紹介欄を設けました。おさがりの情報と一緒に、
-              またチャットをしながら双方向でどんな方なのか確認ができます。
-              任意で写真をのせることもできます。
-            </p>
-          </div>
-        </div>
-        <div class="feature-Container-Inner">
-          <img src="{{ asset('images/feature3.png') }}">
-          <div class="feature-Info">
-            <p><span>きれい度</span></p>
-            <p>
-              おさがりで一番気になるのはそのおさがりがきれいかどうか。
-              わかりやすい言葉の表現と色を使って6段階で表示。きれい度から検索することも可能です。
-            </p>
-          </div>
-        </div>
-        <div class="feature-Container-Inner">
-          <img src="{{ asset('images/feature4.png') }}">
-          <div class="feature-Info">
-            <p><span>事前に写真で確認</span></p>
-            <p>
-              1つのおさがりに4枚まで写真を登録することができます。
-              文字情報だけでなく写真でチェックして、ほしい人の不安、ゆずりたい人の不安を早い段階で解消できます。
-            </p>
-          </div>
-        </div>
-        <div class="feature-Container-Inner">
-          <img src="{{ asset('images/feature5.png') }}">
-          <div class="feature-Info">
-            <p><span>こどもの性別表示</span></p>
-            <p>
-              思春期をむかえるこどもは家族間でも性別を強く意識することがあります。
-              おさがりにもこの問題が想定されるため、全部のおさがりに使っていた子どもの性別を表示させます。
-            </p>
-          </div>
-        </div>
-        <div class="feature-Container-Inner">
-          <img src="{{ asset('images/feature6.png') }}">
-          <div class="feature-Info">
-            <p><span>お互いマッチング</span></p>
-            <p>
-              おさがりをほしい人、ゆずりたい人、双方向で気持ちを表現できるシステムにしました。
-              どちらか一方向では交渉は成立しません。これによって節度を守った交流が生まれます。
-            </p>
+        <div class="feature-inner-bottom">
+          <div class="feature-Container">
+            <div class="feature-Container-Inner">
+              <div class="feature-img">
+                <img src="{{ asset('images/feature4.png') }}">
+              </div>
+              <div class="feature-Info">
+                <p><span>事前に写真で確認</span></p>
+                <p>
+                  1つのおさがりに4枚まで写真を登録することができます。
+                  文字情報だけでなく写真でチェックして、ほしい人の不安、ゆずりたい人の不安を早い段階で解消できます。
+                </p>
+              </div>
+            </div>
+            <div class="feature-Container-Inner">
+              <div class="feature-img">
+                <img src="{{ asset('images/feature5.png') }}">
+              </div>
+              <div class="feature-Info">
+                <p><span>こどもの性別表示</span></p>
+                <p>
+                  思春期をむかえるこどもは家族間でも性別を強く意識することがあります。
+                  おさがりにもこの問題が想定されるため、全部のおさがりに使っていた子どもの性別を表示させます。
+                </p>
+              </div>
+            </div>
+            <div class="feature-Container-Inner">
+              <div class="feature-img">
+                <img src="{{ asset('images/feature6.png') }}">
+              </div>
+              <div class="feature-Info">
+                <p><span>お互いマッチング</span></p>
+                <p>
+                  おさがりをほしい人、ゆずりたい人、双方向で気持ちを表現できるシステムにしました。
+                  どちらか一方向では交渉は成立しません。これによって節度を守った交流が生まれます。
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

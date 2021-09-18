@@ -23,7 +23,7 @@
 
   <!-- カテゴリーを押したらカテゴリーで検索 -->
   <div class="category-Group search-Category-Group">
-    <h3 class="search-title">キーワードからおさがりを検索します。</h3>
+    <h3 class="search-title">カテゴリからおさがりを検索します。</h3>
     <div class="category-Group-Button">
       <div class="search-Category-Button">
         <form>
@@ -40,7 +40,9 @@
   </div>
   <div class="paginate-Container">
     <h3 class="search-title">検索結果</h3>
-    {{$supplies->appends($param)->links()}}
+    <div class="search-paginate-top">
+      {{$supplies->appends($param)->links()}}
+    </div>
   </div>
   <!-- 用品を一つずつ取り出す -->
     <div class="search-Result">
@@ -55,7 +57,7 @@
                     <img src = "{{ asset('storage/images/supply/' . $supply->image_path1) }}">
                   <!-- 用品のサイズを表示(修正箇所：サイズも必須なのでif文はいらない) -->
                     <p>{{$supply->item}}</p>
-                    <p>{{$supply->size}}</p>
+                    <p>サイズ：{{$supply->size}}</p>
                   <!-- コンディションカラムの値によって、表示する状態をケース文で繰り返す -->
                     @foreach(config('const')['condition'] as $k => $val)
                       @if($supply->condition == $k)
