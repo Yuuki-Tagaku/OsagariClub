@@ -89,7 +89,7 @@
           @endif
         </div>
         <div class="matcing-Partner-Container-Inner-Information">
-          <!--ここに情報を入れる-->
+          <!--ここに情報を入れる。-->
           <p><span>名前：{{$supply->user->name}}</span></p>
           <div class="Appleal">
             <p>自己紹介：
