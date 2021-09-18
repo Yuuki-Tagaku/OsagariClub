@@ -76,7 +76,7 @@
                 <img src = "{{ asset('storage/images/supply/' . $supply->image_path1) }}">
               <!-- 用品のサイズを表示(修正箇所：サイズも必須なのでif文はいらない) -->
                 <p>{{$supply->item}}</p>
-                <p>{{$supply->size}}</p>
+                <p>サイズ：{{$supply->size}}</p>
               <!-- コンディションカラムの値によって、表示する状態をケース文で繰り返す。 -->
                 @foreach(config('const')['condition'] as $k => $val)
                   @if($supply->condition == $k)
