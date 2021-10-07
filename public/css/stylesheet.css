@@ -1304,12 +1304,14 @@
   }
 
   .search-paginate-top {
+
     text-align: right;
     margin-right: 8%;
   }
 
   .search-paginate-top .paginate {
     margin-top: 0;
+    margin: 0 auto 0 0;
   }
 
   .paginate-Container h3 {
